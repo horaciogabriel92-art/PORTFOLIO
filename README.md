@@ -1,4 +1,4 @@
-# 🚀 Horacio Morales - Full Stack Developer Portfolio
+# 🚀 Horacio Morales - Developer Portfolio
 
 <div align="center">
   
