@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bordados Pando - Industrial ERP | Horacio Morales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+        }
+
+        .floating-mockup {
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 
+                        0 0 100px rgba(99,102,241,0.15);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .arrow-line {
+            stroke-dasharray: 8;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .highlight-comment { color: #8b949e; }
+        .highlight-keyword { color: #ff7b72; }
+        .highlight-string { color: #a5d6ff; }
+        .highlight-function { color: #d2a8ff; }
+        .highlight-variable { color: #79c0ff; }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(99,102,241,0.5);
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.7));
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 56px;
+            height: 28px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .toggle-switch.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-color: transparent;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(28px);
+        }
+
+        .module-card {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.3s;
+            opacity: 0;
+        }
+
+        .module-card.expanded {
+            max-height: 3000px;
+            opacity: 1;
+        }
+
+        .machine-free { background: linear-gradient(135deg, #10b981, #059669); }
+        .machine-busy { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .machine-maintenance { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        .queue-item {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .pulse-urgent {
+            animation: pulseRed 2s infinite;
+        }
+
+        @keyframes pulseRed {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+        }
+
+        .tab-btn {
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Background Effects -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/20 blur-[150px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/15 blur-[130px] rounded-full"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[200px] rounded-full"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/5 rounded-none">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">H</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Horacio Morales</span>
+            </a>
+            <a href="/#work" class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition border border-white/10 text-sm">
+                ← Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-20 px-4 relative">
+        
+        <!-- Header -->
+        <div class="max-w-7xl mx-auto mb-16">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-widest uppercase mb-6">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    Industrial ERP + Generative AI
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-text bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                    Bordados Pando
+                </h1>
+                <p class="text-slate-400 text-xl max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive operations management system for the mass embroidery industry. 
+                    <span class="text-indigo-400 font-semibold">7 machines</span> monitored in real-time, 
+                    <span class="text-purple-400 font-semibold">AI</span> generating photorealistic mockups, 
+                    and <span class="text-pink-400 font-semibold">automatic queue optimization</span> for production scheduling.
+                </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Next.js 15</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">React 19</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Firebase</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Genkit AI</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Gemini 2.5 Flash</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Tailwind CSS</span>
+                <span class="px-4 py-2 rounded-full glass-card text-sm border border-white/10">Shadcn/UI</span>
+            </div>
+        </div>
+
+        <!-- Interactive Modules Showcase -->
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Toggle Controls -->
+            <div class="glass-card p-6 mb-8">
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="layers" class="w-5 h-5 text-indigo-400"></i>
+                    Explore System Modules
+                </h3>
+                <p class="text-sm text-slate-400 mb-6">Toggle switches to see each ERP component in action</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Toggle 1: AI Quotation -->
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-500/30 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                                <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm">AI Quotation</p>
+                                <p class="text-xs text-slate-500">Gemini Mockups</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch active" onclick="toggleModule('quotation', this)"></div>
+                    </div>
+
+                    <!-- Toggle 2: Workshop Monitor -->
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-amber-500/30 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                                <i data-lucide="monitor" class="w-5 h-5 text-amber-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm">Workshop Monitor</p>
+                                <p class="text-xs text-slate-500">7 Machines Real-time</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleModule('workshop', this)"></div>
+                    </div>
+
+                    <!-- Toggle 3: Order CRM -->
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-500/30 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                <i data-lucide="clipboard-list" class="w-5 h-5 text-green-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm">Order CRM</p>
+                                <p class="text-xs text-slate-500">Kanban + Pipeline</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleModule('crm', this)"></div>
+                    </div>
+
+                    <!-- Toggle 4: Sales Dashboard -->
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-pink-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm">Sales Dashboard</p>
+                                <p class="text-xs text-slate-500">Analytics + Forecasts</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleModule('dashboard', this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 1: AI QUOTATION -->
+            <div id="module-quotation" class="module-card expanded mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- LEFT: Floating Mockup -->
+                    <div class="lg:col-span-7 relative">
+                        <div class="floating-mockup glass-card p-8 relative z-20">
+                            <!-- Browser Chrome -->
+                            <div class="flex items-center gap-2 mb-6 pb-4 border-b border-white/10">
+                                <div class="flex gap-1.5">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="flex-1 mx-4 px-4 py-1.5 rounded-lg bg-white/5 text-xs text-slate-400 text-center font-mono">
+                                    bordadospando.com/quote
+                                </div>
+                            </div>
+
+                            <!-- Quotation UI -->
+                            <div class="space-y-6">
+                                <div class="text-center">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-bold uppercase mb-3">
+                                        <span>✨</span> Digital Quote Pro
+                                    </div>
+                                    <h2 class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                                        Bordados Pando
+                                    </h2>
+                                </div>
+
+                                <div class="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6">
+                                    <span class="text-indigo-400">Design</span>
+                                    <span>Contact</span>
+                                    <span class="text-slate-600">Quote</span>
+                                </div>
+
+                                <div class="flex gap-2 mb-6">
+                                    <div class="h-1 flex-1 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                                    <div class="h-1 flex-1 rounded-full bg-white/10"></div>
+                                    <div class="h-1 flex-1 rounded-full bg-white/10"></div>
+                                </div>
+
+                                <div class="border-2 border-dashed border-indigo-500/50 rounded-2xl p-8 text-center bg-indigo-500/5">
+                                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center mx-auto text-indigo-400 mb-3">
+                                        <i data-lucide="upload" class="w-6 h-6"></i>
+                                    </div>
+                                    <p class="font-bold text-sm">Click or drag your logo</p>
+                                    <p class="text-xs text-slate-400 mt-1">PNG, JPG or SVG</p>
+                                </div>
+
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="p-3 rounded-xl bg-indigo-500/20 border border-indigo-500/50 text-center">
+                                        <div class="text-2xl mb-1">👕</div>
+                                        <p class="text-xs font-medium">T-Shirt</p>
+                                        <p class="text-[10px] text-slate-400">$15 base</p>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-center opacity-60">
+                                        <div class="text-2xl mb-1">🧢</div>
+                                        <p class="text-xs font-medium">Cap</p>
+                                        <p class="text-[10px] text-slate-400">$12 base</p>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-center opacity-60">
+                                        <div class="text-2xl mb-1">🎒</div>
+                                        <p class="text-xs font-medium">Bag</p>
+                                        <p class="text-[10px] text-slate-400">$18 base</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-6 text-center">
+                                    <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Estimate</p>
+                                    <div class="flex items-baseline justify-center gap-1">
+                                        <span class="text-2xl font-bold">$</span>
+                                        <span class="text-5xl font-black">675</span>
+                                        <span class="text-lg text-white/70">.00</span>
+                                    </div>
+                                    <p class="text-xs text-white/60 mt-2">Range: $607 - $742</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute -left-4 top-1/4 glass-card p-3 rounded-xl border border-indigo-500/30 z-30">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                                    <i data-lucide="brain" class="w-4 h-4 text-indigo-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold">Gemini 2.5 Flash</p>
+                                    <p class="text-[10px] text-slate-400">Mockup generation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Explanations -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="gradient-border p-6 relative">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">1</div>
+                            <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400"></i>
+                                AI Mockup Generation
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4">
+                                The quotation system uses <strong>Google Gemini 2.5 Flash Image</strong> to generate photorealistic mockups of embroidered logos on selected garments.
+                            </p>
+                            
+                            <div class="code-block p-4 overflow-x-auto text-xs">
+                                <pre><code><span class="highlight-comment">// Genkit flow for mockup generation</span>
+<span class="highlight-keyword">const</span> <span class="highlight-variable">prompt</span> = <span class="highlight-variable">ai</span>.<span class="highlight-function">definePrompt</span>({
+  <span class="highlight-variable">input</span>: { <span class="highlight-variable">logoDataUri</span>, <span class="highlight-variable">productType</span> },
+  <span class="highlight-variable">prompt</span>: <span class="highlight-string">`Generate photorealistic embroidery 
+    mockup on {{productType}}`</span>
+});
+
+<span class="highlight-keyword">const</span> { <span class="highlight-variable">media</span> } = <span class="highlight-keyword">await</span> <span class="highlight-function">prompt</span>({
+  <span class="highlight-variable">model</span>: <span class="highlight-string">'googleai/gemini-2.5-flash-image'</span>
+});</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="gradient-border p-6 relative">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-sm">2</div>
+                            <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="trending-down" class="w-5 h-5 text-purple-400"></i>
+                                Volume Discount Algorithm
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4">
+                                Tiered discounts: <strong>10% from 50 units</strong>, <strong>15% from 100</strong>.
+                            </p>
+                            
+                            <div class="bg-slate-900/50 rounded-xl p-4 border border-white/5">
+                                <div class="flex items-center justify-between mb-2 text-sm">
+                                    <span class="text-slate-400">Base price (50 units)</span>
+                                    <span class="font-mono">$750.00</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-2 text-indigo-400 text-sm">
+                                    <span>Volume discount (-10%)</span>
+                                    <span class="font-mono">-$75.00</span>
+                                </div>
+                                <div class="border-t border-white/10 pt-2 flex items-center justify-between">
+                                    <span class="font-bold">Total estimate</span>
+                                    <span class="text-lg font-bold text-green-400">$675.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 2: WORKSHOP MONITOR -->
+            <div id="module-workshop" class="module-card mb-8">
+                <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold flex items-center gap-3 mb-2">
+                                <i data-lucide="monitor" class="w-8 h-8 text-amber-400"></i>
+                                Workshop Control Panel
+                            </h2>
+                            <p class="text-slate-400">Industrial monitor with <span class="text-amber-400 font-bold">7 machines</span> in real-time • Firebase Snapshots</p>
+                        </div>
+                        <button class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold flex items-center gap-2 hover:opacity-90 transition">
+                            <i data-lucide="wand-2" class="w-5 h-5"></i>
+                            Optimize & Assign
+                        </button>
+                    </div>
+
+                    <!-- Machines Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <!-- Machine 1: Free -->
+                        <div class="glass-card p-4 border border-green-500/30 relative overflow-hidden">
+                            <div class="absolute top-2 right-2 w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-lg machine-free flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 01</p>
+                                    <p class="text-[10px] text-green-400 font-bold uppercase">Free</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400">Tajima TF-1501</p>
+                            <p class="text-[10px] text-slate-500 mt-1">15 heads • 1200 rpm</p>
+                        </div>
+
+                        <!-- Machine 2: Busy -->
+                        <div class="glass-card p-4 border border-amber-500/30 relative overflow-hidden">
+                            <div class="absolute top-2 right-2 w-3 h-3 rounded-full bg-amber-500"></div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-lg machine-busy flex items-center justify-center">
+                                    <i data-lucide="loader" class="w-5 h-5 text-white animate-spin"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 02</p>
+                                    <p class="text-[10px] text-amber-400 font-bold uppercase">Busy</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300">Order #A2841</p>
+                            <p class="text-[10px] text-slate-500 mt-1">⏱️ 2h 15m remaining</p>
+                            <div class="mt-2 h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-amber-500 w-3/4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Machine 3: Urgent -->
+                        <div class="glass-card p-4 border border-red-500/30 relative overflow-hidden pulse-urgent">
+                            <div class="absolute top-2 right-2 w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center">
+                                    <i data-lucide="alert-triangle" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 03</p>
+                                    <p class="text-[10px] text-red-400 font-bold uppercase">URGENT</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300">Order #A2902</p>
+                            <p class="text-[10px] text-red-400 mt-1">⚠️ Deadline in 4 hours</p>
+                            <div class="mt-2 h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-red-500 w-[90%]"></div>
+                            </div>
+                        </div>
+
+                        <!-- Machine 4: Maintenance -->
+                        <div class="glass-card p-4 border border-red-900/50 relative overflow-hidden opacity-70">
+                            <div class="absolute top-2 right-2 w-3 h-3 rounded-full bg-red-700"></div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-lg machine-maintenance flex items-center justify-center">
+                                    <i data-lucide="wrench" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 04</p>
+                                    <p class="text-[10px] text-red-500 font-bold uppercase">Maintenance</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400">Out of service</p>
+                            <p class="text-[10px] text-slate-500 mt-1">🔧 Scheduled check</p>
+                        </div>
+
+                        <!-- Machines 5-7 -->
+                        <div class="glass-card p-4 border border-green-500/30">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg machine-free flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 05</p>
+                                    <p class="text-[10px] text-green-400">Free</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 border border-amber-500/30">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg machine-busy flex items-center justify-center">
+                                    <i data-lucide="loader" class="w-5 h-5 text-white animate-spin"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 06</p>
+                                    <p class="text-[10px] text-amber-400">Busy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 border border-green-500/30">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg machine-free flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Machine 07</p>
+                                    <p class="text-[10px] text-green-400">Free</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="glass-card p-4 border border-white/10 bg-gradient-to-br from-indigo-900/30 to-purple-900/30">
+                            <p class="text-xs text-slate-400 mb-2">Today's Production</p>
+                            <p class="text-3xl font-black text-white">24</p>
+                            <p class="text-xs text-green-400">↑ 12% vs yesterday</p>
+                        </div>
+                    </div>
+
+                    <!-- Priority Queue -->
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <i data-lucide="list-ordered" class="w-5 h-5 text-indigo-400"></i>
+                            Hierarchical Production Queue
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-4">
+                            Algorithm that automatically sorts by <strong>deadline</strong> and order criticality
+                        </p>
+
+                        <div class="space-y-2">
+                            <!-- Queue Item 1 -->
+                            <div class="queue-item flex items-center gap-4 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                                <span class="font-black text-red-400 w-6">1</span>
+                                <div class="flex-1">
+                                    <p class="font-bold text-sm">ACME Corporation</p>
+                                    <p class="text-xs text-slate-400">#A2902 • 150 t-shirts • Chest + Back</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs font-bold text-red-400">Delivery: Today 18:00</p>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-red-500 text-white font-bold">CRITICAL</span>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-xs font-bold transition">
+                                    Assign
+                                </button>
+                            </div>
+
+                            <!-- Queue Item 2 -->
+                            <div class="queue-item flex items-center gap-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                                <span class="font-black text-amber-400 w-6">2</span>
+                                <div class="flex-1">
+                                    <p class="font-bold text-sm">TechConf 2024</p>
+                                    <p class="text-xs text-slate-400">#A2895 • 75 caps • Front</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs font-bold text-amber-400">Delivery: Tomorrow 12:00</p>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500 text-white font-bold">HIGH</span>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold transition">
+                                    Assign
+                                </button>
+                            </div>
+
+                            <!-- Queue Item 3 -->
+                            <div class="queue-item flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl">
+                                <span class="font-black text-slate-500 w-6">3</span>
+                                <div class="flex-1">
+                                    <p class="font-bold text-sm">FitLife Gym</p>
+                                    <p class="text-xs text-slate-400">#A2889 • 30 bags • 1 side</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs font-bold text-slate-400">Delivery: Friday</p>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-slate-600 text-white font-bold">MEDIUM</span>
+                                </div>
+                                <button class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold transition">
+                                    Assign
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Auto-Assign Algorithm Code -->
+                        <div class="mt-6 gradient-border p-6">
+                            <h4 class="font-bold mb-3 flex items-center gap-2">
+                                <i data-lucide="cpu" class="w-4 h-4 text-indigo-400"></i>
+                                Automatic Assignment Algorithm
+                            </h4>
+                            <div class="code-block p-4 overflow-x-auto text-xs">
+                                <pre><code><span class="highlight-comment">// Queue optimization - Assigns orders to free machines</span>
+<span class="highlight-keyword">const</span> <span class="highlight-function">optimizeQueue</span> = <span class="highlight-keyword">async</span> () => {
+  <span class="highlight-keyword">const</span> <span class="highlight-variable">freeMachines</span> = <span class="highlight-variable">machines</span>.<span class="highlight-function">filter</span>(m => m.estado === <span class="highlight-string">'free'</span>);
+  <span class="highlight-keyword">const</span> <span class="highlight-variable">pendingQueue</span> = <span class="highlight-variable">orders</span>.<span class="highlight-function">filter</span>(o => o.estado === <span class="highlight-string">'in_queue'</span>);
+  
+  <span class="highlight-comment">// Sort by deadline (most urgent first)</span>
+  <span class="highlight-variable">pendingQueue</span>.<span class="highlight-function">sort</span>((a, b) => 
+    a.delivery_date - b.delivery_date
+  );
+  
+  <span class="highlight-comment">// Assign to free machines</span>
+  <span class="highlight-keyword">for</span> (<span class="highlight-keyword">let</span> i = 0; i < freeMachines.length; i++) {
+    <span class="highlight-keyword">if</span> (pendingQueue[i]) {
+      <span class="highlight-keyword">await</span> <span class="highlight-function">assignOrderToMachine</span>(
+        pendingQueue[i].id, 
+        freeMachines[i].id
+      );
+    }
+  }
+};</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 3: ORDER CRM -->
+            <div id="module-crm" class="module-card mb-8">
+                <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h2 class="text-3xl font-bold flex items-center gap-3 mb-2">
+                                <i data-lucide="clipboard-list" class="w-8 h-8 text-green-400"></i>
+                                Order CRM
+                            </h2>
+                            <p class="text-slate-400">Complete pipeline with <span class="text-green-400 font-bold">Kanban Drag & Drop</span></p>
+                        </div>
+                        <button class="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-bold flex items-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            New Order
+                        </button>
+                    </div>
+
+                    <!-- Kanban Board -->
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 overflow-x-auto pb-4">
+                        <!-- Column 1: Pending -->
+                        <div class="min-w-[200px]">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-sm text-slate-300">Pending</h4>
+                                <span class="px-2 py-0.5 rounded-full bg-slate-700 text-xs">3</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="glass-card p-4 border border-white/10 cursor-move hover:border-green-500/50 transition">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[10px] text-slate-500">#A2910</span>
+                                        <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[10px]">New</span>
+                                    </div>
+                                    <p class="font-bold text-sm mb-1">El Gaucho Restaurant</p>
+                                    <p class="text-xs text-slate-400 mb-3">20 aprons • Front logo</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-bold">$340</span>
+                                        <span class="text-[10px] text-slate-500">2h ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: In Queue -->
+                        <div class="min-w-[200px]">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-sm text-slate-300">In Queue</h4>
+                                <span class="px-2 py-0.5 rounded-full bg-indigo-900/50 text-xs text-indigo-400">2</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="glass-card p-4 border border-indigo-500/30 cursor-move">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[10px] text-slate-500">#A2902</span>
+                                        <span class="px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 text-[10px]">Urgent</span>
+                                    </div>
+                                    <p class="font-bold text-sm mb-1">ACME Corporation</p>
+                                    <p class="text-xs text-slate-400 mb-3">150 t-shirts • Chest+Back</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-bold">$2,850</span>
+                                        <span class="text-[10px] text-red-400">Today 18:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: In Process -->
+                        <div class="min-w-[200px]">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-sm text-amber-400">In Process</h4>
+                                <span class="px-2 py-0.5 rounded-full bg-amber-900/50 text-xs text-amber-400">2</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="glass-card p-4 border border-amber-500/30 cursor-move">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[10px] text-slate-500">#A2895</span>
+                                        <div class="w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="w-3/4 h-full bg-amber-500"></div>
+                                        </div>
+                                    </div>
+                                    <p class="font-bold text-sm mb-1">TechConf 2024</p>
+                                    <p class="text-xs text-slate-400 mb-3">75 caps • Front</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-bold">$1,125</span>
+                                        <span class="text-[10px] text-amber-400">Mach. 02</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 4: Quality -->
+                        <div class="min-w-[200px]">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-sm text-purple-400">Quality</h4>
+                                <span class="px-2 py-0.5 rounded-full bg-purple-900/50 text-xs text-purple-400">1</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="glass-card p-4 border border-purple-500/30 cursor-move">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[10px] text-slate-500">#A2881</span>
+                                        <i data-lucide="check-circle" class="w-4 h-4 text-purple-400"></i>
+                                    </div>
+                                    <p class="font-bold text-sm mb-1">Martinez Wedding</p>
+                                    <p class="text-xs text-slate-400 mb-3">50 napkins • Initial</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-bold">$425</span>
+                                        <span class="text-[10px] text-purple-400">QC Pass</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 5: Delivered -->
+                        <div class="min-w-[200px]">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-sm text-green-400">Delivered</h4>
+                                <span class="px-2 py-0.5 rounded-full bg-green-900/50 text-xs text-green-400">5</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="glass-card p-4 border border-green-500/30 opacity-70">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[10px] text-slate-500">#A2845</span>
+                                        <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                                    </div>
+                                    <p class="font-bold text-sm mb-1">Elementary School 15</p>
+                                    <p class="text-xs text-slate-400 mb-3">100 t-shirts</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-bold">$1,500</span>
+                                        <span class="text-[10px] text-green-400">✓ Delivered</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Detail + Revert System -->
+                    <div class="mt-8 grid md:grid-cols-2 gap-6">
+                        <div class="gradient-border p-6">
+                            <h4 class="font-bold mb-4 flex items-center gap-2">
+                                <i data-lucide="users" class="w-4 h-4 text-green-400"></i>
+                                Client Details
+                            </h4>
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-xl">
+                                    👤
+                                </div>
+                                <div>
+                                    <p class="font-bold">ACME Corporation</p>
+                                    <p class="text-sm text-slate-400">contact@acme.com</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="p-3 rounded-lg bg-white/5">
+                                    <p class="text-2xl font-bold text-indigo-400">12</p>
+                                    <p class="text-xs text-slate-500">Orders</p>
+                                </div>
+                                <div class="p-3 rounded-lg bg-white/5">
+                                    <p class="text-2xl font-bold text-green-400">$24K</p>
+                                    <p class="text-xs text-slate-500">Total</p>
+                                </div>
+                                <div class="p-3 rounded-lg bg-white/5">
+                                    <p class="text-2xl font-bold text-amber-400">4.9★</p>
+                                    <p class="text-xs text-slate-500">Rating</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gradient-border p-6">
+                            <h4 class="font-bold mb-4 flex items-center gap-2">
+                                <i data-lucide="undo-2" class="w-4 h-4 text-amber-400"></i>
+                                Revert System
+                            </h4>
+                            <p class="text-sm text-slate-400 mb-4">
+                                Capability to <strong>revert assignments</strong> to correct operational errors without data loss.
+                            </p>
+                            <div class="code-block p-4 overflow-x-auto text-xs">
+                                <pre><code><span class="highlight-comment">// Revert assignment</span>
+<span class="highlight-keyword">const</span> <span class="highlight-function">revertAssignment</span> = <span class="highlight-keyword">async</span> (orderId) => {
+  <span class="highlight-keyword">const</span> <span class="highlight-variable">batch</span> = <span class="highlight-function">writeBatch</span>(db);
+  
+  <span class="highlight-comment">// Free machine</span>
+  <span class="highlight-variable">batch</span>.<span class="highlight-function">update</span>(<span class="highlight-function">doc</span>(db, <span class="highlight-string">'machines'</span>, machineId), {
+    status: <span class="highlight-string">'free'</span>,
+    current_order_id: <span class="highlight-keyword">null</span>
+  });
+  
+  <span class="highlight-comment">// Return order to queue</span>
+  <span class="highlight-variable">batch</span>.<span class="highlight-function">update</span>(<span class="highlight-function">doc</span>(db, <span class="highlight-string">'orders'</span>, orderId), {
+    status: <span class="highlight-string">'in_queue'</span>,
+    history: <span class="highlight-function">arrayUnion</span>({
+      action: <span class="highlight-string">'reverted'</span>,
+      timestamp: <span class="highlight-function">serverTimestamp</span>()
+    })
+  });
+  
+  <span class="highlight-keyword">await</span> <span class="highlight-variable">batch</span>.<span class="highlight-function">commit</span>();
+};</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 4: SALES DASHBOARD -->
+            <div id="module-dashboard" class="module-card mb-8">
+                <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold flex items-center gap-3 mb-2">
+                                <i data-lucide="bar-chart-3" class="w-8 h-8 text-pink-400"></i>
+                                Sales Dashboard
+                            </h2>
+                            <p class="text-slate-400">Critical metrics and <span class="text-pink-400 font-bold">financial forecasts</span></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="tab-btn active px-4 py-2 rounded-lg text-sm font-bold">Month</button>
+                            <button class="tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-white/5">Quarter</button>
+                            <button class="tab-btn px-4 py-2 rounded-lg text-sm font-bold bg-white/5">Year</button>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="glass-card p-6 border border-white/10">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs text-slate-400 uppercase">Monthly Revenue</p>
+                                <i data-lucide="trending-up" class="w-4 h-4 text-green-400"></i>
+                            </div>
+                            <p class="text-3xl font-black">$45,230</p>
+                            <p class="text-xs text-green-400 mt-1">↑ 23% vs last month</p>
+                        </div>
+
+                        <div class="glass-card p-6 border border-white/10">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs text-slate-400 uppercase">Orders</p>
+                                <i data-lucide="package" class="w-4 h-4 text-indigo-400"></i>
+                            </div>
+                            <p class="text-3xl font-black">128</p>
+                            <p class="text-xs text-slate-400 mt-1">94 completed</p>
+                        </div>
+
+                        <div class="glass-card p-6 border border-white/10">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs text-slate-400 uppercase">Avg. Delivery</p>
+                                <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+                            </div>
+                            <p class="text-3xl font-black">2.4<span class="text-lg font-normal text-slate-400">d</span></p>
+                            <p class="text-xs text-green-400 mt-1">↓ 0.3d optimization</p>
+                        </div>
+
+                        <div class="glass-card p-6 border border-pink-500/30 bg-pink-500/5">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs text-pink-400 uppercase font-bold">Future Pipeline</p>
+                                <i data-lucide="target" class="w-4 h-4 text-pink-400"></i>
+                            </div>
+                            <p class="text-3xl font-black text-pink-400">$78,500</p>
+                            <p class="text-xs text-slate-400 mt-1">30-day projection</p>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Revenue Chart -->
+                        <div class="glass-card p-6">
+                            <h4 class="font-bold mb-4">Revenue vs Target</h4>
+                            <div class="flex items-end gap-2 h-40">
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-indigo-500 rounded-t" style="height: 60%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 80%"></div>
+                                    <span class="text-[10px] text-slate-500">Jan</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-indigo-500 rounded-t" style="height: 75%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 80%"></div>
+                                    <span class="text-[10px] text-slate-500">Feb</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-indigo-500 rounded-t" style="height: 90%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 85%"></div>
+                                    <span class="text-[10px] text-slate-500">Mar</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-green-500 rounded-t" style="height: 105%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 90%"></div>
+                                    <span class="text-[10px] text-slate-500">Apr</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-indigo-500 rounded-t" style="height: 85%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 90%"></div>
+                                    <span class="text-[10px] text-slate-500">May</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <div class="w-full bg-indigo-500 rounded-t" style="height: 95%"></div>
+                                    <div class="w-full bg-white/10 rounded-t" style="height: 95%"></div>
+                                    <span class="text-[10px] text-slate-500">Jun</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-center gap-6 mt-4 text-xs">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded bg-indigo-500"></div>
+                                    <span class="text-slate-400">Actual</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded bg-white/20"></div>
+                                    <span class="text-slate-400">Target</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Products -->
+                        <div class="glass-card p-6">
+                            <h4 class="font-bold mb-4">Best Selling Products</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Premium T-Shirts</p>
+                                        <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mt-1">
+                                            <div class="h-full bg-indigo-500 w-[85%]"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-bold">42%</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-xs font-bold">2</span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Trucker Caps</p>
+                                        <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mt-1">
+                                            <div class="h-full bg-purple-500 w-[65%]"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-bold">28%</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-pink-600 flex items-center justify-center text-xs font-bold">3</span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Eco Bags</p>
+                                        <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mt-1">
+                                            <div class="h-full bg-pink-500 w-[45%]"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-bold">18%</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-slate-600 flex items-center justify-center text-xs font-bold">4</span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Aprons</p>
+                                        <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mt-1">
+                                            <div class="h-full bg-slate-500 w-[25%]"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-bold">12%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Revenue Projection Code -->
+                    <div class="mt-6 gradient-border p-6">
+                        <h4 class="font-bold mb-3 flex items-center gap-2">
+                            <i data-lucide="calculator" class="w-4 h-4 text-pink-400"></i>
+                            Portfolio Projection Algorithm
+                        </h4>
+                        <p class="text-sm text-slate-400 mb-4">
+                            Calculates future value based on orders in queue and in process, considering closing probability.
+                        </p>
+                        <div class="code-block p-4 overflow-x-auto text-xs">
+                            <pre><code><span class="highlight-comment">// Financial projection of future portfolio</span>
+<span class="highlight-keyword">const</span> <span class="highlight-function">calculateFutureRevenue</span> = () => {
+  <span class="highlight-keyword">const</span> <span class="highlight-variable">pendingOrders</span> = <span class="highlight-variable">orders</span>.<span class="highlight-function">filter</span>(o => 
+    o.status === <span class="highlight-string">'pending'</span> || 
+    o.status === <span class="highlight-string">'in_queue'</span> ||
+    o.status === <span class="highlight-string">'in_process'</span>
+  );
+  
+  <span class="highlight-keyword">const</span> <span class="highlight-variable">weightedRevenue</span> = <span class="highlight-variable">pendingOrders</span>.<span class="highlight-function">reduce</span>((sum, order) => {
+    <span class="highlight-comment">// Weight by status: closer to delivery = more probable</span>
+    <span class="highlight-keyword">const</span> <span class="highlight-variable">probability</span> = {
+      <span class="highlight-string">'in_process'</span>: 0.95,
+      <span class="highlight-string">'in_queue'</span>: 0.85,
+      <span class="highlight-string">'pending'</span>: 0.70
+    }[order.status];
+    
+    <span class="highlight-keyword">return</span> sum + (order.total * probability);
+  }, 0);
+  
+  <span class="highlight-keyword">return</span> <span class="highlight-variable">weightedRevenue</span>;
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Architecture Summary -->
+            <div class="mt-12 glass-card p-8 border border-indigo-500/30">
+                <h2 class="text-2xl font-bold mb-6 text-center">System Architecture</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="smartphone" class="w-8 h-8 text-indigo-400"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Frontend</h3>
+                        <p class="text-sm text-slate-400">Next.js 15 + React 19 with Server Components for optimized initial load</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="database" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Backend</h3>
+                        <p class="text-sm text-slate-400">Firebase Firestore with real-time snapshots and integrated authentication</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="brain" class="w-8 h-8 text-purple-400"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">AI</h3>
+                        <p class="text-sm text-slate-400">Google Genkit + Gemini 2.5 Flash for image generation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12 text-center">
+                <p class="text-slate-400 mb-6">Interested in a similar system for your business?</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="/quote" class="px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90 transition flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
+                        Get a Quote
+                    </a>
+                    <a href="/#work" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition flex items-center gap-2">
+                        <i data-lucide="grid" class="w-5 h-5"></i>
+                        More Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Toggle functionality
+        function toggleModule(moduleId, toggleElement) {
+            const module = document.getElementById('module-' + moduleId);
+            const isActive = toggleElement.classList.contains('active');
+            
+            if (isActive) {
+                toggleElement.classList.remove('active');
+                module.classList.remove('expanded');
+            } else {
+                toggleElement.classList.add('active');
+                module.classList.add('expanded');
+                
+                setTimeout(() => {
+                    module.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Initialize with quotation visible
+        document.addEventListener('DOMContentLoaded', () => {
+            const quotationToggle = document.querySelector('[onclick="toggleModule(\'quotation\', this)"]');
+            if (quotationToggle) {
+                quotationToggle.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

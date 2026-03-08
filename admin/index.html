@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Project Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background: linear-gradient(135deg, #020617 0%, #0f172a 100%); min-height: 100vh; color: #e2e8f0; }
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
+        .status-nueva { background: #3b82f6; }
+        .status-revision { background: #f59e0b; }
+        .status-aprobada { background: #10b981; }
+        .status-onboarding { background: #8b5cf6; }
+        .status-completada { background: #64748b; }
+        .prioridad-alta { border-left: 4px solid #ef4444; }
+        .prioridad-media { border-left: 4px solid #f59e0b; }
+        .prioridad-baja { border-left: 4px solid #10b981; }
+        .step-active { background: #3b82f6; color: white; }
+        .step-completed { background: #10b981; color: white; }
+        .step-pending { background: #334155; color: #94a3b8; }
+        .input-field { width: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem 1rem; color: white; }
+        .input-field:focus { border-color: #3b82f6; outline: none; }
+        .textarea-field { width: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem 1rem; color: white; min-height: 100px; resize: vertical; }
+        .section-card { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .hidden-section { display: none !important; }
+        .onboarding-card {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+        .onboarding-card:hover {
+            background: rgba(51, 65, 85, 0.95);
+            border-color: rgba(255,255,255,0.25);
+        }
+        .budget-badge {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="p-6">
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="fixed inset-0 bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center z-50">
+        <div class="glass-panel p-8 max-w-md w-full">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="shield" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-2xl font-bold">Panel de Administración</h1>
+                <p class="text-slate-400 text-sm mt-2">Ingresa tu contraseña para continuar</p>
+            </div>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Contraseña</label>
+                    <input type="password" id="login-password" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    Ingresar
+                </button>
+            </form>
+            
+            <p id="login-error" class="text-red-400 text-sm text-center mt-4 hidden"></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="main-app" class="max-w-7xl mx-auto hidden">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">Panel de Proyectos</h1>
+                <p class="text-slate-400">Gestión de cotizaciones y onboarding</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="showNewOnboarding()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition flex items-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Nuevo Onboarding
+                </button>
+                <button onclick="logout()" class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition flex items-center gap-2">
+                    <i data-lucide="log-out" class="w-4 h-4"></i> Salir
+                </button>
+            </div>
+        </div>
+
+        <!-- MAIN TABS -->
+        <div class="flex gap-2 mb-6 border-b border-white/10 pb-4">
+            <button onclick="showMainTab('quotes')" id="main-tab-quotes" class="px-6 py-3 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 font-medium">
+                <i data-lucide="file-text" class="w-4 h-4 inline mr-2"></i>Cotizaciones
+            </button>
+            <button onclick="showMainTab('onboardings')" id="main-tab-onboardings" class="px-6 py-3 rounded-lg hover:bg-white/5 transition">
+                <i data-lucide="clipboard-list" class="w-4 h-4 inline mr-2"></i>Onboardings
+            </button>
+        </div>
+
+        <!-- VIEW: QUOTES -->
+        <div id="view-quotes">
+            <!-- Stats -->
+            <div class="grid grid-cols-5 gap-4 mb-8">
+                <div class="glass-panel p-4 text-center">
+                    <p class="text-slate-400 text-sm">Nuevas</p>
+                    <p class="text-3xl font-bold text-blue-400" id="stat-nuevas">0</p>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <p class="text-slate-400 text-sm">En Revisión</p>
+                    <p class="text-3xl font-bold text-amber-400" id="stat-revision">0</p>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <p class="text-slate-400 text-sm">Aprobadas</p>
+                    <p class="text-3xl font-bold text-green-400" id="stat-aprobada">0</p>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <p class="text-slate-400 text-sm">Onboarding</p>
+                    <p class="text-3xl font-bold text-purple-400" id="stat-onboarding">0</p>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <p class="text-slate-400 text-sm">Completadas</p>
+                    <p class="text-3xl font-bold text-slate-400" id="stat-completada">0</p>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="glass-panel p-4 mb-6 flex flex-wrap gap-4 items-center">
+                <select id="filter-status" class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm" onchange="applyFilters()">
+                    <option value="">Todos los estados</option>
+                    <option value="nueva">Nueva</option>
+                    <option value="en_revision">En Revisión</option>
+                    <option value="aprobada">Aprobada</option>
+                    <option value="onboarding">Onboarding</option>
+                    <option value="completada">Completada</option>
+                </select>
+                <button onclick="loadQuotes()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Quotes Table -->
+            <div class="glass-panel overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-slate-800/50">
+                        <tr>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">ID</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Tipo</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Estado</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Prioridad</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Fecha</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quotes-list">
+                        <tr><td colspan="6" class="p-8 text-center text-slate-500">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEW: ONBOARDINGS -->
+        <div id="view-onboardings" class="hidden-section">
+            <!-- Onboarding Tabs -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="showOnboardingTab('pending')" id="onb-tab-pending" class="px-4 py-2 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 text-sm">
+                    Cotizaciones Aprobadas
+                </button>
+                <button onclick="showOnboardingTab('active')" id="onb-tab-active" class="px-4 py-2 rounded-lg hover:bg-white/5 transition text-sm">
+                    Onboardings Activos
+                </button>
+                <button onclick="showOnboardingTab('completed')" id="onb-tab-completed" class="px-4 py-2 rounded-lg hover:bg-white/5 transition text-sm">
+                    Completados
+                </button>
+            </div>
+
+            <!-- Pending Quotes (Aprobadas) -->
+            <div id="onb-view-pending" class="glass-panel overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-slate-800/50">
+                        <tr>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Fecha</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Cotización</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Tipo</th>
+                            <th class="text-left p-4 text-sm font-medium text-slate-400">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pending-quotes-list">
+                        <tr><td colspan="4" class="p-8 text-center text-slate-500">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Active Onboardings -->
+            <div id="onb-view-active" class="hidden-section">
+                <div id="active-onboardings-list" class="grid gap-4">
+                    <p class="text-slate-500 text-center p-8">Cargando...</p>
+                </div>
+            </div>
+
+            <!-- Completed Onboardings -->
+            <div id="onb-view-completed" class="hidden-section">
+                <div id="completed-onboardings-list" class="grid gap-4">
+                    <p class="text-slate-500 text-center p-8">Cargando...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: ONBOARDING FORM (5 Steps) -->
+        <div id="view-onboarding-form" class="hidden-section">
+            <div class="flex justify-between items-center mb-6">
+                <button onclick="backToOnboardings()" class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+                </button>
+                <h2 class="text-xl font-bold">Nuevo Onboarding</h2>
+                <div class="w-24"></div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="flex justify-between mb-8">
+                <div class="step-indicator flex-1 text-center" data-step="1">
+                    <div class="step-circle w-10 h-10 rounded-full step-active flex items-center justify-center mx-auto mb-2 font-bold">1</div>
+                    <span class="text-sm">Datos Básicos</span>
+                </div>
+                <div class="step-indicator flex-1 text-center opacity-50" data-step="2">
+                    <div class="step-circle w-10 h-10 rounded-full step-pending flex items-center justify-center mx-auto mb-2 font-bold">2</div>
+                    <span class="text-sm">Descubrimiento</span>
+                </div>
+                <div class="step-indicator flex-1 text-center opacity-50" data-step="3">
+                    <div class="step-circle w-10 h-10 rounded-full step-pending flex items-center justify-center mx-auto mb-2 font-bold">3</div>
+                    <span class="text-sm">Requerimientos</span>
+                </div>
+                <div class="step-indicator flex-1 text-center opacity-50" data-step="4">
+                    <div class="step-circle w-10 h-10 rounded-full step-pending flex items-center justify-center mx-auto mb-2 font-bold">4</div>
+                    <span class="text-sm">Tech Access</span>
+                </div>
+                <div class="step-indicator flex-1 text-center opacity-50" data-step="5">
+                    <div class="step-circle w-10 h-10 rounded-full step-pending flex items-center justify-center mx-auto mb-2 font-bold">5</div>
+                    <span class="text-sm">Finalizar</span>
+                </div>
+            </div>
+
+            <form id="onboarding-form">
+                <input type="hidden" id="onboarding-id" name="id">
+                <input type="hidden" id="quote-source" name="quote_source">
+
+                <!-- STEP 1 -->
+                <div id="step-1" class="step-content">
+                    <div class="section-card">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="user" class="text-blue-400"></i>Datos del Cliente
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nombre *</label>
+                                <input type="text" name="cliente_nombre" class="input-field" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Email *</label>
+                                <input type="email" name="cliente_email" class="input-field" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Empresa</label>
+                                <input type="text" name="cliente_empresa" class="input-field">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Teléfono</label>
+                                <input type="tel" name="cliente_telefono" class="input-field">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="briefcase" class="text-purple-400"></i>Proyecto
+                        </h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nombre del Proyecto *</label>
+                                <input type="text" name="proyecto_nombre" class="input-field" required>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Tipo *</label>
+                                    <select name="proyecto_tipo" class="input-field" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="landing">Landing Page</option>
+                                        <option value="web">Sitio Web</option>
+                                        <option value="ecommerce">E-commerce</option>
+                                        <option value="webapp">Web App</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Presupuesto (USD) *</label>
+                                    <input type="number" name="presupuesto_acordado" class="input-field" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div id="step-2" class="step-content hidden-section">
+                    <div class="section-card">
+                        <h2 class="text-xl font-bold mb-4">Fase de Descubrimiento</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Objetivo del proyecto *</label>
+                                <textarea name="objetivo_negocio" class="textarea-field" rows="2" placeholder="Aumentar ventas, captar leads..." required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Público objetivo *</label>
+                                <textarea name="publico_objetivo" class="textarea-field" rows="2" placeholder="Mujeres 25-45 años..." required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Dolor actual *</label>
+                                <textarea name="dolor_actual" class="textarea-field" rows="2" placeholder="El sitio actual es lento..." required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Métricas de éxito (6 meses) *</label>
+                                <textarea name="metricas_exito" class="textarea-field" rows="2" placeholder="Ventas de $5k a $15k/mes..." required></textarea>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Fecha límite</label>
+                                    <input type="text" name="fecha_limite" class="input-field" placeholder="Ej: 15 de marzo">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Canal preferido</label>
+                                    <select name="canal_comunicacion" class="input-field">
+                                        <option value="email">Email</option>
+                                        <option value="whatsapp">WhatsApp</option>
+                                        <option value="slack">Slack</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div id="step-3" class="step-content hidden-section">
+                    <div class="section-card">
+                        <h2 class="text-xl font-bold mb-4">Requerimientos Técnicos</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">User Stories *</label>
+                                <textarea name="user_stories" class="textarea-field" rows="4" placeholder="Como [usuario] quiero [acción] para [beneficio]..." required></textarea>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Stack Tecnológico</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="stack" value="nextjs"> Next.js + WP Headless</label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="stack" value="nextjs-full"> Next.js Full Stack</label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="stack" value="wordpress"> WordPress</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Integraciones</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="integraciones" value="stripe"> Stripe</label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="integraciones" value="mercadopago"> MercadoPago</label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="integraciones" value="mailchimp"> Mailchimp</label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="integraciones" value="analytics"> Google Analytics</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Notas técnicas</label>
+                                <textarea name="notas_tecnicas" class="textarea-field" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div id="step-4" class="step-content hidden-section">
+                    <div class="section-card">
+                        <h2 class="text-xl font-bold mb-4">Tech Access Checklist</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-semibold text-blue-400 mb-2">Accesos</h3>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="acceso_dominio"> Acceso al dominio</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="acceso_hosting"> Acceso al hosting</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="acceso_wp"> WordPress Admin</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="acceso_repositorio"> Repositorio</label>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-purple-400 mb-2">Activos</h3>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="activo_logo"> Logo vectorial</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="activo_colores"> Paleta de colores</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="activo_tipografias"> Fuentes</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="activo_imagenes"> Banco de imágenes</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+                            <h4 class="font-semibold text-amber-400 mb-2">Contrato</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-2"><input type="checkbox" name="deposito_50"> Depósito 50% recibido</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="contrato_firmado"> Contrato firmado</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5 -->
+                <div id="step-5" class="step-content hidden-section">
+                    <div class="section-card text-center py-12">
+                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-400 mb-6">
+                            <i data-lucide="check-circle" class="w-10 h-10"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-4">¡Onboarding Completado!</h2>
+                        <p class="text-slate-400 mb-6">Revisa que toda la información esté correcta.</p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button type="button" onclick="createTrelloFromForm()" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition flex items-center gap-2">
+                                <i data-lucide="trello" class="w-5 h-5"></i>Crear Tablero Trello
+                            </button>
+                            <button type="button" onclick="saveOnboarding('completado')" class="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 transition flex items-center gap-2">
+                                <i data-lucide="save" class="w-5 h-5"></i>Guardar y Finalizar
+                            </button>
+                            <button type="button" onclick="saveOnboarding('borrador')" class="px-6 py-3 rounded-lg bg-slate-600 hover:bg-slate-700 transition flex items-center gap-2">
+                                Guardar Borrador
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between mt-8 pt-6 border-t border-white/10">
+                    <button type="button" onclick="prevStep()" id="btn-prev" class="px-6 py-3 rounded-lg bg-slate-700 hover:bg-slate-600 transition flex items-center gap-2 hidden">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>Anterior
+                    </button>
+                    <div></div>
+                    <button type="button" onclick="nextStep()" id="btn-next" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition flex items-center gap-2">
+                        Siguiente<i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==================== AUTH ====================
+        let authToken = localStorage.getItem('admin_token');
+        let currentStep = 1;
+        const totalSteps = 5;
+        let quotes = [];
+        let currentQuote = null;
+
+        if (authToken) showMainApp();
+
+        function showMainApp() {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+            loadQuotes();
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('login-password').value;
+            try {
+                const response = await fetch('/api/auth-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    authToken = data.token;
+                    localStorage.setItem('admin_token', authToken);
+                    showMainApp();
+                } else {
+                    document.getElementById('login-error').textContent = data.error;
+                    document.getElementById('login-error').classList.remove('hidden');
+                }
+            } catch (error) {
+                document.getElementById('login-error').textContent = 'Error de conexión';
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        async function apiFetch(url, options = {}) {
+            const response = await fetch(url, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`,
+                    ...options.headers
+                }
+            });
+            if (response.status === 401) {
+                logout();
+                return null;
+            }
+            return response;
+        }
+
+        function logout() {
+            localStorage.removeItem('admin_token');
+            location.reload();
+        }
+
+        // ==================== NAVIGATION ====================
+        function showMainTab(tab) {
+            document.getElementById('view-quotes').classList.add('hidden-section');
+            document.getElementById('view-onboardings').classList.add('hidden-section');
+            document.getElementById('view-onboarding-form').classList.add('hidden-section');
+            
+            document.getElementById('main-tab-quotes').classList.remove('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30');
+            document.getElementById('main-tab-onboardings').classList.remove('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30');
+            
+            if (tab === 'quotes') {
+                document.getElementById('view-quotes').classList.remove('hidden-section');
+                document.getElementById('main-tab-quotes').classList.add('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30');
+                loadQuotes();
+            } else {
+                document.getElementById('view-onboardings').classList.remove('hidden-section');
+                document.getElementById('main-tab-onboardings').classList.add('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30');
+                showOnboardingTab('pending');
+            }
+        }
+
+        // ==================== QUOTES ====================
+        async function loadQuotes() {
+            try {
+                const response = await apiFetch('/api/quotes');
+                if (!response) return;
+                const data = await response.json();
+                if (data.success) {
+                    quotes = data.quotes || [];
+                    applyFilters();
+                    updateStats();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('stat-nuevas').textContent = quotes.filter(q => q.status === 'nueva').length;
+            document.getElementById('stat-revision').textContent = quotes.filter(q => q.status === 'en_revision').length;
+            document.getElementById('stat-aprobada').textContent = quotes.filter(q => q.status === 'aprobada').length;
+            document.getElementById('stat-onboarding').textContent = quotes.filter(q => q.status === 'onboarding').length;
+            document.getElementById('stat-completada').textContent = quotes.filter(q => q.status === 'completada').length;
+        }
+
+        function applyFilters() {
+            const statusFilter = document.getElementById('filter-status').value;
+            let filtered = quotes.filter(q => !statusFilter || q.status === statusFilter);
+            renderQuotes(filtered);
+        }
+
+        function renderQuotes(quotesToRender) {
+            const tbody = document.getElementById('quotes-list');
+            if (quotesToRender.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-500">No hay cotizaciones</td></tr>';
+                return;
+            }
+            tbody.innerHTML = quotesToRender.map(q => `
+                <tr class="border-t border-white/5 hover:bg-white/5">
+                    <td class="p-4 font-mono text-xs text-slate-400">${q.id.slice(-8)}</td>
+                    <td class="p-4 text-slate-400">${q.tipo}</td>
+                    <td class="p-4"><span class="px-2 py-1 rounded-full text-xs status-${q.status}">${q.status}</span></td>
+                    <td class="p-4 text-slate-400 capitalize">${q.prioridad}</td>
+                    <td class="p-4 text-slate-400 text-sm">${new Date(q.created_at).toLocaleDateString()}</td>
+                    <td class="p-4">
+                        ${q.status === 'aprobada' ? 
+                            `<button onclick="startOnboardingFromQuote('${q.id}')" class="text-green-400 hover:text-green-300" title="Iniciar Onboarding"><i data-lucide="rocket" class="w-4 h-4"></i></button>` :
+                            `<button onclick="viewQuote('${q.id}')" class="text-blue-400 hover:text-blue-300"><i data-lucide="eye" class="w-4 h-4"></i></button>`
+                        }
+                    </td>
+                </tr>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        async function viewQuote(id) {
+            const response = await apiFetch(`/api/quotes?id=${id}`);
+            if (!response) return;
+            const data = await response.json();
+            if (data.success) {
+                alert(JSON.stringify(data.quote, null, 2));
+            }
+        }
+
+        // ==================== ONBOARDINGS ====================
+        function showOnboardingTab(tab) {
+            document.getElementById('onb-view-pending').classList.add('hidden-section');
+            document.getElementById('onb-view-active').classList.add('hidden-section');
+            document.getElementById('onb-view-completed').classList.add('hidden-section');
+            
+            document.querySelectorAll('[id^="onb-tab-"]').forEach(t => t.classList.remove('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30'));
+            
+            document.getElementById(`onb-view-${tab}`).classList.remove('hidden-section');
+            document.getElementById(`onb-tab-${tab}`).classList.add('bg-blue-600/20', 'text-blue-400', 'border', 'border-blue-500/30');
+            
+            if (tab === 'pending') loadPendingQuotesForOnboarding();
+            if (tab === 'active') loadActiveOnboardings();
+            if (tab === 'completed') loadCompletedOnboardings();
+        }
+
+        async function loadPendingQuotesForOnboarding() {
+            const response = await apiFetch('/api/quotes');
+            if (!response) return;
+            const data = await response.json();
+            const pending = data.quotes?.filter(q => q.status === 'aprobada') || [];
+            
+            const tbody = document.getElementById('pending-quotes-list');
+            if (pending.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-500">No hay cotizaciones aprobadas</td></tr>';
+                return;
+            }
+            tbody.innerHTML = pending.map(q => `
+                <tr class="border-t border-white/5 hover:bg-white/5">
+                    <td class="p-4 text-slate-400">${new Date(q.created_at).toLocaleDateString()}</td>
+                    <td class="p-4 font-mono text-xs">${q.id.slice(-8)}</td>
+                    <td class="p-4 text-slate-400">${q.tipo}</td>
+                    <td class="p-4">
+                        <button onclick="startOnboardingFromQuote('${q.id}')" class="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-sm">Iniciar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function loadActiveOnboardings() {
+            const response = await apiFetch('/api/list-onboardings?status=activo');
+            if (!response) return;
+            const data = await response.json();
+            const container = document.getElementById('active-onboardings-list');
+            if (!data.onboardings?.length) {
+                container.innerHTML = '<p class="text-slate-500 text-center p-8">No hay onboardings activos</p>';
+                return;
+            }
+            container.innerHTML = data.onboardings.map(o => `
+                <div class="onboarding-card">
+                    <div class="flex justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg">${o.proyecto || 'Sin nombre'}</h3>
+                            <p class="text-slate-400 text-sm">${new Date(o.created_at).toLocaleDateString()}</p>
+                        </div>
+                        ${o.presupuesto ? `<span class="budget-badge">$${o.presupuesto}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadCompletedOnboardings() {
+            const response = await apiFetch('/api/list-onboardings?status=completado');
+            if (!response) return;
+            const data = await response.json();
+            const container = document.getElementById('completed-onboardings-list');
+            if (!data.onboardings?.length) {
+                container.innerHTML = '<p class="text-slate-500 text-center p-8">No hay completados</p>';
+                return;
+            }
+            container.innerHTML = data.onboardings.map(o => `
+                <div class="onboarding-card">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-lg">${o.proyecto || 'Sin nombre'}</h3>
+                            <p class="text-slate-400 text-sm">${new Date(o.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            ${o.presupuesto ? `<span class="budget-badge">$${o.presupuesto}</span>` : ''}
+                            <button onclick="createTrelloFromCompleted('${o.id}', '${o.proyecto}')" class="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-sm">Trello</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== ONBOARDING FORM ====================
+        function showNewOnboarding() {
+            document.getElementById('view-quotes').classList.add('hidden-section');
+            document.getElementById('view-onboardings').classList.add('hidden-section');
+            document.getElementById('view-onboarding-form').classList.remove('hidden-section');
+            resetForm();
+        }
+
+        function backToOnboardings() {
+            document.getElementById('view-onboarding-form').classList.add('hidden-section');
+            showMainTab('onboardings');
+        }
+
+        async function startOnboardingFromQuote(quoteId) {
+            const response = await apiFetch(`/api/quotes?id=${quoteId}`);
+            if (!response) return;
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById('quote-source').value = quoteId;
+                showNewOnboarding();
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('onboarding-form').reset();
+            currentStep = 1;
+            updateStepUI();
+        }
+
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateStepUI();
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+            }
+        }
+
+        function validateStep(step) {
+            const stepEl = document.getElementById(`step-${step}`);
+            const required = stepEl.querySelectorAll('[required]');
+            let valid = true;
+            required.forEach(field => {
+                if (!field.value.trim()) {
+                    valid = false;
+                    field.classList.add('border-red-500');
+                    setTimeout(() => field.classList.remove('border-red-500'), 3000);
+                }
+            });
+            return valid;
+        }
+
+        function updateStepUI() {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden-section'));
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden-section');
+            
+            document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
+                const circle = ind.querySelector('.step-circle');
+                if (idx + 1 < currentStep) {
+                    circle.className = 'step-circle w-10 h-10 rounded-full step-completed flex items-center justify-center mx-auto mb-2 font-bold';
+                } else if (idx + 1 === currentStep) {
+                    circle.className = 'step-circle w-10 h-10 rounded-full step-active flex items-center justify-center mx-auto mb-2 font-bold';
+                } else {
+                    circle.className = 'step-circle w-10 h-10 rounded-full step-pending flex items-center justify-center mx-auto mb-2 font-bold';
+                }
+            });
+            
+            document.getElementById('btn-prev').classList.toggle('hidden', currentStep === 1);
+            document.getElementById('btn-next').classList.toggle('hidden', currentStep === totalSteps);
+        }
+
+        async function saveOnboarding(status) {
+            const form = document.getElementById('onboarding-form');
+            if (status === 'borrador') {
+                form.querySelectorAll('[required]').forEach(f => f.removeAttribute('required'));
+            }
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            data.stack = Array.from(document.querySelectorAll('input[name="stack"]:checked')).map(cb => cb.value);
+            data.integraciones = Array.from(document.querySelectorAll('input[name="integraciones"]:checked')).map(cb => cb.value);
+            
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (!cb.name.includes('stack') && !cb.name.includes('integraciones')) {
+                    data[cb.name] = cb.checked;
+                }
+            });
+            
+            const response = await apiFetch('/api/save-onboarding', {
+                method: 'POST',
+                body: JSON.stringify({ ...data, status })
+            });
+            
+            if (response) {
+                const result = await response.json();
+                if (result.success) {
+                    alert(status === 'completado' ? 'Onboarding guardado' : 'Borrador guardado');
+                    backToOnboardings();
+                }
+            }
+        }
+
+        async function createTrelloFromForm() {
+            const projectName = document.querySelector('[name="proyecto_nombre"]').value;
+            const response = await apiFetch('/api/trello-create', {
+                method: 'POST',
+                body: JSON.stringify({ project_name: projectName })
+            });
+            if (response) {
+                const result = await response.json();
+                if (result.success) alert('Tablero creado: ' + result.board_url);
+            }
+        }
+
+        async function createTrelloFromCompleted(id, projectName) {
+            const response = await apiFetch('/api/trello-create', {
+                method: 'POST',
+                body: JSON.stringify({ onboarding_id: id, project_name: projectName || 'Proyecto' })
+            });
+            if (response) {
+                const result = await response.json();
+                if (result.success) alert('Tablero creado: ' + result.board_url);
+            }
+        }
+
+        // Init
+        lucide.createIcons();
+    </script>
+</body>
+</html>

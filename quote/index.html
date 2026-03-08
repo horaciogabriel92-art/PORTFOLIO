@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="title">Get a Quote | Horacio Morales - Web Developer</title>
+    <meta name="description" content="Get a free quote for your web project. Professional web development services.">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --dark-bg: #020617; --card-bg: rgba(15, 23, 42, 0.6); }
+        * { font-family: 'Inter', sans-serif; }
+        body { background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%); min-height: 100vh; color: #e2e8f0; }
+        .glass-panel { background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
+        .input-field { background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; transition: all 0.3s; }
+        .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); outline: none; }
+        .btn-primary { background: linear-gradient(135deg, #3b82f6, #8b5cf6); transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,0.4); }
+        .option-card { cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+        .option-card:hover { border-color: rgba(59,130,246,0.5); }
+        .option-card.selected { border-color: #3b82f6; background: rgba(59,130,246,0.1); }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden-step { display: none; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="fixed top-4 right-4 z-50">
+        <select id="language-selector" class="glass-panel px-4 py-2 rounded-full text-sm cursor-pointer">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇺🇸 English</option>
+        </select>
+    </div>
+
+    <nav class="fixed top-0 w-full z-40 glass-panel border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">H</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Horacio Morales</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12 fade-in">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-blue-400 text-sm font-medium border border-blue-500/20 mb-6">
+                <i data-lucide="zap" class="w-4 h-4"></i>
+                <span data-i18n="subtitle">Free Quote in 24-48h</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="mainTitle">Let's Build Something <span class="text-blue-400">Amazing</span></h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto" data-i18n="description">Tell me about your project. No technical knowledge required.</p>
+        </div>
+
+        <div class="glass-panel p-6 md:p-10">
+            <form id="quote-form">
+                <div id="step-1" class="step-content fade-in">
+                    <h2 class="text-2xl font-bold mb-2" data-i18n="step1Title">What do you need?</h2>
+                    <p class="text-slate-400 mb-6" data-i18n="step1Desc">Select what best describes your project</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="option-card glass-panel p-6 rounded-xl" data-value="landing">
+                            <i data-lucide="layout" class="w-8 h-8 text-blue-400 mb-3"></i>
+                            <h3 class="font-semibold" data-i18n="optLanding">Landing Page</h3>
+                            <p class="text-sm text-slate-400 mt-1" data-i18n="optLandingDesc">Single page to showcase your product</p>
+                        </div>
+                        <div class="option-card glass-panel p-6 rounded-xl" data-value="website">
+                            <i data-lucide="globe" class="w-8 h-8 text-purple-400 mb-3"></i>
+                            <h3 class="font-semibold" data-i18n="optWebsite">Business Website</h3>
+                            <p class="text-sm text-slate-400 mt-1" data-i18n="optWebsiteDesc">Multi-page site with CMS</p>
+                        </div>
+                        <div class="option-card glass-panel p-6 rounded-xl" data-value="webapp">
+                            <i data-lucide="app-window" class="w-8 h-8 text-green-400 mb-3"></i>
+                            <h3 class="font-semibold" data-i18n="optWebapp">Web Application</h3>
+                            <p class="text-sm text-slate-400 mt-1" data-i18n="optWebappDesc">Custom functionality, dashboards</p>
+                        </div>
+                        <div class="option-card glass-panel p-6 rounded-xl" data-value="ecommerce">
+                            <i data-lucide="shopping-cart" class="w-8 h-8 text-amber-400 mb-3"></i>
+                            <h3 class="font-semibold" data-i18n="optEcommerce">Online Store</h3>
+                            <p class="text-sm text-slate-400 mt-1" data-i18n="optEcommerceDesc">Sell products with payments</p>
+                        </div>
+                        <div class="option-card glass-panel p-6 rounded-xl md:col-span-2" data-value="notsure">
+                            <i data-lucide="help-circle" class="w-8 h-8 text-slate-400 mb-3"></i>
+                            <h3 class="font-semibold" data-i18n="optNotSure">I'm not sure</h3>
+                            <p class="text-sm text-slate-400 mt-1" data-i18n="optNotSureDesc">Describe your idea and I'll help</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="project_type" required>
+                </div>
+
+                <div id="step-2" class="step-content hidden-step">
+                    <h2 class="text-2xl font-bold mb-2" data-i18n="step2Title">Tell me about your project</h2>
+                    <p class="text-slate-400 mb-6" data-i18n="step2Desc">The more details, the better</p>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-i18n="labelGoal">What's the main goal?</label>
+                            <textarea name="project_goal" class="input-field w-full px-4 py-3 rounded-xl" rows="3" required></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-i18n="labelFeatures">What features do you need?</label>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="contact" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featContact">Contact forms</span></label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="payments" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featPayments">Online payments</span></label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="users" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featUsers">User accounts</span></label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="cms" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featCMS">Edit content</span></label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="blog" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featBlog">Blog</span></label>
+                                <label class="flex items-center gap-2"><input type="checkbox" name="features" value="notsure" class="rounded border-slate-600 bg-slate-800 text-blue-500"><span class="text-sm" data-i18n="featNotSure">Not sure yet</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-3" class="step-content hidden-step">
+                    <h2 class="text-2xl font-bold mb-2" data-i18n="step3Title">Timeline & Budget</h2>
+                    <p class="text-slate-400 mb-6" data-i18n="step3Desc">Help me understand your constraints</p>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-i18n="labelTimeline">When do you need it?</label>
+                            <select name="timeline" class="input-field w-full px-4 py-3 rounded-xl" required>
+                                <option value="" data-i18n="selectTimeline">Select...</option>
+                                <option value="asap" data-i18n="timeASAP">ASAP (Rush)</option>
+                                <option value="1month" data-i18n="time1Month">Within 1 month</option>
+                                <option value="2months" data-i18n="time2Months">1-2 months</option>
+                                <option value="3months" data-i18n="time3Months">2-3 months</option>
+                                <option value="flexible" data-i18n="timeFlexible">Flexible</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-i18n="labelBudget">Budget (USD)</label>
+                            <select name="budget_range" class="input-field w-full px-4 py-3 rounded-xl" required>
+                                <option value="" data-i18n="selectBudget">Select...</option>
+                                <option value="1k-3k">$1,000 - $3,000</option>
+                                <option value="3k-5k">$3,000 - $5,000</option>
+                                <option value="5k-10k">$5,000 - $10,000</option>
+                                <option value="10k+">$10,000+</option>
+                                <option value="notsure" data-i18n="budgetNotSure">Not sure</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-4" class="step-content hidden-step">
+                    <h2 class="text-2xl font-bold mb-2" data-i18n="step4Title">Your Contact Info</h2>
+                    <p class="text-slate-400 mb-6" data-i18n="step4Desc">I'll send your quote here</p>
+                    <div class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div><label class="block text-sm font-medium mb-2" data-i18n="labelName">Full Name *</label><input type="text" name="nombre_cliente" class="input-field w-full px-4 py-3 rounded-xl" required></div>
+                            <div><label class="block text-sm font-medium mb-2" data-i18n="labelEmail">Email *</label><input type="email" name="email_cliente" class="input-field w-full px-4 py-3 rounded-xl" required></div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div><label class="block text-sm font-medium mb-2" data-i18n="labelCompany">Company</label><input type="text" name="empresa" class="input-field w-full px-4 py-3 rounded-xl"></div>
+                            <div><label class="block text-sm font-medium mb-2" data-i18n="labelPhone">Phone</label><input type="tel" name="telefono" class="input-field w-full px-4 py-3 rounded-xl"></div>
+                        </div>
+                        <div><label class="block text-sm font-medium mb-2" data-i18n="labelAdditional">Anything else?</label><textarea name="notas_adicionales" class="input-field w-full px-4 py-3 rounded-xl" rows="3"></textarea></div>
+                    </div>
+                </div>
+
+                <div id="step-5" class="step-content hidden-step text-center py-12">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-400 mb-6"><i data-lucide="check-circle" class="w-10 h-10"></i></div>
+                    <h2 class="text-3xl font-bold mb-4" data-i18n="successTitle">Quote Request Sent!</h2>
+                    <p class="text-slate-400 text-lg mb-6" data-i18n="successDesc">I'll review your details and send a personalized quote within 24-48 hours.</p>
+                    <a href="/" class="inline-block mt-8 px-8 py-3 rounded-full glass-card hover:bg-white/5 transition" data-i18n="backHome">← Back to Portfolio</a>
+                </div>
+
+                <div class="flex justify-between mt-8 pt-6 border-t border-white/10" id="form-navigation">
+                    <button type="button" id="btn-prev" class="px-6 py-3 rounded-xl glass-card hover:bg-white/5 transition font-medium hidden"><i data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i><span data-i18n="btnBack">Back</span></button>
+                    <div></div>
+                    <button type="button" id="btn-next" class="btn-primary px-8 py-3 rounded-xl font-medium"><span data-i18n="btnNext">Next</span><i data-lucide="arrow-right" class="w-4 h-4 inline ml-2"></i></button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-12 px-4 text-center">
+        <p class="text-slate-500 text-sm">© 2026 Horacio Morales. <span data-i18n="footer">Professional Web Development.</span></p>
+    </footer>
+
+    <script>
+        const translations = {
+            es: { title: "Solicitar Cotización | Horacio Morales", subtitle: "Cotización gratis en 24-48h", mainTitle: "Construyamos Algo <span class='text-blue-400'>Increíble</span>", description: "Cuéntame sobre tu proyecto. No necesitas conocimientos técnicos.", step1Title: "¿Qué necesitas?", step1Desc: "Selecciona lo que mejor describa tu proyecto", optLanding: "Página de Aterrizaje", optLandingDesc: "Página única para mostrar tu producto", optWebsite: "Sitio Web Empresarial", optWebsiteDesc: "Sitio multipágina con CMS", optWebapp: "Aplicación Web", optWebappDesc: "Funcionalidad personalizada, dashboards", optEcommerce: "Tienda Online", optEcommerceDesc: "Vende productos con pagos", optNotSure: "No estoy seguro", optNotSureDesc: "Describe tu idea y te ayudo", step2Title: "Cuéntame sobre tu proyecto", step2Desc: "Más detalles = mejor cotización", labelGoal: "¿Cuál es el objetivo principal?", labelFeatures: "¿Qué características necesitas?", featContact: "Formularios de contacto", featPayments: "Pagos online", featUsers: "Cuentas de usuario", featCMS: "Editar contenido", featBlog: "Blog", featNotSure: "No estoy seguro", step3Title: "Tiempo y Presupuesto", step3Desc: "Ayúdame a entender tus restricciones", labelTimeline: "¿Cuándo lo necesitas?", selectTimeline: "Seleccionar...", timeASAP: "Lo antes posible", time1Month: "Dentro de 1 mes", time2Months: "1-2 meses", time3Months: "2-3 meses", timeFlexible: "Flexible", labelBudget: "Presupuesto (USD)", selectBudget: "Seleccionar...", budgetNotSure: "No estoy seguro", step4Title: "Tu Información", step4Desc: "Aquí enviaré tu cotización", labelName: "Nombre completo *", labelEmail: "Email *", labelCompany: "Empresa", labelPhone: "Teléfono", labelAdditional: "¿Algo más?", successTitle: "¡Solicitud Enviada!", successDesc: "Revisaré tu proyecto y te enviaré una cotización en 24-48 horas.", backHome: "← Volver al Portafolio", btnNext: "Siguiente", btnBack: "Atrás", btnSubmit: "Enviar Solicitud", footer: "Desarrollo web profesional." },
+            en: { title: "Get a Quote | Horacio Morales", subtitle: "Free quote in 24-48h", mainTitle: "Let's Build Something <span class='text-blue-400'>Amazing</span>", description: "Tell me about your project. No technical knowledge required.", step1Title: "What do you need?", step1Desc: "Select what best describes your project", optLanding: "Landing Page", optLandingDesc: "Single page to showcase your product", optWebsite: "Business Website", optWebsiteDesc: "Multi-page site with CMS", optWebapp: "Web Application", optWebappDesc: "Custom functionality, dashboards", optEcommerce: "Online Store", optEcommerceDesc: "Sell products with payments", optNotSure: "I'm not sure", optNotSureDesc: "Describe your idea and I'll help", step2Title: "Tell me about your project", step2Desc: "More details = better quote", labelGoal: "What's the main goal?", labelFeatures: "What features do you need?", featContact: "Contact forms", featPayments: "Online payments", featUsers: "User accounts", featCMS: "Edit content", featBlog: "Blog", featNotSure: "Not sure yet", step3Title: "Timeline & Budget", step3Desc: "Help me understand your constraints", labelTimeline: "When do you need it?", selectTimeline: "Select...", timeASAP: "ASAP (Rush)", time1Month: "Within 1 month", time2Months: "1-2 months", time3Months: "2-3 months", timeFlexible: "Flexible", labelBudget: "Budget (USD)", selectBudget: "Select...", budgetNotSure: "Not sure", step4Title: "Your Contact Info", step4Desc: "I'll send your quote here", labelName: "Full Name *", labelEmail: "Email *", labelCompany: "Company", labelPhone: "Phone", labelAdditional: "Anything else?", successTitle: "Quote Request Sent!", successDesc: "I'll review your project and send a quote within 24-48 hours.", backHome: "← Back to Portfolio", btnNext: "Next", btnBack: "Back", btnSubmit: "Submit Request", footer: "Professional web development." }
+        };
+
+        let currentLang = 'es', currentStep = 1, totalSteps = 4, formData = {};
+        lucide.createIcons();
+
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const savedLang = localStorage.getItem('quote-language');
+            if (savedLang) return savedLang;
+            if (browserLang.startsWith('en')) return 'en';
+            return 'es';
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('quote-language', lang);
+            document.getElementById('language-selector').value = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = key === 'mainTitle' ? translations[lang][key] : translations[lang][key];
+                }
+            });
+            updateButtonText();
+        }
+
+        function updateButtonText() {
+            const nextBtn = document.getElementById('btn-next');
+            const prevBtn = document.getElementById('btn-prev');
+            if (currentStep === totalSteps) {
+                nextBtn.innerHTML = `<span>${translations[currentLang].btnSubmit}</span> <i data-lucide="send" class="w-4 h-4 inline ml-2"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>${translations[currentLang].btnNext}</span> <i data-lucide="arrow-right" class="w-4 h-4 inline ml-2"></i>`;
+            }
+            prevBtn.innerHTML = `<i data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i> <span>${translations[currentLang].btnBack}</span>`;
+            lucide.createIcons();
+        }
+
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                document.querySelector('[name="project_type"]').value = this.dataset.value;
+            });
+        });
+
+        document.getElementById('btn-next').addEventListener('click', nextStep);
+        document.getElementById('btn-prev').addEventListener('click', prevStep);
+
+        function validateStep(step) {
+            const stepElement = document.getElementById(`step-${step}`);
+            if (step === 1) {
+                const projectType = document.querySelector('[name="project_type"]').value;
+                if (!projectType) { alert(currentLang === 'es' ? 'Por favor selecciona un tipo de proyecto' : 'Please select a project type'); return false; }
+            }
+            const requiredFields = stepElement.querySelectorAll('[required]');
+            let valid = true;
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) { valid = false; field.classList.add('border-red-500'); setTimeout(() => field.classList.remove('border-red-500'), 3000); }
+            });
+            if (!valid) alert(currentLang === 'es' ? 'Por favor completa todos los campos' : 'Please fill all fields');
+            return valid;
+        }
+
+        function collectFormData() {
+            const form = document.getElementById('quote-form');
+            const formDataObj = new FormData(form);
+            const features = [];
+            form.querySelectorAll('input[name="features"]:checked').forEach(cb => features.push(cb.value));
+            formData = { project_type: formDataObj.get('project_type'), project_goal: formDataObj.get('project_goal'), features: features.join(', '), timeline: formDataObj.get('timeline'), budget_range: formDataObj.get('budget_range'), nombre_cliente: formDataObj.get('nombre_cliente'), email_cliente: formDataObj.get('email_cliente'), empresa: formDataObj.get('empresa'), telefono: formDataObj.get('telefono'), notas_adicionales: formDataObj.get('notas_adicionales'), idioma: currentLang, status: 'nueva_cotizacion' };
+        }
+
+        async function submitForm() {
+            collectFormData();
+            try {
+                const response = await fetch('/api/save-quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById(`step-${currentStep}`).classList.add('hidden-step');
+                    document.getElementById('step-5').classList.remove('hidden-step');
+                    document.getElementById('form-navigation').classList.add('hidden');
+                } else throw new Error(result.error);
+            } catch (error) {
+                alert(currentLang === 'es' ? 'Error al enviar. Intenta de nuevo.' : 'Error submitting. Try again.');
+            }
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) return;
+            if (currentStep === totalSteps) { submitForm(); return; }
+            document.getElementById(`step-${currentStep}`).classList.add('hidden-step');
+            currentStep++;
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden-step');
+            document.getElementById(`step-${currentStep}`).classList.add('fade-in');
+            updateNavigation();
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step-${currentStep}`).classList.add('hidden-step');
+                currentStep--;
+                document.getElementById(`step-${currentStep}`).classList.remove('hidden-step');
+                document.getElementById(`step-${currentStep}`).classList.add('fade-in');
+                updateNavigation();
+            }
+        }
+
+        function updateNavigation() {
+            document.getElementById('btn-prev').classList.toggle('hidden', currentStep === 1);
+            updateButtonText();
+        }
+
+        document.getElementById('language-selector').addEventListener('change', (e) => setLanguage(e.target.value));
+        setLanguage(detectLanguage());
+        updateNavigation();
+    </script>
+</body>
+</html>

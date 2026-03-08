@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Technical Documentation | Portfolio System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        :root {
+            --sidebar-width: 280px;
+        }
+        
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .doc-sidebar {
+            width: var(--sidebar-width);
+            background: #1e293b;
+            border-right: 1px solid #334155;
+        }
+        
+        .doc-content {
+            margin-left: var(--sidebar-width);
+        }
+        
+        .nav-link {
+            color: #94a3b8;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+            border-left-color: #60a5fa;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .syntax-keyword { color: #c678dd; }
+        .syntax-string { color: #98c379; }
+        .syntax-comment { color: #5c6370; font-style: italic; }
+        .syntax-function { color: #61afef; }
+        .syntax-variable { color: #e06c75; }
+        .syntax-number { color: #d19a66; }
+        
+        .method-signature {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-left: 4px solid #60a5fa;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+        }
+        
+        .alert-info {
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-required {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+        
+        .badge-optional {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+        
+        .badge-type {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+        }
+        
+        .table-params {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-params th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        
+        .table-params td {
+            padding: 12px;
+            border-bottom: 1px solid #1e293b;
+        }
+        
+        .table-params tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .endpoint {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+        
+        .http-method {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .method-get { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .method-post { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .method-put { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .method-delete { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        
+        .search-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+        }
+        
+        .search-box:focus {
+            border-color: #60a5fa;
+            outline: none;
+        }
+        
+        .breadcrumbs {
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .breadcrumbs a:hover {
+            color: #60a5fa;
+        }
+        
+        @media (max-width: 1024px) {
+            .doc-sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 50;
+                height: 100vh;
+            }
+            .doc-sidebar.open {
+                transform: translateX(0);
+            }
+            .doc-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-toggle" class="lg:hidden fixed top-4 left-4 z-50 p-2 bg-slate-800 rounded-lg border border-slate-700">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+    
+    <!-- Sidebar -->
+    <aside class="doc-sidebar fixed left-0 top-0 h-screen overflow-y-auto">
+        <div class="p-6">
+            <a href="/" class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">H</span>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg">Horacio Morales</h1>
+                    <p class="text-xs text-slate-400">Technical Documentation</p>
+                </div>
+            </a>
+            
+            <div class="relative mb-6">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <input type="text" placeholder="Search documentation..." 
+                    class="search-box w-full pl-10 pr-4 py-2 rounded-lg text-sm"
+                    oninput="searchDocs(this.value)">
+            </div>
+            
+            <nav class="space-y-1" id="doc-nav">
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Getting Started</p>
+                    <a href="#overview" class="nav-link active block px-3 py-2 rounded-lg text-sm">Overview</a>
+                    <a href="#architecture" class="nav-link block px-3 py-2 rounded-lg text-sm">System Architecture</a>
+                    <a href="#installation" class="nav-link block px-3 py-2 rounded-lg text-sm">Installation</a>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Core Systems</p>
+                    <a href="#frontend" class="nav-link block px-3 py-2 rounded-lg text-sm">Frontend Stack</a>
+                    <a href="#admin-panel" class="nav-link block px-3 py-2 rounded-lg text-sm">Admin Panel</a>
+                    <a href="#quote-system" class="nav-link block px-3 py-2 rounded-lg text-sm">Quote System</a>
+                    <a href="#onboarding" class="nav-link block px-3 py-2 rounded-lg text-sm">Onboarding Flow</a>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">API Reference</p>
+                    <a href="#api-overview" class="nav-link block px-3 py-2 rounded-lg text-sm">API Overview</a>
+                    <a href="#auth" class="nav-link block px-3 py-2 rounded-lg text-sm">Authentication</a>
+                    <a href="#endpoints" class="nav-link block px-3 py-2 rounded-lg text-sm">Endpoints</a>
+                    <a href="#errors" class="nav-link block px-3 py-2 rounded-lg text-sm">Error Handling</a>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Security</p>
+                    <a href="#security-overview" class="nav-link block px-3 py-2 rounded-lg text-sm">Security Overview</a>
+                    <a href="#encryption" class="nav-link block px-3 py-2 rounded-lg text-sm">Data Encryption</a>
+                    <a href="#rate-limiting" class="nav-link block px-3 py-2 rounded-lg text-sm">Rate Limiting</a>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Deployment</p>
+                    <a href="#deployment" class="nav-link block px-3 py-2 rounded-lg text-sm">Deployment Guide</a>
+                    <a href="#environment" class="nav-link block px-3 py-2 rounded-lg text-sm">Environment Variables</a>
+                    <a href="#build" class="nav-link block px-3 py-2 rounded-lg text-sm">Build Process</a>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Development</p>
+                    <a href="#coding-standards" class="nav-link block px-3 py-2 rounded-lg text-sm">Coding Standards</a>
+                    <a href="#testing" class="nav-link block px-3 py-2 rounded-lg text-sm">Testing Strategy</a>
+                    <a href="#troubleshooting" class="nav-link block px-3 py-2 rounded-lg text-sm">Troubleshooting</a>
+                </div>
+            </nav>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="doc-content min-h-screen">
+        <div class="max-w-4xl mx-auto px-8 py-12">
+            
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs mb-6">
+                <a href="/">Home</a>
+                <span class="mx-2">/</span>
+                <span class="text-slate-300">Documentation</span>
+            </div>
+            
+            <!-- Section: Overview -->
+            <section id="overview" class="doc-section mb-16">
+                <h1 class="text-4xl font-bold mb-6">Portfolio System Documentation</h1>
+                <p class="text-lg text-slate-300 mb-6">
+                    Complete technical documentation for the Horacio Morales portfolio platform. 
+                    This system includes a public-facing portfolio, quote calculator, client onboarding system, 
+                    and admin dashboard with real-time data management.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 my-8">
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <p class="text-sm text-slate-400 mb-1">Version</p>
+                        <p class="text-lg font-semibold">1.2.0</p>
+                    </div>
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <p class="text-sm text-slate-400 mb-1">Last Updated</p>
+                        <p class="text-lg font-semibold">March 8, 2026</p>
+                    </div>
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <p class="text-sm text-slate-400 mb-1">Node.js Version</p>
+                        <p class="text-lg font-semibold">v18.0+</p>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h4 class="font-semibold mb-2 flex items-center gap-2">
+                        <i data-lucide="info" class="w-5 h-5 text-blue-400"></i>
+                        Documentation Purpose
+                    </h4>
+                    <p class="text-slate-300">
+                        This documentation serves as both a technical reference for developers and a demonstration 
+                        of software documentation best practices. Every component, API, and architectural decision 
+                        is documented with clear explanations and code examples.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Section: Architecture -->
+            <section id="architecture" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">System Architecture</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">High-Level Overview</h3>
+                <p class="text-slate-300 mb-6">
+                    The system follows a modular architecture with clear separation between frontend, API, and data layers. 
+                    Serverless functions handle backend logic, while Redis provides fast data access for real-time features.
+                </p>
+                
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment">// System Architecture Diagram (Text Representation)</span>
+
+<span class="syntax-variable">User</span>
+  |
+  v
+<span class="syntax-variable">Vercel Edge</span> <span class="syntax-comment">---> Static Assets (CSS, JS, HTML)</span>
+  |           <span class="syntax-comment">---> API Routes (/api/*)</span>
+  |
+  +---> <span class="syntax-function">Portfolio Frontend</span> (Vite + Tailwind)
+  |         |
+  |         +---> <span class="syntax-function">Quote Calculator</span>
+  |         +---> <span class="syntax-function">Interactive Labs</span>
+  |         +---> <span class="syntax-function">Project Showcase</span>
+  |
+  +---> <span class="syntax-function">Admin Dashboard</span>
+  |         |
+  |         +---> JWT Authentication
+  |         +---> Quote Management
+  |         +---> Onboarding Pipeline
+  |         +---> Trello Integration
+  |
+  +---> <span class="syntax-function">API Layer</span>
+            |
+            +---> <span class="syntax-function">/api/auth</span> (JWT Verification)
+            +---> <span class="syntax-function">/api/quotes</span> (CRUD Operations)
+            +---> <span class="syntax-function">/api/onboarding</span> (Pipeline Management)
+            |
+            v
+<span class="syntax-variable">Upstash Redis</span> <span class="syntax-comment">---> Encrypted Data Storage</span>
+                <span class="syntax-comment">---> Session Management</span>
+                <span class="syntax-comment">---> Rate Limit Tracking</span></pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Design Principles</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0"></i>
+                        <span><strong>Security First:</strong> All client PII is encrypted at rest using AES-256. JWT tokens for authentication.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0"></i>
+                        <span><strong>Performance:</strong> Static site generation with Vite. Lazy loading for heavy components.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0"></i>
+                        <span><strong>Scalability:</strong> Serverless architecture with Redis backend scales automatically.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0"></i>
+                        <span><strong>Maintainability:</strong> Modular code structure with clear separation of concerns.</span>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- Section: Installation -->
+            <section id="installation" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Installation</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">Prerequisites</h3>
+                <ul class="list-disc list-inside text-slate-300 mb-6 space-y-2">
+                    <li>Node.js v18.0 or higher</li>
+                    <li>npm or yarn package manager</li>
+                    <li>Git for version control</li>
+                    <li>Upstash Redis account (for data persistence)</li>
+                    <li>Vercel account (for deployment)</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-4">Local Setup</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment"># Clone the repository</span>
+<span class="syntax-function">git</span> clone https://github.com/yourusername/portfolio.git
+<span class="syntax-function">cd</span> portfolio
+
+<span class="syntax-comment"># Install dependencies</span>
+<span class="syntax-function">npm</span> install
+
+<span class="syntax-comment"># Configure environment variables</span>
+<span class="syntax-function">cp</span> .env.example .env.local
+<span class="syntax-comment"># Edit .env.local with your credentials</span>
+
+<span class="syntax-comment"># Start development server</span>
+<span class="syntax-function">npm</span> run dev
+
+<span class="syntax-comment"># Build for production</span>
+<span class="syntax-function">npm</span> run build</pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Environment Variables</h3>
+                <p class="text-slate-300 mb-4">
+                    Create a <code class="bg-slate-800 px-2 py-1 rounded text-sm">.env.local</code> file with the following required variables:
+                </p>
+                
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment"># Database Configuration (Upstash Redis)</span>
+<span class="syntax-variable">KV_URL</span>=<span class="syntax-string">"redis://default:password@host:port"</span>
+<span class="syntax-variable">KV_REST_API_URL</span>=<span class="syntax-string">"https://your-redis-url.upstash.io"</span>
+<span class="syntax-variable">KV_REST_API_TOKEN</span>=<span class="syntax-string">"your-api-token"</span>
+
+<span class="syntax-comment"># Security Configuration</span>
+<span class="syntax-variable">ADMIN_TOKEN</span>=<span class="syntax-string">"your-jwt-secret-min-32-characters"</span>
+<span class="syntax-variable">ENCRYPTION_KEY</span>=<span class="syntax-string">"your-encryption-key-32-chars"</span>
+
+<span class="syntax-comment"># External Integrations</span>
+<span class="syntax-variable">TRELLO_KEY</span>=<span class="syntax-string">"your-trello-api-key"</span>
+<span class="syntax-variable">TRELLO_TOKEN</span>=<span class="syntax-string">"your-trello-token"</span>
+<span class="syntax-variable">TRELLO_ORGANIZATION</span>=<span class="syntax-string">"your-org-id"</span>
+
+<span class="syntax-comment"># Email Notifications (Resend)</span>
+<span class="syntax-variable">RESEND_API_KEY</span>=<span class="syntax-string">"re_xxxxxxxx"</span>
+<span class="syntax-variable">EMAIL_FROM</span>=<span class="syntax-string">"notifications@yourdomain.com"</span></pre>
+                </div>
+            </section>
+            
+            <!-- Section: Frontend -->
+            <section id="frontend" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Frontend Stack</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">Technology Stack</h3>
+                <table class="table-params mb-6">
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Version</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-mono text-sm">Vite</td>
+                            <td>7.x</td>
+                            <td>Build tool and dev server</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">Tailwind CSS</td>
+                            <td>3.x</td>
+                            <td>Utility-first CSS framework</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">Lucide Icons</td>
+                            <td>Latest</td>
+                            <td>Icon library</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">Vanilla JS</td>
+                            <td>ES6+</td>
+                            <td>Client-side interactivity</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 class="text-xl font-semibold mb-4">Project Structure</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre>portfolio/
+├── <span class="syntax-variable">src/</span>
+│   ├── <span class="syntax-variable">main.js</span>           <span class="syntax-comment"># Entry point, particle animation</span>
+│   └── <span class="syntax-variable">style.css</span>         <span class="syntax-comment"># Global styles and utilities</span>
+├── <span class="syntax-variable">public/</span>
+│   └── <span class="syntax-variable">assets/</span>           <span class="syntax-comment"># Static assets</span>
+├── <span class="syntax-variable">api/</span>
+│   ├── <span class="syntax-variable">_utils/</span>
+│   │   ├── <span class="syntax-variable">security.js</span>   <span class="syntax-comment"># Encryption, JWT, rate limiting</span>
+│   │   └── <span class="syntax-variable">db.js</span>         <span class="syntax-comment"># Redis connection</span>
+│   ├── <span class="syntax-variable">quotes.js</span>         <span class="syntax-comment"># Quote CRUD endpoints</span>
+│   ├── <span class="syntax-variable">onboarding.js</span>     <span class="syntax-comment"># Onboarding management</span>
+│   └── <span class="syntax-variable">trello.js</span>         <span class="syntax-comment"># Trello integration</span>
+├── <span class="syntax-variable">admin/</span>
+│   └── <span class="syntax-variable">index.html</span>      <span class="syntax-comment"># Admin dashboard SPA</span>
+├── <span class="syntax-variable">quote/</span>
+│   └── <span class="syntax-variable">index.html</span>      <span class="syntax-comment"># Public quote calculator</span>
+├── <span class="syntax-variable">documentation/</span>
+│   └── <span class="syntax-variable">index.html</span>      <span class="syntax-comment"># This documentation</span>
+├── <span class="syntax-variable">index.html</span>              <span class="syntax-comment"># Portfolio homepage</span>
+└── <span class="syntax-variable">vite.config.js</span>        <span class="syntax-comment"># Build configuration</span></pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Component Architecture</h3>
+                <p class="text-slate-300 mb-4">
+                    The frontend uses a component-based architecture with clear separation of concerns:
+                </p>
+                <ul class="space-y-3 text-slate-300 mb-6">
+                    <li><strong>Layout Components:</strong> Navigation, sidebar, footer</li>
+                    <li><strong>UI Components:</strong> Cards, buttons, modals, form elements</li>
+                    <li><strong>Interactive Labs:</strong> Self-contained demo components with code explanations</li>
+                    <li><strong>Page Sections:</strong> Hero, work showcase, about, contact</li>
+                </ul>
+            </section>
+            
+            <!-- Section: API Overview -->
+            <section id="api-overview" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">API Reference</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">Base URL</h3>
+                <div class="code-block p-4 mb-6">
+                    <p class="font-mono text-sm">https://portfolio.estudioforgelab.com/api</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Request/Response Format</h3>
+                <p class="text-slate-300 mb-4">
+                    All API endpoints accept and return JSON. Timestamps are in ISO 8601 format. 
+                    All requests must include proper Content-Type headers.
+                </p>
+                
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment"># Request Headers</span>
+Content-Type: application/json
+Authorization: Bearer &lt;jwt-token&gt;  <span class="syntax-comment"># Required for protected endpoints</span>
+X-Client-Version: 1.2.0</pre>
+                </div>
+            </section>
+            
+            <!-- Section: Authentication -->
+            <section id="auth" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Authentication</h2>
+                
+                <p class="text-slate-300 mb-6">
+                    The system uses JWT (JSON Web Tokens) for authentication. Tokens are signed with 
+                    HS256 algorithm and expire after 1 hour. Protected endpoints require a valid token 
+                    in the Authorization header.
+                </p>
+                
+                <h3 class="text-xl font-semibold mb-4">Login Endpoint</h3>
+                <div class="endpoint">
+                    <span class="http-method method-post">POST</span>
+                    <code class="font-mono text-sm">/api/auth/login</code>
+                </div>
+                
+                <h4 class="font-semibold mb-3 mt-6">Request Body</h4>
+                <table class="table-params mb-6">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-mono text-sm">password</td>
+                            <td>string</td>
+                            <td><span class="badge badge-required">Required</span></td>
+                            <td>Admin password (bcrypt hashed)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 class="font-semibold mb-3">Response</h4>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre>{
+  <span class="syntax-string">"success"</span>: <span class="syntax-keyword">true</span>,
+  <span class="syntax-string">"token"</span>: <span class="syntax-string">"eyJhbGciOiJIUzI1NiIs..."</span>,
+  <span class="syntax-string">"expires"</span>: <span class="syntax-string">"2026-03-08T14:30:00Z"</span>
+}</pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Token Verification</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment">// Server-side verification middleware</span>
+<span class="syntax-keyword">import</span> jwt <span class="syntax-keyword">from</span> <span class="syntax-string">'jsonwebtoken'</span>;
+
+<span class="syntax-keyword">const</span> <span class="syntax-function">verifyAuth</span> = (req) => {
+  <span class="syntax-keyword">const</span> token = req.headers.authorization?.replace(<span class="syntax-string">'Bearer '</span>, <span class="syntax-string">''</span>);
+  
+  <span class="syntax-keyword">if</span> (!token) {
+    <span class="syntax-keyword">throw</span> <span class="syntax-keyword">new</span> Error(<span class="syntax-string">'Authentication required'</span>);
+  }
+  
+  <span class="syntax-keyword">return</span> jwt.verify(token, process.env.ADMIN_TOKEN);
+};</pre>
+                </div>
+            </section>
+            
+            <!-- Section: Endpoints -->
+            <section id="endpoints" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">API Endpoints</h2>
+                
+                <!-- Quotes -->
+                <h3 class="text-xl font-semibold mb-4">Quotes</h3>
+                
+                <div class="endpoint">
+                    <span class="http-method method-post">POST</span>
+                    <code class="font-mono text-sm">/api/quotes</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Create a new quote request from the public form.</p>
+                
+                <div class="endpoint">
+                    <span class="http-method method-get">GET</span>
+                    <code class="font-mono text-sm">/api/quotes</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">List all quotes (admin only).</p>
+                
+                <div class="endpoint">
+                    <span class="http-method method-get">GET</span>
+                    <code class="font-mono text-sm">/api/quotes/:id</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Get single quote details.</p>
+                
+                <div class="endpoint">
+                    <span class="http-method method-put">PUT</span>
+                    <code class="font-mono text-sm">/api/quotes/:id</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-6">Update quote status and notes.</p>
+                
+                <!-- Onboarding -->
+                <h3 class="text-xl font-semibold mb-4">Onboarding</h3>
+                
+                <div class="endpoint">
+                    <span class="http-method method-post">POST</span>
+                    <code class="font-mono text-sm">/api/onboarding</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Create new onboarding record.</p>
+                
+                <div class="endpoint">
+                    <span class="http-method method-get">GET</span>
+                    <code class="font-mono text-sm">/api/onboarding</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">List all onboarding records.</p>
+                
+                <div class="endpoint">
+                    <span class="http-method method-post">POST</span>
+                    <code class="font-mono text-sm">/api/onboarding/:id/complete</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-6">Mark onboarding as complete and trigger Trello board creation.</p>
+                
+                <!-- Trello -->
+                <h3 class="text-xl font-semibold mb-4">Trello Integration</h3>
+                
+                <div class="endpoint">
+                    <span class="http-method method-post">POST</span>
+                    <code class="font-mono text-sm">/api/trello/board</code>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Create new Trello board for client project.</p>
+                
+                <h4 class="font-semibold mb-3">Request Body Example</h4>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre>{
+  <span class="syntax-string">"clientName"</span>: <span class="syntax-string">"Acme Corporation"</span>,
+  <span class="syntax-string">"projectType"</span>: <span class="syntax-string">"e-commerce"</span>,
+  <span class="syntax-string">"description"</span>: <span class="syntax-string">"Custom WooCommerce site with React checkout"</span>,
+  <span class="syntax-string">"budgetRange"</span>: <span class="syntax-string">"5000-10000"</span>,
+  <span class="syntax-string">"timeline"</span>: <span class="syntax-string">"2-3 months"</span>
+}</pre>
+                </div>
+            </section>
+            
+            <!-- Section: Security -->
+            <section id="security-overview" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Security</h2>
+                
+                <div class="alert alert-error mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center gap-2">
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-red-400"></i>
+                        Security Requirements
+                    </h4>
+                    <p class="text-slate-300">
+                        This system handles sensitive client information. All security measures documented here 
+                        are mandatory and enforced at both application and infrastructure levels.
+                    </p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Security Measures</h3>
+                <table class="table-params mb-6">
+                    <thead>
+                        <tr>
+                            <th>Measure</th>
+                            <th>Implementation</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Encryption at Rest</td>
+                            <td>AES-256-CBC for PII fields</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Authentication</td>
+                            <td>JWT with 1-hour expiry</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Rate Limiting</td>
+                            <td>100 requests/hour per IP</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>CORS</td>
+                            <td>Restricted to domain only</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Password Hashing</td>
+                            <td>bcrypt with salt rounds</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Secure IDs</td>
+                            <td>UUID v4 generation</td>
+                            <td><span class="text-green-400">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Section: Encryption -->
+            <section id="encryption" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Data Encryption</h2>
+                
+                <p class="text-slate-300 mb-6">
+                    Client Personally Identifiable Information (PII) is encrypted before storage using 
+                    AES-256-CBC encryption. This includes names, email addresses, and phone numbers.
+                </p>
+                
+                <h3 class="text-xl font-semibold mb-4">Encryption Implementation</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-keyword">import</span> crypto <span class="syntax-keyword">from</span> <span class="syntax-string">'crypto'</span>;
+
+<span class="syntax-comment">/**
+ * Encrypts sensitive text data using AES-256-CBC
+ * @param {string} text - Plain text to encrypt
+ * @returns {string} Encrypted hex string
+ */</span>
+<span class="syntax-keyword">export const</span> <span class="syntax-function">encrypt</span> = (text) => {
+  <span class="syntax-keyword">const</span> cipher = crypto.createCipher(
+    <span class="syntax-string">'aes-256-cbc'</span>, 
+    process.env.ENCRYPTION_KEY
+  );
+  <span class="syntax-keyword">let</span> encrypted = cipher.update(text, <span class="syntax-string">'utf8'</span>, <span class="syntax-string">'hex'</span>);
+  encrypted += cipher.final(<span class="syntax-string">'hex'</span>);
+  <span class="syntax-keyword">return</span> encrypted;
+};
+
+<span class="syntax-comment">/**
+ * Decrypts encrypted data back to plain text
+ * @param {string} encrypted - Encrypted hex string
+ * @returns {string} Decrypted plain text
+ */</span>
+<span class="syntax-keyword">export const</span> <span class="syntax-function">decrypt</span> = (encrypted) => {
+  <span class="syntax-keyword">const</span> decipher = crypto.createDecipher(
+    <span class="syntax-string">'aes-256-cbc'</span>, 
+    process.env.ENCRYPTION_KEY
+  );
+  <span class="syntax-keyword">let</span> decrypted = decipher.update(encrypted, <span class="syntax-string">'hex'</span>, <span class="syntax-string">'utf8'</span>);
+  decrypted += decipher.final(<span class="syntax-string">'utf8'</span>);
+  <span class="syntax-keyword">return</span> decrypted;
+};</pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Encrypted Fields</h3>
+                <ul class="list-disc list-inside text-slate-300 space-y-2">
+                    <li><code class="bg-slate-800 px-2 py-1 rounded text-sm">nombre_cliente</code> - Client full name</li>
+                    <li><code class="bg-slate-800 px-2 py-1 rounded text-sm">email_cliente</code> - Client email address</li>
+                    <li><code class="bg-slate-800 px-2 py-1 rounded text-sm">telefono</code> - Client phone number</li>
+                    <li><code class="bg-slate-800 px-2 py-1 rounded text-sm">empresa</code> - Company name (if provided)</li>
+                </ul>
+            </section>
+            
+            <!-- Section: Rate Limiting -->
+            <section id="rate-limiting" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Rate Limiting</h2>
+                
+                <p class="text-slate-300 mb-6">
+                    To prevent abuse and ensure service availability, all API endpoints implement rate limiting 
+                    based on client IP address.
+                </p>
+                
+                <h3 class="text-xl font-semibold mb-4">Rate Limits</h3>
+                <table class="table-params mb-6">
+                    <thead>
+                        <tr>
+                            <th>Endpoint Type</th>
+                            <th>Limit</th>
+                            <th>Window</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Public Endpoints</td>
+                            <td>100 requests</td>
+                            <td>Per hour per IP</td>
+                        </tr>
+                        <tr>
+                            <td>Authentication</td>
+                            <td>5 attempts</td>
+                            <td>Per 15 minutes per IP</td>
+                        </tr>
+                        <tr>
+                            <td>Admin Operations</td>
+                            <td>50 requests</td>
+                            <td>Per hour per IP</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 class="text-xl font-semibold mb-4">Implementation</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment">// In-memory rate limiting (Redis recommended for production)</span>
+<span class="syntax-keyword">const</span> rateLimit = <span class="syntax-keyword">new</span> Map();
+
+<span class="syntax-keyword">export const</span> <span class="syntax-function">checkRateLimit</span> = (identifier) => {
+  <span class="syntax-keyword">const</span> now = Date.now();
+  <span class="syntax-keyword">const</span> windowMs = <span class="syntax-number">60</span> * <span class="syntax-number">60</span> * <span class="syntax-number">1000</span>; <span class="syntax-comment">// 1 hour</span>
+  <span class="syntax-keyword">const</span> maxRequests = <span class="syntax-number">100</span>;
+  
+  <span class="syntax-keyword">if</span> (!rateLimit.has(identifier)) {
+    rateLimit.set(identifier, { count: <span class="syntax-number">1</span>, resetTime: now + windowMs });
+    <span class="syntax-keyword">return</span> { allowed: <span class="syntax-keyword">true</span> };
+  }
+  
+  <span class="syntax-keyword">const</span> record = rateLimit.get(identifier);
+  
+  <span class="syntax-keyword">if</span> (now > record.resetTime) {
+    record.count = <span class="syntax-number">1</span>;
+    record.resetTime = now + windowMs;
+    <span class="syntax-keyword">return</span> { allowed: <span class="syntax-keyword">true</span> };
+  }
+  
+  <span class="syntax-keyword">if</span> (record.count >= maxRequests) {
+    <span class="syntax-keyword">return</span> { 
+      allowed: <span class="syntax-keyword">false</span>, 
+      retryAfter: Math.ceil((record.resetTime - now) / <span class="syntax-number">1000</span>)
+    };
+  }
+  
+  record.count++;
+  <span class="syntax-keyword">return</span> { allowed: <span class="syntax-keyword">true</span> };
+};</pre>
+                </div>
+            </section>
+            
+            <!-- Section: Deployment -->
+            <section id="deployment" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Deployment</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">Platform: Vercel</h3>
+                <p class="text-slate-300 mb-6">
+                    The application is deployed on Vercel's serverless platform with automatic deployments 
+                    triggered by git pushes to the main branch.
+                </p>
+                
+                <h3 class="text-xl font-semibold mb-4">Build Process</h3>
+                <div class="code-block p-4 mb-6 overflow-x-auto">
+<pre><span class="syntax-comment">// build.js - Custom build script</span>
+<span class="syntax-keyword">import</span> { execSync } <span class="syntax-keyword">from</span> <span class="syntax-string">'child_process'</span>;
+<span class="syntax-keyword">import</span> { cpSync, copyFileSync, existsSync } <span class="syntax-keyword">from</span> <span class="syntax-string">'fs'</span>;
+
+<span class="syntax-comment">// Step 1: Run Vite build</span>
+<span class="syntax-function">execSync</span>(<span class="syntax-string">'vite build'</span>, { stdio: <span class="syntax-string">'inherit'</span> });
+
+<span class="syntax-comment">// Step 2: Copy static directories</span>
+<span class="syntax-function">cpSync</span>(<span class="syntax-string">'admin'</span>, <span class="syntax-string">'dist/admin'</span>, { recursive: <span class="syntax-keyword">true</span> });
+<span class="syntax-function">cpSync</span>(<span class="syntax-string">'quote'</span>, <span class="syntax-string">'dist/quote'</span>, { recursive: <span class="syntax-keyword">true</span> });
+
+<span class="syntax-comment">// Step 3: Copy standalone pages</span>
+<span class="syntax-keyword">if</span> (<span class="syntax-function">existsSync</span>(<span class="syntax-string">'proyecto-bordados-pando.html'</span>)) {
+  <span class="syntax-function">copyFileSync</span>(
+    <span class="syntax-string">'proyecto-bordados-pando.html'</span>, 
+    <span class="syntax-string">'dist/proyecto-bordados-pando.html'</span>
+  );
+}</pre>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Deployment Checklist</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-square" class="w-5 h-5 text-slate-500 mt-0.5"></i>
+                        <span>Environment variables configured in Vercel dashboard</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-square" class="w-5 h-5 text-slate-500 mt-0.5"></i>
+                        <span>Redis database connection tested</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-square" class="w-5 h-5 text-slate-500 mt-0.5"></i>
+                        <span>Admin password hashed and stored</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-square" class="w-5 h-5 text-slate-500 mt-0.5"></i>
+                        <span>Trello API credentials validated</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-square" class="w-5 h-5 text-slate-500 mt-0.5"></i>
+                        <span>Build script executes without errors</span>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- Section: Environment Variables -->
+            <section id="environment" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Environment Variables</h2>
+                
+                <table class="table-params">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-mono text-sm">KV_URL</td>
+                            <td>Required</td>
+                            <td>Redis connection URL</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">KV_REST_API_URL</td>
+                            <td>Required</td>
+                            <td>Upstash REST API endpoint</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">KV_REST_API_TOKEN</td>
+                            <td>Required</td>
+                            <td>Upstash API authentication token</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">ADMIN_TOKEN</td>
+                            <td>Required</td>
+                            <td>JWT signing secret (min 32 chars)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">ENCRYPTION_KEY</td>
+                            <td>Required</td>
+                            <td>AES-256 encryption key (32 chars)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">TRELLO_KEY</td>
+                            <td>Optional</td>
+                            <td>Trello API key for board creation</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">TRELLO_TOKEN</td>
+                            <td>Optional</td>
+                            <td>Trello OAuth token</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono text-sm">RESEND_API_KEY</td>
+                            <td>Optional</td>
+                            <td>Email service API key</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Section: Coding Standards -->
+            <section id="coding-standards" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Coding Standards</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">JavaScript Guidelines</h3>
+                <ul class="space-y-3 text-slate-300 mb-6">
+                    <li>Use ES6+ features (const/let, arrow functions, destructuring)</li>
+                    <li>Prefer async/await over promise chains</li>
+                    <li>Use strict equality (===) always</li>
+                    <li>Maximum function length: 50 lines</li>
+                    <li>Maximum file length: 300 lines</li>
+                    <li>Document all functions with JSDoc</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-4">CSS Guidelines</h3>
+                <ul class="space-y-3 text-slate-300 mb-6">
+                    <li>Use Tailwind utility classes for all styling</li>
+                    <li>Custom CSS only for complex animations</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>Use CSS variables for theme colors</li>
+                    <li>Maximum selector specificity: 2 levels</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-4">File Naming</h3>
+                <table class="table-params">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Convention</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>JavaScript</td>
+                            <td>kebab-case</td>
+                            <td class="font-mono text-sm">quote-calculator.js</td>
+                        </tr>
+                        <tr>
+                            <td>CSS</td>
+                            <td>kebab-case</td>
+                            <td class="font-mono text-sm">admin-panel.css</td>
+                        </tr>
+                        <tr>
+                            <td>HTML</td>
+                            <td>kebab-case</td>
+                            <td class="font-mono text-sm">index.html</td>
+                        </tr>
+                        <tr>
+                            <td>Assets</td>
+                            <td>kebab-case</td>
+                            <td class="font-mono text-sm">hero-image.webp</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Section: Testing -->
+            <section id="testing" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Testing Strategy</h2>
+                
+                <div class="alert alert-warning">
+                    <h4 class="font-semibold mb-2">Testing Status</h4>
+                    <p class="text-slate-300">
+                        Automated testing is currently minimal. Manual testing checklist below should be 
+                        completed before each deployment.
+                    </p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4">Manual Testing Checklist</h3>
+                
+                <h4 class="font-semibold mb-3 mt-6">Authentication</h4>
+                <ul class="space-y-2 text-slate-300 mb-6">
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Admin login with correct password succeeds</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Admin login with wrong password fails</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Token expires after 1 hour</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Protected endpoints reject requests without token</span>
+                    </li>
+                </ul>
+                
+                <h4 class="font-semibold mb-3">Quote System</h4>
+                <ul class="space-y-2 text-slate-300 mb-6">
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Quote form submission creates database entry</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Client data is encrypted in database</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Admin can view decrypted client data</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Status updates persist correctly</span>
+                    </li>
+                </ul>
+                
+                <h4 class="font-semibold mb-3">Rate Limiting</h4>
+                <ul class="space-y-2 text-slate-300">
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Rate limit triggers after 100 requests</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Rate limit resets after 1 hour</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <input type="checkbox" class="rounded border-slate-600 bg-slate-800">
+                        <span>Different IPs have separate limits</span>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- Section: Troubleshooting -->
+            <section id="troubleshooting" class="doc-section mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">Troubleshooting</h2>
+                
+                <h3 class="text-xl font-semibold mb-4">Common Issues</h3>
+                
+                <div class="space-y-6">
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <h4 class="font-semibold mb-2 text-red-400">Redis Connection Failed</h4>
+                        <p class="text-slate-300 text-sm mb-2">
+                            Error: "Unable to connect to Redis" or timeout errors.
+                        </p>
+                        <p class="text-slate-400 text-sm">
+                            <strong>Solution:</strong> Verify KV_URL and KV_REST_API_TOKEN environment variables. 
+                            Check if Upstash database is active in dashboard. Ensure IP whitelist includes Vercel IPs.
+                        </p>
+                    </div>
+                    
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <h4 class="font-semibold mb-2 text-red-400">JWT Verification Failed</h4>
+                        <p class="text-slate-300 text-sm mb-2">
+                            Error: "Invalid token" or "Authentication required" on protected endpoints.
+                        </p>
+                        <p class="text-slate-400 text-sm">
+                            <strong>Solution:</strong> Check ADMIN_TOKEN environment variable matches between 
+                            login and verification. Token may be expired - re-authenticate.
+                        </p>
+                    </div>
+                    
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <h4 class="font-semibold mb-2 text-red-400">Build Script Errors</h4>
+                        <p class="text-slate-300 text-sm mb-2">
+                            Error: "ENOENT: no such file or directory" during build.
+                        </p>
+                        <p class="text-slate-400 text-sm">
+                            <strong>Solution:</strong> Ensure all directories (admin/, quote/, documentation/) exist. 
+                            Check file permissions. Run build script from project root.
+                        </p>
+                    </div>
+                    
+                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
+                        <h4 class="font-semibold mb-2 text-red-400">Trello Board Creation Fails</h4>
+                        <p class="text-slate-300 text-sm mb-2">
+                            Error: Onboarding completes but no Trello board created.
+                        </p>
+                        <p class="text-slate-400 text-sm">
+                            <strong>Solution:</strong> Verify TRELLO_KEY and TRELLO_TOKEN. Check organization ID is correct. 
+                            Ensure token has write permissions to organization.
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4 mt-8">Debug Mode</h3>
+                <p class="text-slate-300 mb-4">
+                    Enable verbose logging by setting environment variable:
+                </p>
+                <div class="code-block p-4 mb-6">
+                    <p class="font-mono text-sm">DEBUG=true</p>
+                </div>
+                <p class="text-slate-300">
+                    This will log all API requests, database operations, and authentication attempts to the console.
+                </p>
+            </section>
+            
+            <!-- Footer -->
+            <footer class="mt-16 pt-8 border-t border-slate-700 text-slate-500 text-sm">
+                <div class="flex justify-between items-center">
+                    <p>Documentation version 1.2.0 | Last updated March 8, 2026</p>
+                    <a href="#overview" class="text-blue-400 hover:text-blue-300">Back to top</a>
+                </div>
+            </footer>
+            
+        </div>
+    </main>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.querySelector('.doc-sidebar').classList.toggle('open');
+        });
+        
+        // Close sidebar when clicking on mobile
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    document.querySelector('.doc-sidebar').classList.remove('open');
+                }
+            });
+        });
+        
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNav);
+        
+        // Search functionality
+        function searchDocs(query) {
+            if (!query) {
+                document.querySelectorAll('.doc-section').forEach(s => s.style.display = 'block');
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                section.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

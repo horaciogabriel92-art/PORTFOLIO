@@ -1,0 +1,1572 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Horacio Morales - Web Developer specializing in interactive experiences and WordPress customization">
+    <title>Horacio Morales | Web Developer</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@400;700&family=Quicksand:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    \n
+</head>
+
+<body class="text-slate-200">
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('hero')">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">H</span>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Horacio Morales</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#work" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="#labs" class="hover:text-blue-400 transition-colors">Interactive Labs</a>
+                <a href="#snippets" class="hover:text-blue-400 transition-colors">Code Vault</a>
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="/documentation/" class="hover:text-blue-400 transition-colors">Documentation</a>
+                <a href="#contact"
+                    class="px-5 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 p-4">
+            <div class="flex flex-col gap-4">
+                <a href="#work" class="text-lg font-medium">Work</a>
+                <a href="#labs" class="text-lg font-medium">Interactive Labs</a>
+                <a href="#snippets" class="text-lg font-medium">Code Vault</a>
+                <a href="#about" class="text-lg font-medium">About</a>
+                <a href="/documentation/" class="text-lg font-medium">Documentation</a>
+                <a href="#contact" class="text-lg font-medium text-blue-400">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-20 px-4 max-w-7xl mx-auto space-y-24">
+
+
+        <!-- HERO SECTION -->
+        <section id="hero"
+            class="min-h-[80vh] flex flex-col justify-center items-center text-center space-y-8 relative">
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full blur-3xl -z-10">
+            </div>
+
+            <div
+                class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20 hover:bg-blue-500/20 transition-colors cursor-pointer shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                <span
+                    class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse"></span>
+                Available for new projects
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight max-w-4xl tracking-tight">
+                I build
+                <span
+                    class="inline-block relative bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 animate-gradient pb-2">
+                    <span id="typewriter-text"
+                        class="inline-block border-r-4 border-emerald-400 pr-1 animate-[blink_0.8s_infinite] min-w-[300px] text-left">websites</span>
+                </span><br class="md:hidden" />
+                that actually work
+            </h1>
+
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                I'm Horacio Morales. Started with a $5 hosting account and WordPress one-click installs.
+                Now I craft custom digital experiences with modern tools. No fancy titles, just results.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 pt-4">
+                <button onclick="scrollToSection('work')"
+                    class="px-8 py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2">
+                    View My Work
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+
+                <button onclick="scrollToSection('contact')"
+                    class="px-8 py-4 rounded-full glass-card font-semibold hover:bg-white/5 border border-white/5 transition-all flex items-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
+                    Contact
+                </button>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="pt-12 w-full max-w-3xl">
+                <p class="text-sm text-slate-500 mb-6 uppercase tracking-widest">Current Stack</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-wordpress-plain text-blue-400 text-lg"></i> WordPress
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-php-plain text-indigo-400 text-lg"></i> PHP
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-javascript-plain text-yellow-400 text-lg"></i> JavaScript
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-tailwindcss-original text-cyan-400 text-lg"></i> Tailwind CSS
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-react-original text-blue-500 text-lg"></i> React
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-mysql-plain text-orange-400 text-lg"></i> MySQL
+                    </span>
+                    <span
+                        class="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm border border-white/5 hover:border-white/20 transition-colors">
+                        <i class="devicon-git-plain text-red-500 text-lg"></i> Git
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT ESTIMATOR CTA -->
+        <section id="estimator" class="py-6 scroll-mt-24">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-blue-500/20 relative overflow-hidden group">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-emerald-600/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <div
+                    class="absolute top-0 right-0 p-12 opacity-10 transform translate-x-1/4 -translate-y-1/4 blur-2xl group-hover:blur-xl transition-all duration-500">
+                    <div class="w-64 h-64 bg-blue-500 rounded-full"></div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="text-center md:text-left space-y-4 max-w-2xl">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider border border-blue-500/20">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i> Project Estimator
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold">Ready to build something great?</h2>
+                        <p class="text-slate-400 text-lg">
+                            Get an instant, detailed estimate for your next web app, business site, or custom software
+                            project.
+                        </p>
+                    </div>
+
+                    <a href="/quote"
+                        class="shrink-0 px-8 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-blue-50 transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center gap-3 group/btn">
+                        Start Your Project
+                        <i data-lucide="arrow-right"
+                            class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK / CASE STUDIES -->
+        <section id="work" class="space-y-12 pt-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">Selected Work</h2>
+                    <p class="text-slate-400">Real projects for real clients. From WordPress sites to custom
+                        applications.</p>
+                </div>
+                <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center gap-2 text-sm font-medium">
+                    View GitHub <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Project 0: Bordados Pando -->
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-amber-500/20 transition-all duration-300 cursor-pointer"
+                    style="transform-style: preserve-3d; perspective: 1000px;"
+                    onclick="window.location.href='proyecto-bordados-pando.html'">
+                    <div class="tilt-glow absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
+                        style="transform: translateZ(1px);"></div>
+                    <div class="relative z-10 aspect-video bg-gradient-to-br from-amber-900/40 to-slate-900 relative overflow-hidden"
+                        style="transform: translateZ(20px);">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div
+                                class="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10">
+                            </div>
+                            <div class="w-full flex-col h-full bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-6 text-center border border-white/10"
+                                style="transform: translateZ(30px);">
+                                <h2 class="text-3xl font-bold font-['Cinzel'] tracking-wider text-white mb-2">
+                                    Bordados<br><span class="text-amber-500">Pando</span></h2>
+                                <p class="text-xs text-amber-200/50 tracking-[0.2em] uppercase">Industrial ERP</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 z-20">
+                            <div
+                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase tracking-wider border border-amber-500/30">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Powered
+                            </div>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 backdrop-blur-sm">
+                            <span
+                                class="px-6 py-3 bg-white text-slate-900 rounded-full font-medium hover:scale-105 transition-transform shadow-2xl flex items-center gap-2">
+                                <i data-lucide="eye" class="w-4 h-4"></i> Ver Proyecto
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6 relative z-10 bg-slate-900/50 backdrop-blur-md"
+                        style="transform: translateZ(20px);">
+                        <h3 class="text-xl font-bold mb-2 text-white">Bordados Pando ERP</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-2">Real-time industrial management system with
+                            AI-generated embroidery mockups and intelligent queue routing.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs border border-white/10">Next.js
+                                15</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-500 text-xs border border-yellow-500/20">Firebase</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">Genkit
+                                AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 1 -->
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer"
+                    style="transform-style: preserve-3d; perspective: 1000px;">
+                    <div class="tilt-glow absolute inset-0 bg-gradient-to-tr from-blue-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
+                        style="transform: translateZ(1px);"></div>
+                    <div class="relative z-10 aspect-video bg-gradient-to-br from-blue-900/50 to-purple-900/50 relative overflow-hidden"
+                        style="transform: translateZ(20px);">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/10"
+                                style="transform: translateZ(30px);">
+                                <i data-lucide="shopping-bag" class="w-10 h-10 text-blue-400"></i>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
+                            <span
+                                class="px-6 py-3 bg-white text-slate-900 rounded-full font-medium hover:scale-105 transition-transform shadow-2xl">View
+                                Case Study</span>
+                        </div>
+                    </div>
+                    <div class="p-6 relative z-10 bg-slate-900/50 backdrop-blur-md"
+                        style="transform: translateZ(20px);">
+                        <h3 class="text-xl font-bold mb-2">E-commerce Platform</h3>
+                        <p class="text-slate-400 text-sm mb-4">Custom WooCommerce solution with React checkout and
+                            WordPress headless CMS. Improved conversions by 15%.</p>
+                        <div class="flex gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">WordPress</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs border border-purple-500/20">React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer hidden md:block"
+                    style="transform-style: preserve-3d; perspective: 1000px;">
+                    <div class="tilt-glow absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
+                        style="transform: translateZ(1px);"></div>
+                    <div class="relative z-10 aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 relative overflow-hidden"
+                        style="transform: translateZ(20px);">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/10"
+                                style="transform: translateZ(30px);">
+                                <i data-lucide="building" class="w-10 h-10 text-emerald-400"></i>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
+                            <span
+                                class="px-6 py-3 bg-white text-slate-900 rounded-full font-medium hover:scale-105 transition-transform shadow-2xl">View
+                                Case Study</span>
+                        </div>
+                    </div>
+                    <div class="p-6 relative z-10 bg-slate-900/50 backdrop-blur-md"
+                        style="transform: translateZ(20px);">
+                        <h3 class="text-xl font-bold mb-2">Corporate Dashboard</h3>
+                        <p class="text-slate-400 text-sm mb-4">Internal tool for inventory management. Vanilla JS
+                            frontend with PHP REST API.</p>
+                        <div class="flex gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">JavaScript</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs border border-orange-500/20">PHP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE LABS (The complex modules) -->
+        <section id="labs" class="space-y-12">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Interactive Labs</h2>
+                <p class="text-slate-400 text-lg">
+                    Complex functionalities built from scratch with detailed technical explanations. 
+                    <span class="text-indigo-400">No libraries</span>, <span class="text-purple-400">no dependencies</span>. 
+                    Just raw code demonstrating problem-solving capabilities and deep understanding of web fundamentals.
+                </p>
+            </div>
+
+            <!-- FEATURED LAB: Tarot Shuffle System (Expanded) -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-indigo-500/20">
+                <div class="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                            <i data-lucide="shuffle" class="w-5 h-5 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Algorithm: Fisher-Yates Shuffle + 3D CSS</h3>
+                            <p class="text-sm text-slate-400">From a production Tarot card system • 22 cards • True randomness</p>
+                        </div>
+                    </div>
+                    <button onclick="runTarotShuffle()" id="tarot-shuffle-btn"
+                        class="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold flex items-center gap-2 hover:opacity-90 transition">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        Run Shuffle Demo
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- LEFT: Live Demo -->
+                    <div class="p-8 bg-slate-950/50 border-r border-white/5">
+                        <div class="relative h-64" id="tarot-demo-area">
+                            <!-- Deck -->
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                                <div id="tarot-deck" class="relative w-24 h-36 transition-all duration-500">
+                                    <!-- Main deck -->
+                                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-800 to-purple-900 rounded-lg shadow-2xl border border-white/20 flex items-center justify-center">
+                                        <i data-lucide="sparkles" class="w-8 h-8 text-white/40"></i>
+                                    </div>
+                                    <!-- Ghost cards for animation -->
+                                    <div class="ghost-card absolute w-24 h-36 bg-gradient-to-br from-indigo-800 to-purple-900 rounded-lg border border-white/20 opacity-0"></div>
+                                    <div class="ghost-card absolute w-24 h-36 bg-gradient-to-br from-indigo-800 to-purple-900 rounded-lg border border-white/20 opacity-0"></div>
+                                </div>
+                                <p class="text-center text-sm text-slate-500 mt-4" id="deck-status">Deck ready (22 cards)</p>
+                            </div>
+
+                            <!-- Drawn cards (hidden initially) -->
+                            <div id="drawn-cards" class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 pointer-events-none">
+                                <div class="tarot-card-wrapper w-20 h-32" style="perspective: 1000px;">
+                                    <div class="tarot-card-inner relative w-full h-full transition-transform duration-700" style="transform-style: preserve-3d;">
+                                        <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-indigo-800 to-purple-900 rounded-lg border border-white/20"></div>
+                                        <div class="absolute inset-0 backface-hidden bg-slate-800 rounded-lg border-2 border-amber-500/50 flex flex-col items-center justify-center" style="transform: rotateY(180deg);">
+                                            <span class="text-2xl">🌙</span>
+                                            <span class="text-xs text-amber-400 mt-1">The Moon</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarot-card-wrapper w-20 h-32" style="perspective: 1000px;">
+                                    <div class="tarot-card-inner relative w-full h-full transition-transform duration-700" style="transform-style: preserve-3d;">
+                                        <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-indigo-800 to-purple-900 rounded-lg border border-white/20"></div>
+                                        <div class="absolute inset-0 backface-hidden bg-slate-800 rounded-lg border-2 border-amber-500/50 flex flex-col items-center justify-center" style="transform: rotateY(180deg);">
+                                            <span class="text-2xl">☀️</span>
+                                            <span class="text-xs text-amber-400 mt-1">The Sun</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Algorithm Stats -->
+                        <div class="grid grid-cols-3 gap-3 mt-6">
+                            <div class="p-3 rounded-lg bg-white/5 text-center">
+                                <p class="text-xs text-slate-500">Time Complexity</p>
+                                <p class="text-lg font-bold text-green-400">O(n)</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-white/5 text-center">
+                                <p class="text-xs text-slate-500">Space Complexity</p>
+                                <p class="text-lg font-bold text-blue-400">O(1)</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-white/5 text-center">
+                                <p class="text-xs text-slate-500">Cards Shuffled</p>
+                                <p class="text-lg font-bold text-purple-400" id="shuffle-count">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Code Explanation -->
+                    <div class="p-6 bg-slate-900/30">
+                        <!-- Tabs -->
+                        <div class="flex gap-2 mb-4 border-b border-white/10 pb-4">
+                            <button onclick="switchTab('shuffle-algo')" class="tab-btn-lab active px-4 py-2 rounded-lg text-sm font-medium transition" data-tab="shuffle-algo">Algorithm</button>
+                            <button onclick="switchTab('css-3d')" class="tab-btn-lab px-4 py-2 rounded-lg text-sm font-medium bg-white/5 transition" data-tab="css-3d">CSS 3D</button>
+                            <button onclick="switchTab('js-engine')" class="tab-btn-lab px-4 py-2 rounded-lg text-sm font-medium bg-white/5 transition" data-tab="js-engine">JS Engine</button>
+                        </div>
+
+                        <!-- Tab Content: Algorithm -->
+                        <div id="tab-shuffle-algo" class="tab-content">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-indigo-400 mb-2">Why Fisher-Yates?</h4>
+                                <p class="text-sm text-slate-400 mb-4">
+                                    The Fisher-Yates shuffle produces a uniformly random permutation. Each element has exactly 
+                                    <strong>1/n probability</strong> of ending up in any position. This is crucial for a fair card draw.
+                                </p>
+                            </div>
+                            <div class="code-window rounded-lg">
+                                <div class="code-header">
+                                    <div class="code-dot bg-red-500"></div>
+                                    <div class="code-dot bg-yellow-500"></div>
+                                    <div class="code-dot bg-green-500"></div>
+                                    <span class="ml-2 text-xs text-slate-400">fisher-yates.js</span>
+                                </div>
+                                <div class="code-content text-xs">
+                                    <pre><span class="code-keyword">function</span> <span class="code-function">fisherYatesShuffle</span>(array) {
+  <span class="code-comment">// Create a copy to avoid mutating original</span>
+  <span class="code-keyword">const</span> arr = [...array];
+  
+  <span class="code-comment">// Iterate from last to first element</span>
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = arr.length - 1; i > 0; i--) {
+    <span class="code-comment">// Pick random index from 0 to i</span>
+    <span class="code-keyword">const</span> j = Math.floor(Math.random() * (i + 1));
+    
+    <span class="code-comment">// Swap elements at i and j</span>
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  
+  <span class="code-keyword">return</span> arr;
+}
+
+<span class="code-comment">// Usage with 22 Tarot cards</span>
+<span class="code-keyword">const</span> deck = [<span class="code-string">'The Fool'</span>, <span class="code-string">'The Magician'</span>, ...];
+<span class="code-keyword">const</span> shuffled = fisherYatesShuffle(deck);
+<span class="code-keyword">const</span> selection = [shuffled[0], shuffled[1]];</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: CSS 3D -->
+                        <div id="tab-css-3d" class="tab-content hidden">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-purple-400 mb-2">CSS 3D Transforms</h4>
+                                <p class="text-sm text-slate-400 mb-4">
+                                    The card flip uses <code>transform-style: preserve-3d</code> and 
+                                    <code>backface-visibility: hidden</code>. The container has perspective 
+                                    to create depth perception.
+                                </p>
+                            </div>
+                            <div class="code-window rounded-lg">
+                                <div class="code-header">
+                                    <span class="text-xs text-slate-400">card-flip.css</span>
+                                </div>
+                                <div class="code-content text-xs">
+                                    <pre><span class="code-comment">/* Container establishes 3D context */</span>
+.card-wrapper {
+  perspective: 1000px;
+}
+
+<span class="code-comment">/* Inner card enables 3D transforms */</span>
+.card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+<span class="code-comment">/* Flip the card */</span>
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+<span class="code-comment">/* Front face: hidden when flipped */</span>
+.card-front, .card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+}
+
+<span class="code-comment">/* Back face starts rotated */</span>
+.card-back {
+  transform: rotateY(180deg);
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: JS Engine -->
+                        <div id="tab-js-engine" class="tab-content hidden">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-amber-400 mb-2">State Machine Pattern</h4>
+                                <p class="text-sm text-slate-400 mb-4">
+                                    The system uses a state machine to manage UI transitions: 
+                                    <strong>IDLE → SHUFFLING → REVEALING → COMPLETE</strong>. This prevents race conditions.
+                                </p>
+                            </div>
+                            <div class="code-window rounded-lg">
+                                <div class="code-header">
+                                    <span class="text-xs text-slate-400">state-machine.js</span>
+                                </div>
+                                <div class="code-content text-xs">
+                                    <pre><span class="code-keyword">const</span> TarotSystem = {
+  states: {
+    IDLE: <span class="code-string">'idle'</span>,
+    SHUFFLING: <span class="code-string">'shuffling'</span>,
+    REVEALING: <span class="code-string">'revealing'</span>,
+    COMPLETE: <span class="code-string">'complete'</span>
+  },
+  
+  current: <span class="code-string">'idle'</span>,
+  
+  <span class="code-function">transition</span>(to) {
+    <span class="code-keyword">const</span> valid = {
+      idle: [<span class="code-string">'shuffling'</span>],
+      shuffling: [<span class="code-string">'revealing'</span>],
+      revealing: [<span class="code-string">'complete'</span>],
+      complete: [<span class="code-string">'idle'</span>]
+    };
+    
+    <span class="code-keyword">if</span> (valid[<span class="code-keyword">this</span>.current].includes(to)) {
+      <span class="code-keyword">this</span>.current = to;
+      <span class="code-keyword">this</span>.execute(to);
+    }
+  }
+};</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Labs Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- LAB: Kanban Drag & Drop -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="layout-grid" class="w-5 h-5 text-blue-500"></i>
+                            Native Drag & Drop API
+                        </h3>
+                        <button onclick="toggleCode('kanban')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-5 bg-slate-900/50">
+                        <div class="grid grid-cols-3 gap-2" id="kanban-board">
+                            <div class="kanban-col glass-card rounded-lg p-3 min-h-[120px]" data-status="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <h4 class="text-xs font-bold text-slate-400 mb-2">TODO</h4>
+                                <div class="space-y-2" id="col-todo">
+                                    <div class="kanban-card bg-slate-800 p-2 rounded border border-white/5 text-xs cursor-move" draggable="true" ondragstart="drag(event)" id="task-1">
+                                        <div class="font-medium">API Research</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kanban-col glass-card rounded-lg p-3 min-h-[120px]" data-status="doing" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <h4 class="text-xs font-bold text-blue-400 mb-2">DOING</h4>
+                                <div class="space-y-2" id="col-doing"></div>
+                            </div>
+                            <div class="kanban-col glass-card rounded-lg p-3 min-h-[120px]" data-status="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <h4 class="text-xs font-bold text-green-400 mb-2">DONE</h4>
+                                <div class="space-y-2" id="col-done"></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">Try dragging the card between columns</p>
+                    </div>
+                    <div id="kanban-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre><span class="code-comment">// HTML5 Drag & Drop API</span>
+<span class="code-keyword">function</span> <span class="code-function">drag</span>(e) {
+  e.dataTransfer.setData(<span class="code-string">"text/plain"</span>, e.target.id);
+}
+
+<span class="code-keyword">function</span> <span class="code-function">allowDrop</span>(e) {
+  e.preventDefault(); <span class="code-comment">// Required!</span>
+}
+
+<span class="code-keyword">function</span> <span class="code-function">drop</span>(e) {
+  e.preventDefault();
+  <span class="code-keyword">const</span> id = e.dataTransfer.getData(<span class="code-string">"text"</span>);
+  e.currentTarget.appendChild(document.getElementById(id));
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB: Virtual Scroll Performance -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-green-500"></i>
+                            Virtual Scroll (10K Items)
+                        </h3>
+                        <button onclick="toggleCode('virtual')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-5 bg-slate-900/50">
+                        <div class="h-48 overflow-y-auto border border-white/10 rounded-lg" id="virtual-container" style="position: relative;">
+                            <div id="virtual-content" style="height: 400000px;"></div>
+                            <div id="virtual-visible" style="position: absolute; top: 0; left: 0; right: 0;"></div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">Rendering only visible items • <span id="rendered-count">0</span> DOM nodes</p>
+                    </div>
+                    <div id="virtual-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre><span class="code-comment">// Virtual scroll: render only visible</span>
+<span class="code-keyword">const</span> ITEM_HEIGHT = 40;
+<span class="code-keyword">const</span> VISIBLE_COUNT = 10;
+
+<span class="code-keyword">function</span> <span class="code-function">onScroll</span>(e) {
+  <span class="code-keyword">const</span> scrollTop = e.target.scrollTop;
+  <span class="code-keyword">const</span> startIdx = Math.floor(scrollTop / ITEM_HEIGHT);
+  <span class="code-keyword">const</span> endIdx = startIdx + VISIBLE_COUNT;
+  
+  <span class="code-comment">// Render only visible slice</span>
+  renderItems(data.slice(startIdx, endIdx));
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB: Password Validation -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-500"></i>
+                            Real-time Validation
+                        </h3>
+                        <button onclick="toggleCode('pass')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-5 bg-slate-900/50 space-y-4">
+                        <input type="password" id="pass-input" placeholder="Type a password..."
+                            class="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-emerald-500 outline-none transition"
+                            oninput="checkStrength(this.value)">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-xs" id="req-length">
+                                <i data-lucide="circle" class="w-3 h-3 text-slate-600"></i>
+                                <span class="text-slate-400">8+ characters</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs" id="req-upper">
+                                <i data-lucide="circle" class="w-3 h-3 text-slate-600"></i>
+                                <span class="text-slate-400">Uppercase letter</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs" id="req-number">
+                                <i data-lucide="circle" class="w-3 h-3 text-slate-600"></i>
+                                <span class="text-slate-400">Number</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs" id="req-special">
+                                <i data-lucide="circle" class="w-3 h-3 text-slate-600"></i>
+                                <span class="text-slate-400">Special character</span>
+                            </div>
+                        </div>
+                        <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div id="strength-bar" class="h-full w-0 transition-all duration-300 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div id="pass-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre><span class="code-keyword">function</span> <span class="code-function">checkStrength</span>(pass) {
+  <span class="code-keyword">let</span> score = 0;
+  <span class="code-keyword">const</span> tests = [
+    { regex: /.{8,}/, name: <span class="code-string">'length'</span> },
+    { regex: /[A-Z]/, name: <span class="code-string">'uppercase'</span> },
+    { regex: /[0-9]/, name: <span class="code-string">'number'</span> },
+    { regex: /[^A-Za-z0-9]/, name: <span class="code-string">'special'</span> }
+  ];
+  
+  tests.forEach(test => {
+    <span class="code-keyword">if</span> (test.regex.test(pass)) score++;
+  });
+  
+  <span class="code-keyword">return</span> score; <span class="code-comment">// 0-4 scale</span>
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB: Canvas Animation -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-pink-500"></i>
+                            Canvas Particle System
+                        </h3>
+                        <button onclick="toggleCode('canvas')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-0 bg-slate-900/50">
+                        <canvas id="particle-canvas-lab" class="w-full h-48 bg-slate-950"></canvas>
+                    </div>
+                    <div id="canvas-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre><span class="code-keyword">class</span> Particle {
+  <span class="code-function">constructor</span>(x, y) {
+    <span class="code-keyword">this</span>.x = x;
+    <span class="code-keyword">this</span>.y = y;
+    <span class="code-keyword">this</span>.vx = (Math.random() - 0.5) * 2;
+    <span class="code-keyword">this</span>.vy = (Math.random() - 0.5) * 2;
+  }
+  
+  <span class="code-function">update</span>() {
+    <span class="code-keyword">this</span>.x += <span class="code-keyword">this</span>.vx;
+    <span class="code-keyword">this</span>.y += <span class="code-keyword">this</span>.vy;
+  }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB: Typewriter Effect -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="type" class="w-5 h-5 text-amber-500"></i>
+                            Typewriter Algorithm
+                        </h3>
+                        <button onclick="toggleCode('typewriter')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-8 bg-slate-900/50 flex items-center justify-center min-h-[160px]">
+                        <p class="font-mono text-lg text-amber-400">
+                            <span id="typewriter-display"></span>
+                            <span class="animate-pulse">|</span>
+                        </p>
+                    </div>
+                    <div id="typewriter-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre><code><span class="code-keyword">async function</span> <span class="code-function">typewriter</span>(text, element) {
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i &lt;= text.length; i++) {
+    element.textContent = text.slice(0, i);
+    <span class="code-keyword">await</span> <span class="code-function">sleep</span>(100);
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB: 3D Card Flip -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                    <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold flex items-center gap-2">
+                            <i data-lucide="credit-card" class="w-5 h-5 text-purple-500"></i>
+                            CSS 3D Transforms
+                        </h3>
+                        <button onclick="toggleCode('card3d')" class="text-xs text-slate-400 hover:text-white transition">View Code</button>
+                    </div>
+                    <div class="p-8 bg-slate-900/50 flex flex-col items-center">
+                        <div class="perspective-1000 w-48 h-28 cursor-pointer group"
+                            onclick="this.querySelector('.card-inner').classList.toggle('rotate-y-180')">
+                            <div class="card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+                                <div class="absolute inset-0 backface-hidden rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 p-4 flex items-center justify-center shadow-xl border border-white/20">
+                                    <span class="text-white font-bold">FRONT</span>
+                                </div>
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-gradient-to-br from-slate-700 to-slate-800 p-4 flex items-center justify-center shadow-xl border border-white/20">
+                                    <span class="text-white font-bold">BACK</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-xs text-slate-500">Click to flip</p>
+                    </div>
+                    <div id="card3d-code" class="hidden border-t border-white/10">
+                        <div class="code-content text-xs p-4 bg-slate-950">
+                            <pre>.perspective-1000 { <span class="code-keyword">perspective</span>: 1000px; }
+.preserve-3d { <span class="code-keyword">transform-style</span>: preserve-3d; }
+.backface-hidden { <span class="code-keyword">backface-visibility</span>: hidden; }
+.rotate-y-180 { <span class="code-keyword">transform</span>: rotateY(180deg); }</pre>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CODE VAULT -->
+        <section id="snippets" class="space-y-8">
+            <h2 class="text-3xl font-bold">Code Vault</h2>
+            <p class="text-slate-400 mb-6">Reusable snippets I use across projects.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-panel rounded-xl p-6 border border-white/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold">Debounce Function</h3>
+                        <button onclick="copyCode(this)" class="text-slate-500 hover:text-white">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <pre class="text-xs text-slate-400 overflow-x-auto"><code id="code-1">const debounce = (fn, delay) => {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+};</code></pre>
+                </div>
+
+                <div class="glass-panel rounded-xl p-6 border border-white/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold">Fetch Wrapper</h3>
+                        <button onclick="copyCode(this)" class="text-slate-500 hover:text-white">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <pre class="text-xs text-slate-400 overflow-x-auto"><code id="code-2">async function api(endpoint, options = {}) {
+    const res = await fetch(`/wp-json/custom/v1${endpoint}`, {
+        headers: { 'Content-Type': 'application/json' },
+        ...options
+    });
+    if (!res.ok) throw new Error('API Error');
+    return res.json();
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="glass-panel rounded-3xl p-8 md:p-12 border border-white/5">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <h2 class="text-3xl font-bold">About Me</h2>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    I bought my first hosting account in 2018, installed WordPress with Softaculous, and spent three
+                    days trying to change the header color.
+                    That frustration turned into curiosity. I started selling simple websites to local
+                    businesses—restaurants, shops, professionals who needed a digital presence.
+                </p>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    Some projects were messy. Some broke. But I learned how to debug at 2 AM while a client waited for
+                    their launch.
+                    Now I build with purpose: clean code, fast loading times, and interfaces that don't confuse users.
+                    I don't have a CS degree. I have Google, patience, and a folder full of failed experiments that
+                    taught me what works.
+                </p>
+                <div class="flex justify-center gap-8 pt-6 text-sm">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-400">50+</div>
+                        <div class="text-slate-500">Projects Delivered</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-400">6</div>
+                        <div class="text-slate-500">Years Learning</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-pink-400">100%</div>
+                        <div class="text-slate-500">Self Taught</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT ESTIMATOR MODULE -->
+        <section id="quote" class="max-w-4xl mx-auto pt-12">
+            <div class="text-center mb-8 fade-in">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20 mb-6">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span>Free Quote in 24-48h</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Let's Build Something <span
+                        class="text-blue-400">Amazing</span></h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Tell me about your project. No technical knowledge
+                    required.</p>
+            </div>
+
+            <div class="glass-panel p-6 md:p-10 border border-white/5 rounded-2xl bg-slate-900/60 shadow-2xl">
+                <form id="quote-form-home">
+                    <div id="qstp-1" class="step-content fade-in">
+                        <h3 class="text-2xl font-bold mb-2">What do you need?</h3>
+                        <p class="text-slate-400 mb-6">Select what best describes your project</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all"
+                                data-value="landing">
+                                <i data-lucide="layout" class="w-8 h-8 text-blue-400 mb-3"></i>
+                                <h4 class="font-semibold">Landing Page</h4>
+                                <p class="text-sm text-slate-400 mt-1">Single page to showcase your product</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all"
+                                data-value="website">
+                                <i data-lucide="globe" class="w-8 h-8 text-purple-400 mb-3"></i>
+                                <h4 class="font-semibold">Business Website</h4>
+                                <p class="text-sm text-slate-400 mt-1">Multi-page site with CMS</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all"
+                                data-value="webapp">
+                                <i data-lucide="app-window" class="w-8 h-8 text-green-400 mb-3"></i>
+                                <h4 class="font-semibold">Web Application</h4>
+                                <p class="text-sm text-slate-400 mt-1">Custom functionality, dashboards</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all"
+                                data-value="ecommerce">
+                                <i data-lucide="shopping-cart" class="w-8 h-8 text-amber-400 mb-3"></i>
+                                <h4 class="font-semibold">Online Store</h4>
+                                <p class="text-sm text-slate-400 mt-1">Sell products with payments</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl md:col-span-2 cursor-pointer hover:border-blue-500/50 transition-all"
+                                data-value="notsure">
+                                <i data-lucide="help-circle" class="w-8 h-8 text-slate-400 mb-3"></i>
+                                <h4 class="font-semibold">I'm not sure</h4>
+                                <p class="text-sm text-slate-400 mt-1">Describe your idea and I'll help</p>
+                            </div>
+                        </div>
+                        <input type="hidden" name="project_type" required>
+                    </div>
+
+                    <div id="qstp-2" class="step-content hidden">
+                        <h3 class="text-2xl font-bold mb-2">Tell me about your project</h3>
+                        <p class="text-slate-400 mb-6">The more details, the better</p>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">What's the main goal?</label>
+                                <textarea name="project_goal"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors"
+                                    rows="3" required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">What features do you need?</label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="contact"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">Contact forms</span></label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="payments"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">Online payments</span></label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="users"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">User accounts</span></label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="cms"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">Edit content</span></label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="blog"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">Blog</span></label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" name="features"
+                                            value="notsure"
+                                            class="rounded border-slate-600 bg-slate-800 text-blue-500"><span
+                                            class="text-sm">Not sure yet</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="qstp-3" class="step-content hidden">
+                        <h3 class="text-2xl font-bold mb-2">Timeline & Budget</h3>
+                        <p class="text-slate-400 mb-6">Help me understand your constraints</p>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">When do you need it?</label>
+                                <select name="timeline"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors text-slate-300"
+                                    required>
+                                    <option value="">Select...</option>
+                                    <option value="asap">ASAP (Rush)</option>
+                                    <option value="1month">Within 1 month</option>
+                                    <option value="2months">1-2 months</option>
+                                    <option value="3months">2-3 months</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Budget (USD)</label>
+                                <select name="budget_range"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors text-slate-300"
+                                    required>
+                                    <option value="">Select...</option>
+                                    <option value="1k-3k">$1,000 - $3,000</option>
+                                    <option value="3k-5k">$3,000 - $5,000</option>
+                                    <option value="5k-10k">$5,000 - $10,000</option>
+                                    <option value="10k+">$10,000+</option>
+                                    <option value="notsure">Not sure</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="qstp-4" class="step-content hidden">
+                        <h3 class="text-2xl font-bold mb-2">Your Contact Info</h3>
+                        <p class="text-slate-400 mb-6">I'll send your quote here</p>
+                        <div class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium mb-2">Full Name *</label><input type="text"
+                                        name="nombre_cliente"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors"
+                                        required></div>
+                                <div><label class="block text-sm font-medium mb-2">Email *</label><input type="email"
+                                        name="email_cliente"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors"
+                                        required></div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium mb-2">Company</label><input type="text"
+                                        name="empresa"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors">
+                                </div>
+                                <div><label class="block text-sm font-medium mb-2">Phone</label><input type="tel"
+                                        name="telefono"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors">
+                                </div>
+                            </div>
+                            <div><label class="block text-sm font-medium mb-2">Anything else?</label><textarea
+                                    name="notas_adicionales"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors resize-none"
+                                    rows="3"></textarea></div>
+                        </div>
+                    </div>
+
+                    <div id="qstp-5" class="step-content hidden text-center py-12">
+                        <div
+                            class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-400 mb-6">
+                            <i data-lucide="check-circle" class="w-10 h-10"></i></div>
+                        <h3 class="text-3xl font-bold mb-4">Quote Request Sent!</h3>
+                        <p class="text-slate-400 text-lg mb-6">I'll review your details and send a personalized quote
+                            within 24-48 hours.</p>
+                        <button type="button" onclick="location.reload()"
+                            class="inline-block mt-8 px-8 py-3 rounded-full bg-white/5 hover:bg-white/10 transition border border-white/10">Start
+                            New Quote</button>
+                    </div>
+
+                    <div class="flex justify-between mt-8 pt-6 border-t border-white/10" id="quote-nav">
+                        <button type="button" id="qbtn-prev"
+                            class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition font-medium hidden border border-white/10"><i
+                                data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i><span>Back</span></button>
+                        <div></div>
+                        <button type="button" id="qbtn-next"
+                            class="px-8 py-3 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 transition hover:scale-[1.02] flex items-center shadow-[0_0_20px_rgba(37,99,235,0.3)]"><span>Next
+                                Step</span><i data-lucide="arrow-right" class="w-4 h-4 inline ml-2"></i></button>
+                    </div>
+                </form>
+
+                <div class="mt-8 pt-8 border-t border-white/5 flex justify-center gap-6">
+                    <a href="#"
+                        class="p-3 rounded-full bg-slate-800 border border-white/10 hover:bg-white/10 transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#"
+                        class="p-3 rounded-full bg-slate-800 border border-white/10 hover:bg-white/10 transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#"
+                        class="p-3 rounded-full bg-slate-800 border border-white/10 hover:bg-white/10 transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-white/5 py-8 text-center text-slate-500 text-sm">
+        <footer class="border-t border-white/5 py-8 text-center text-slate-500 text-sm">
+            <p>© 2026 Horacio Morales. Built with Vite, Tailwind CSS, & AI.</p>
+        </footer>
+
+        <!-- BORDADOS PANDO CODE VAULT MODAL -->
+        <div id="bordados-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-4">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+                onclick="document.getElementById('bordados-modal').classList.add('hidden')"></div>
+
+            <!-- Modal Content -->
+            <div
+                class="relative w-full max-w-5xl max-h-[90vh] bg-slate-900 rounded-2xl shadow-2xl border border-white/10 flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+                <!-- Left Side: Context -->
+                <div class="w-full md:w-1/3 bg-slate-950 p-8 border-r border-white/5 overflow-y-auto hidden md:block">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-wider border border-blue-500/20 mb-6">
+                        <i data-lucide="braces" class="w-3.5 h-3.5"></i> Code Vault
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-6 text-white">Bordados Pando ERP</h2>
+
+                    <div class="space-y-6 text-sm text-slate-400">
+                        <div>
+                            <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4 text-rose-400"></i> El Problema
+                            </h4>
+                            <p>Un taller de bordado industrial operaba a ciegas, causando cuellos de botella y sin
+                                visibilidad del estado de los pedidos en tiempo real.</p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="lightbulb" class="w-4 h-4 text-amber-400"></i> La Solución
+                            </h4>
+                            <p>Un sistema ERP a medida con un monitor automatizado de máquinas, ruteo inteligente basado
+                                en cercanía a vencimientos (Firestore Snapshots) y visualización potenciada con IA.</p>
+                        </div>
+
+                        <div class="pt-6 border-t border-white/5">
+                            <p class="text-xs mb-3 font-semibold uppercase tracking-wider">Tech Stack Principal</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-slate-800 rounded text-xs">Next.js 15</span>
+                                <span class="px-2 py-1 bg-slate-800 rounded text-xs">Firebase</span>
+                                <span class="px-2 py-1 bg-slate-800 rounded text-xs">Google Genkit</span>
+                                <span class="px-2 py-1 bg-slate-800 rounded text-xs">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Visual Node Graph Overlay -->
+                <div class="w-full md:w-2/3 relative bg-slate-950/50 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950 overflow-hidden min-h-[500px] sm:h-[80vh] flex flex-col items-center justify-center p-4 py-12 md:p-8">
+                    
+                    <!-- Background Grid -->
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+                    <!-- Graph Container -->
+                    <div class="relative w-full max-w-3xl flex-1 flex flex-col items-center justify-center min-h-[400px]">
+                        
+                        <!-- Header / Close controls -->
+                        <div class="absolute top-0 right-0 z-50 p-4">
+                            <button onclick="document.getElementById('bordados-modal').classList.add('hidden')"
+                                class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <!-- Central Node: The Product UI Mockup -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-48 md:w-64 glass-panel border border-white/10 rounded-2xl p-4 shadow-[0_0_40px_rgba(59,130,246,0.15)] bg-slate-900/80 backdrop-blur-xl">
+                            <div class="text-center mb-3">
+                                <p class="text-[10px] text-blue-400 font-bold uppercase tracking-wider mb-1">Estudio Visual</p>
+                                <h4 class="text-white text-sm font-semibold">Previsualización Real</h4>
+                            </div>
+                            <div class="aspect-square bg-slate-950 rounded-xl border border-white/5 flex items-center justify-center relative overflow-hidden group">
+                                <i data-lucide="shirt" class="w-16 h-16 text-slate-700 transition-transform duration-500 group-hover:scale-110"></i>
+                                <div class="absolute w-24 h-24 bg-blue-500/20 rounded-full blur-2xl group-hover:bg-blue-500/30 transition-colors"></div>
+                                <div class="absolute bottom-2 right-2 px-2 py-0.5 bg-black/50 backdrop-blur text-[8px] text-white rounded font-mono uppercase border border-white/10">IA Generada</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Fragment 1: Triage Logic -->
+                        <div class="absolute top-[5%] left-0 md:-left-4 w-[65%] md:w-[45%] bg-[#1e1e1e]/90 backdrop-blur-md border border-rose-500/30 rounded-xl overflow-hidden shadow-2xl transition hover:transform hover:-translate-y-1 z-20">
+                            <div class="bg-gradient-to-r from-rose-500/10 to-transparent border-b border-rose-500/20 px-3 py-2 flex justify-between items-center">
+                                <span class="text-[10px] md:text-xs font-mono text-rose-400 flex items-center gap-1.5"><i data-lucide="zap" class="w-3 h-3"></i> Triage Engine (page.tsx)</span>
+                            </div>
+                            <div class="p-3 overflow-x-auto text-[9px] md:text-xs font-mono text-[#d4d4d4] leading-relaxed relative hide-scrollbar">
+<pre class="m-0 bg-transparent"><code><span class="text-[#569cd6]">const</span> <span class="text-[#4fc1ff]">diffH</span> = (<span class="text-[#9cdcfe]">deadline</span> - <span class="text-[#9cdcfe]">now</span>) / <span class="text-[#b5cea8]">36e5</span>;
+
+<span class="text-[#af00db]">if</span> (<span class="text-[#4fc1ff]">diffH</span> &lt; <span class="text-[#b5cea8]">0</span>)  <span class="text-[#af00db]">return</span> <span class="text-[#ce9178]">'critico'</span>;
+<span class="text-[#af00db]">if</span> (<span class="text-[#4fc1ff]">diffH</span> &lt; <span class="text-[#b5cea8]">24</span>) <span class="text-[#af00db]">return</span> <span class="text-[#ce9178]">'rojo'</span>;
+<span class="text-[#af00db]">if</span> (<span class="text-[#4fc1ff]">diffH</span> &lt; <span class="text-[#b5cea8]">72</span>) <span class="text-[#af00db]">return</span> <span class="text-[#ce9178]">'amarillo'</span>;
+<span class="text-[#af00db]">return</span> <span class="text-[#ce9178]">'verde'</span>;</code></pre>
+                            </div>
+                            <!-- Arrow Base pointing toward center -->
+                            <div class="absolute -right-1 top-1/2 w-3 h-3 rotate-45 bg-[#1e1e1e] border-t border-r border-rose-500/30 translate-x-1/2 -translate-y-1/2"></div>
+                        </div>
+
+                        <!-- Floating Fragment 2: Genkit AI -->
+                        <div class="absolute bottom-[5%] right-0 md:-right-4 w-[75%] md:w-[50%] bg-[#1e1e1e]/90 backdrop-blur-md border border-blue-500/30 rounded-xl overflow-hidden shadow-2xl transition hover:transform hover:-translate-y-1 z-20">
+                            <div class="bg-gradient-to-r from-transparent to-blue-500/10 border-b border-blue-500/20 px-3 py-2 flex justify-end items-center">
+                                <span class="text-[10px] md:text-xs font-mono text-blue-400 flex items-center gap-1.5 align-right"><i data-lucide="sparkles" class="w-3 h-3"></i> Genkit Mockup (flows.ts)</span>
+                            </div>
+                            <div class="p-3 overflow-x-auto text-[9px] md:text-xs font-mono text-[#d4d4d4] leading-relaxed relative hide-scrollbar">
+<pre class="m-0 bg-transparent"><code><span class="text-[#af00db]">await</span> <span class="text-[#dcdcaa]">generateMockupPrompt</span>(<span class="text-[#9cdcfe]">input</span>, {
+  <span class="text-[#9cdcfe]">model</span>: <span class="text-[#ce9178]">'googleai/gemini-2.5-flash-image'</span>,
+  <span class="text-[#9cdcfe]">config</span>: { <span class="text-[#9cdcfe]">responseModalities</span>: [<span class="text-[#ce9178]">'IMAGE'</span>] }
+});</code></pre>
+                            </div>
+                            <!-- Arrow Base pointing toward center -->
+                            <div class="absolute -left-1 top-1/2 w-3 h-3 rotate-45 bg-[#1e1e1e] border-b border-l border-blue-500/30 -translate-x-1/2 -translate-y-1/2"></div>
+                        </div>
+
+                        <!-- Connection Lines (SVG) -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-0">
+                            <!-- Line from Triage to Center -->
+                            <path class="stroke-rose-500/30" stroke-width="2" stroke-dasharray="4" fill="none" d="M 25% 25% L 40% 40%" />
+                            <circle cx="40%" cy="40%" r="4" class="fill-rose-500/50" />
+                            
+                            <!-- Line from Genkit to Center -->
+                            <path class="stroke-blue-500/30" stroke-width="2" stroke-dasharray="4" fill="none" d="M 75% 75% L 60% 60%" />
+                            <circle cx="60%" cy="60%" r="4" class="fill-blue-500/50" />
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="/src/main.js"></script>
+
+        <!-- INTERACTIVE LABS SCRIPTS -->
+        <script>
+            // ===== TAROT SHUFFLE SYSTEM =====
+            const TAROT_CARDS = [
+                { name: 'The Fool', symbol: '🃏' },
+                { name: 'The Magician', symbol: '🔮' },
+                { name: 'High Priestess', symbol: '🌙' },
+                { name: 'The Empress', symbol: '👑' },
+                { name: 'The Emperor', symbol: '🏛️' },
+                { name: 'Hierophant', symbol: '📿' },
+                { name: 'The Lovers', symbol: '💕' },
+                { name: 'The Chariot', symbol: '🏎️' },
+                { name: 'Strength', symbol: '🦁' },
+                { name: 'Hermit', symbol: '🕯️' },
+                { name: 'Wheel', symbol: '☸️' },
+                { name: 'Justice', symbol: '⚖️' },
+                { name: 'Hanged Man', symbol: '🙃' },
+                { name: 'Death', symbol: '💀' },
+                { name: 'Temperance', symbol: '🏺' },
+                { name: 'Devil', symbol: '😈' },
+                { name: 'The Tower', symbol: '🏰' },
+                { name: 'The Star', symbol: '⭐' },
+                { name: 'The Moon', symbol: '🌙' },
+                { name: 'The Sun', symbol: '☀️' },
+                { name: 'Judgement', symbol: '🎺' },
+                { name: 'The World', symbol: '🌍' }
+            ];
+
+            let shuffleState = 'idle'; // idle, shuffling, revealing, complete
+            let shuffleCount = 0;
+
+            async function runTarotShuffle() {
+                if (shuffleState !== 'idle' && shuffleState !== 'complete') return;
+                
+                const btn = document.getElementById('tarot-shuffle-btn');
+                const deck = document.getElementById('tarot-deck');
+                const status = document.getElementById('deck-status');
+                const drawnCards = document.getElementById('drawn-cards');
+                const shuffleCounter = document.getElementById('shuffle-count');
+                
+                // Reset
+                shuffleState = 'shuffling';
+                btn.disabled = true;
+                btn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Shuffling...';
+                drawnCards.style.opacity = '0';
+                drawnCards.style.pointerEvents = 'none';
+                deck.style.opacity = '1';
+                
+                // Start shuffle animation
+                deck.classList.add('shuffling');
+                
+                // Fisher-Yates shuffle simulation
+                await sleep(2000);
+                
+                // Actually shuffle the deck
+                const shuffled = fisherYatesShuffle([...TAROT_CARDS]);
+                const selection = [shuffled[0], shuffled[1]];
+                
+                // Update drawn cards
+                const cards = drawnCards.querySelectorAll('.tarot-card-inner');
+                cards[0].querySelector('.text-xs').textContent = selection[0].name;
+                cards[0].querySelector('.text-2xl').textContent = selection[0].symbol;
+                cards[1].querySelector('.text-xs').textContent = selection[1].name;
+                cards[1].querySelector('.text-2xl').textContent = selection[1].symbol;
+                
+                // Reveal animation
+                deck.classList.remove('shuffling');
+                deck.style.transform = 'translateX(-100px) scale(0.8)';
+                deck.style.opacity = '0';
+                
+                await sleep(300);
+                
+                drawnCards.style.opacity = '1';
+                drawnCards.style.pointerEvents = 'auto';
+                
+                // Flip cards sequentially
+                setTimeout(() => {
+                    cards[0].classList.add('rotate-y-180');
+                }, 500);
+                
+                setTimeout(() => {
+                    cards[1].classList.add('rotate-y-180');
+                }, 1100);
+                
+                shuffleCount++;
+                shuffleCounter.textContent = shuffleCount;
+                status.textContent = `Cards drawn: ${selection[0].name} + ${selection[1].name}`;
+                
+                shuffleState = 'complete';
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="refresh-cw" class="w-4 h-4"></i> Shuffle Again';
+                lucide.createIcons();
+                
+                // Reset position after delay
+                setTimeout(() => {
+                    resetTarotDemo();
+                }, 4000);
+            }
+
+            function resetTarotDemo() {
+                if (shuffleState !== 'complete') return;
+                
+                const deck = document.getElementById('tarot-deck');
+                const drawnCards = document.getElementById('drawn-cards');
+                const btn = document.getElementById('tarot-shuffle-btn');
+                const status = document.getElementById('deck-status');
+                
+                drawnCards.style.opacity = '0';
+                drawnCards.style.pointerEvents = 'none';
+                
+                // Reset card flips
+                drawnCards.querySelectorAll('.tarot-card-inner').forEach(card => {
+                    card.classList.remove('rotate-y-180');
+                });
+                
+                deck.style.transform = 'translateX(0) scale(1)';
+                deck.style.opacity = '1';
+                
+                status.textContent = 'Deck ready (22 cards)';
+                btn.innerHTML = '<i data-lucide="play" class="w-4 h-4"></i> Run Shuffle Demo';
+                shuffleState = 'idle';
+                lucide.createIcons();
+            }
+
+            function fisherYatesShuffle(array) {
+                const arr = [...array];
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+
+            // ===== LAB TABS =====
+            function switchTab(tabId) {
+                // Hide all tabs
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.add('hidden');
+                });
+                
+                // Show selected
+                document.getElementById('tab-' + tabId).classList.remove('hidden');
+                
+                // Update buttons
+                document.querySelectorAll('.tab-btn-lab').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('bg-gradient-to-r', 'from-indigo-600', 'to-purple-600');
+                    btn.classList.add('bg-white/5');
+                });
+                
+                const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('bg-white/5');
+                activeBtn.classList.add('bg-gradient-to-r', 'from-indigo-600', 'to-purple-600');
+            }
+
+            // ===== DRAG & DROP =====
+            function drag(ev) {
+                ev.dataTransfer.setData('text/plain', ev.target.id);
+                ev.target.style.opacity = '0.5';
+            }
+
+            function allowDrop(ev) {
+                ev.preventDefault();
+                const col = ev.currentTarget;
+                col.style.borderColor = 'rgba(99, 102, 241, 0.5)';
+                col.style.background = 'rgba(99, 102, 241, 0.1)';
+            }
+
+            function drop(ev) {
+                ev.preventDefault();
+                const col = ev.currentTarget;
+                col.style.borderColor = '';
+                col.style.background = '';
+                
+                const data = ev.dataTransfer.getData('text');
+                const element = document.getElementById(data);
+                element.style.opacity = '1';
+                
+                col.querySelector('.space-y-2').appendChild(element);
+            }
+
+            // ===== PASSWORD STRENGTH =====
+            function checkStrength(pass) {
+                const requirements = [
+                    { regex: /.{8,}/, id: 'req-length' },
+                    { regex: /[A-Z]/, id: 'req-upper' },
+                    { regex: /[0-9]/, id: 'req-number' },
+                    { regex: /[^A-Za-z0-9]/, id: 'req-special' }
+                ];
+                
+                let score = 0;
+                requirements.forEach(req => {
+                    const el = document.getElementById(req.id);
+                    const icon = el.querySelector('i');
+                    if (req.regex.test(pass)) {
+                        score++;
+                        icon.setAttribute('data-lucide', 'check-circle');
+                        icon.classList.remove('text-slate-600');
+                        icon.classList.add('text-green-400');
+                        el.querySelector('span').classList.add('text-green-400');
+                    } else {
+                        icon.setAttribute('data-lucide', 'circle');
+                        icon.classList.remove('text-green-400');
+                        icon.classList.add('text-slate-600');
+                        el.querySelector('span').classList.remove('text-green-400');
+                    }
+                });
+                lucide.createIcons();
+                
+                // Update strength bar
+                const bar = document.getElementById('strength-bar');
+                const width = (score / 4) * 100;
+                bar.style.width = width + '%';
+                
+                // Color based on score
+                bar.className = 'h-full rounded-full transition-all duration-300 ' + 
+                    (score <= 1 ? 'bg-red-500' : score === 2 ? 'bg-amber-500' : score === 3 ? 'bg-blue-500' : 'bg-green-500');
+            }
+
+            // ===== VIRTUAL SCROLL =====
+            const TOTAL_ITEMS = 10000;
+            const ITEM_HEIGHT = 40;
+            const VISIBLE_COUNT = 6;
+            
+            function initVirtualScroll() {
+                const container = document.getElementById('virtual-container');
+                const content = document.getElementById('virtual-content');
+                const visible = document.getElementById('virtual-visible');
+                
+                // Set total height
+                content.style.height = (TOTAL_ITEMS * ITEM_HEIGHT) + 'px';
+                
+                function render() {
+                    const scrollTop = container.scrollTop;
+                    const startIdx = Math.floor(scrollTop / ITEM_HEIGHT);
+                    const endIdx = Math.min(startIdx + VISIBLE_COUNT + 1, TOTAL_ITEMS);
+                    
+                    // Render visible items
+                    let html = '';
+                    for (let i = startIdx; i < endIdx; i++) {
+                        const top = i * ITEM_HEIGHT;
+                        html += `<div class="absolute left-0 right-0 px-4 py-2 text-sm border-b border-white/5 hover:bg-white/5 transition" style="top: ${top}px; height: ${ITEM_HEIGHT}px">
+                            <span class="text-slate-500 mr-3">#${i + 1}</span> Item ${i + 1}
+                        </div>`;
+                    }
+                    visible.innerHTML = html;
+                    visible.style.transform = `translateY(${scrollTop - (scrollTop % ITEM_HEIGHT)}px)`;
+                    
+                    document.getElementById('rendered-count').textContent = (endIdx - startIdx);
+                }
+                
+                container.addEventListener('scroll', render);
+                render();
+            }
+
+            // ===== TYPEWRITER EFFECT =====
+            const typewriterTexts = ['websites', 'web apps', 'e-commerce', 'solutions'];
+            let typewriterIndex = 0;
+            let typewriterChar = 0;
+            
+            async function typewriterEffect() {
+                const el = document.getElementById('typewriter-display');
+                if (!el) return;
+                
+                const text = typewriterTexts[typewriterIndex];
+                
+                // Typing
+                for (let i = 0; i <= text.length; i++) {
+                    el.textContent = text.slice(0, i);
+                    await sleep(100);
+                }
+                
+                await sleep(2000);
+                
+                // Deleting
+                for (let i = text.length; i >= 0; i--) {
+                    el.textContent = text.slice(0, i);
+                    await sleep(50);
+                }
+                
+                typewriterIndex = (typewriterIndex + 1) % typewriterTexts.length;
+                typewriterEffect();
+            }
+
+            // ===== CANVAS PARTICLES =====
+            function initParticles() {
+                const canvas = document.getElementById('particle-canvas-lab');
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                const particles = [];
+                const particleCount = 25;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 1,
+                        vy: (Math.random() - 0.5) * 1,
+                        radius: Math.random() * 3 + 1,
+                        color: ['#6366f1', '#8b5cf6', '#ec4899'][Math.floor(Math.random() * 3)]
+                    });
+                }
+                
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        
+                        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                        
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                    });
+                    
+                    // Connect nearby particles
+                    particles.forEach((p1, i) => {
+                        particles.slice(i + 1).forEach(p2 => {
+                            const dx = p1.x - p2.x;
+                            const dy = p1.y - p2.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (dist < 60) {
+                                ctx.beginPath();
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.strokeStyle = `rgba(99, 102, 241, ${1 - dist / 60})`;
+                                ctx.stroke();
+                            }
+                        });
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+            }
+
+            // ===== UTILITIES =====
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            function toggleCode(id) {
+                const el = document.getElementById(id + '-code');
+                el.classList.toggle('hidden');
+            }
+
+            // ===== INITIALIZATION =====
+            document.addEventListener('DOMContentLoaded', () => {
+                initVirtualScroll();
+                typewriterEffect();
+                initParticles();
+                
+                // Add shuffling CSS
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes shuffle-left {
+                        0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0; }
+                        50% { transform: translateX(-60px) rotate(-15deg); opacity: 0.8; }
+                    }
+                    @keyframes shuffle-right {
+                        0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0; }
+                        50% { transform: translateX(60px) rotate(15deg); opacity: 0.8; }
+                    }
+                    .shuffling .ghost-card:nth-child(1) { animation: shuffle-left 0.4s infinite; }
+                    .shuffling .ghost-card:nth-child(2) { animation: shuffle-right 0.4s infinite 0.1s; }
+                    .tab-btn-lab.active { color: white; }
+                    .perspective-1000 { perspective: 1000px; }
+                    .preserve-3d { transform-style: preserve-3d; }
+                    .backface-hidden { backface-visibility: hidden; }
+                    .rotate-y-180 { transform: rotateY(180deg); }
+                `;
+                document.head.appendChild(style);
+            });
+        </script>
+</body>
+
+</html>

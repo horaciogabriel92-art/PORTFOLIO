@@ -1,0 +1,12 @@
+node_modules
+.vercel
+dist
+*.zip
+.env
+.env.local
+.env.production
+.vscode
+.git
+AUDITORIA_SEGURIDAD.md
+ONBOARDING-GUIDE.md
+AGENTS.md

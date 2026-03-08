@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/quote", "destination": "/quote/index.html" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/documentation", "destination": "/documentation/index.html" },
+    { "source": "/documentation/(.*)", "destination": "/documentation/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
