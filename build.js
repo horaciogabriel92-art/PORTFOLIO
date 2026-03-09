@@ -29,6 +29,7 @@ try {
   cpSync('quote', 'dist/quote', { recursive: true });
   cpSync('documentation', 'dist/documentation', { recursive: true });
   cpSync('api', 'dist/api', { recursive: true });
+  cpSync('src', 'dist/src', { recursive: true });
   console.log('✓ folders copied');
   
   console.log('\n✓ Build complete!');
