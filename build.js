@@ -6,10 +6,11 @@ execSync('npx vite build', { stdio: 'inherit' });
 
 console.log('Copying static files...');
 try {
-  // Ensure dist exists and copy index.html if Vite didn't generate it properly
-  if (existsSync('index.html')) {
-    copyFileSync('index.html', 'dist/index.html');
-    console.log('✓ index.html copied');
+  // Note: Vite generates dist/index.html from root index.html
+  // Don't copy it manually or we'll overwrite the processed version
+  if (!existsSync('dist/index.html')) {
+    console.error('✗ Vite did not generate dist/index.html');
+    process.exit(1);
   }
   // Copy folders
   cpSync('onboarding', 'dist/onboarding', { recursive: true });
