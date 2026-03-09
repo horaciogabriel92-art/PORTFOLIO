@@ -6,6 +6,7 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.2.1-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
   [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
   [![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=flat-square&logo=node.js)](https://nodejs.org/)
+  [![AI](https://img.shields.io/badge/AI-Architect-8A2BE2?style=flat-square&logo=openai)]
   [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com)
   
   **🌐 Live Demo:** [portfolio.estudioforgelab.com](https://portfolio.estudioforgelab.com)
@@ -18,13 +19,15 @@
 
 > *"Empecé con un hosting de $5 y WordPress con Softaculous. Pasé 3 días tratando de cambiar el color del header. Esa frustración se convirtió en curiosidad..."*
 
-Después de **6 años** construyendo sitios web para restaurantes, tiendas y profesionales, decidí crear algo que reflejara verdaderamente mis capacidades técnicas. No quería otro portfolio template de WordPress.
+Después de **6 años** construyendo productos digitales, decidí crear algo que reflejara verdaderamente cómo trabajo: como **Product Developer & AI Architect**.
+
+**Mi diferencia:** No solo escribo código. Diseño la arquitectura, orquesto sistemas de IA como mi equipo de desarrollo, y curo el resultado final. Productos entregados en semanas, no meses.
 
 **Quería demostrar que puedo:**
-- 🔧 Construir sistemas complejos desde cero
-- 🎨 Crear experiencias interactivas sin depender de librerías pesadas
+- 🔧 Construir sistemas completos: frontend → backend → deploy
+- 🤖 Integrar IA como ventaja competitiva (no como reemplazo)
+- 🎨 Crear experiencias interactivas sin frameworks pesados
 - 🛡️ Implementar seguridad empresarial
-- 🤖 Integrar IA (Gemini) en flujos de trabajo reales
 
 ---
 
@@ -54,8 +57,9 @@ Después de **6 años** construyendo sitios web para restaurantes, tiendas y pro
 ### **Frontend** (Portfolio + Quote Form + Documentation)
 ```
 Vite 7.3.1
-├── Tailwind CSS 4.2.1 (utility-first)
+├── Tailwind CSS 4.2.1 (utility-first + Dark/Light mode)
 ├── Vanilla JavaScript (ES6+ modules)
+├── Canvas API (Particle systems)
 ├── Lucide Icons (CDN)
 └── Google Fonts (Inter, JetBrains Mono)
 ```
@@ -244,10 +248,10 @@ portfolio/
 
 ## 🎯 Resultados & Métricas
 
-- **50+** proyectos entregados
-- **6 años** de aprendizaje continuo
-- **100%** self-taught
-- **0** frameworks en los Interactive Labs (props a vanilla JS)
+- **50+** productos entregados
+- **6 años** self-taught (no CS degree)
+- **100%** AI-accelerated workflow
+- **0** frameworks en los Interactive Labs (vanilla JS)
 - **<100ms** respuesta promedio de APIs
 
 ---
