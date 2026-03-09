@@ -3,7 +3,7 @@
 [![Vercel](https://img.shields.io/badge/Live%20Site-Vercel-000?style=flat-square&logo=vercel)](https://portfolio.estudioforgelab.com)
 [![Stack](https://img.shields.io/badge/Stack-HTML%20%7C%20Tailwind%20%7C%20JS-38B2AC?style=flat-square)](https://developer.mozilla.org)
 
-> **Product Developer & AI Architect** — Construyo productos digitales con IA como ventaja competitiva. Entrego en semanas lo que otros hacen en meses.
+> **Product Developer & AI Architect** — Construyo productos digitales con IA como ventaja competitiva. Mejor código, menos horas.
 
 ---
 
@@ -70,7 +70,7 @@ Mi portfolio no es una plantilla. Es una demostración técnica de cómo trabajo
 - Optimización de código (refactoring sin romper nada)
 - Documentación técnica (que sí se mantenga actualizada)
 
-**Mi factor de eficiencia:** 40% más rápido que desarrollo tradicional. No porque escriba más rápido, porque tomo mejores decisiones en menos tiempo.
+**Mi factor de eficiencia:** IA aplicada correctamente reduce el tiempo de desarrollo sin sacrificar calidad. No porque escriba más rápido, porque tomo mejores decisiones con menos iteraciones.
 
 ---
 
