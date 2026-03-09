@@ -808,85 +808,189 @@ console.log = (...args) => {
             </div>
         </section>
 
-        <!-- ABOUT -->
-        <section id="about" class="glass-panel rounded-3xl p-8 md:p-12 border border-white/5">
-            <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-3xl font-bold">About Me</h2>
-                <p class="text-slate-400 leading-relaxed text-lg">
-                    I bought my first hosting account in 2018, installed WordPress with Softaculous, and spent three
-                    days trying to change the header color.
-                    That frustration turned into curiosity. I started selling simple websites to local
-                    businesses—restaurants, shops, professionals who needed a digital presence.
+        <!-- ABOUT / TERMINAL SECTION -->
+        <section id="about" class="space-y-12">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
+                <p class="text-slate-400">
+                    20 years of building for the web. From table layouts to AI-powered applications.
                 </p>
-                <p class="text-slate-400 leading-relaxed text-lg">
-                    Some projects were messy. Some broke. But I learned how to debug at 2 AM while a client waited for
-                    their launch.
-                    Now I build with purpose: clean code, fast loading times, and interfaces that don't confuse users.
-                    I don't have a CS degree. I have Google, patience, and a folder full of failed experiments that
-                    taught me what works.
-                </p>
-                <div class="flex justify-center gap-8 pt-6 text-sm">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-400">50+</div>
-                        <div class="text-slate-500">Projects Delivered</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <!-- Terminal Effect -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/5 font-mono text-sm">
+                    <div class="bg-slate-800/80 px-4 py-3 border-b border-white/5 flex items-center gap-2">
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="text-slate-500 text-xs ml-2">horacio@portfolio:~</span>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-purple-400">6</div>
-                        <div class="text-slate-500">Years Learning</div>
+                    <div class="p-6 space-y-3 text-slate-300">
+                        <div class="typing-line">
+                            <span class="text-green-400">$</span> whoami
+                        </div>
+                        <div class="pl-4">
+                            <span class="text-blue-400">horacio_morales</span> - Product Developer & AI Architect
+                        </div>
+                        
+                        <div class="typing-line">
+                            <span class="text-green-400">$</span> cat experience.json
+                        </div>
+                        <div class="pl-4 text-slate-400">
+<pre>{
+  "web_design": "20 years",
+  "wordpress": "Since 2016",
+  "modern_stack": "React, Node, Firebase",
+  "current_focus": "AI-accelerated development"
+}</pre>
+                        </div>
+                        
+                        <div class="typing-line">
+                            <span class="text-green-400">$</span> status --availability
+                        </div>
+                        <div class="pl-4">
+                            <span class="text-green-400">🟢</span> Open to new projects
+                        </div>
+                        
+                        <div class="typing-line">
+                            <span class="text-green-400">$</span> <span class="animate-pulse">_</span>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-pink-400">100%</div>
-                        <div class="text-slate-500">Self Taught</div>
+                </div>
+
+                <!-- Human Story -->
+                <div class="space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 border border-white/5">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                            <i data-lucide="history" class="w-5 h-5 text-blue-400"></i>
+                            The Journey
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Started 20 years ago with table-based layouts and Flash animations. Built my first 
+                            WordPress site in 2016—it was ugly, but it worked. Since then, I've shipped solutions 
+                            for restaurants, shops, and industrial clients. No CS degree, just continuous learning.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-white/5">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                            <i data-lucide="bot" class="w-5 h-5 text-purple-400"></i>
+                            How I Work Now
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            I architect systems and orchestrate AI agents to accelerate development. I review every 
+                            line of code, optimize performance, and ensure the final product meets professional standards. 
+                            Better code, fewer hours.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-white/5">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                            <i data-lucide="target" class="w-5 h-5 text-amber-400"></i>
+                            What I Do
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Build complete web applications—from interface to deployment. Handle frontend, backend, 
+                            databases, and server configuration. Self-taught means I had to learn every layer, 
+                            which turns out to be useful.
+                        </p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
+                            <div class="text-2xl font-bold text-blue-400">20+</div>
+                            <div class="text-xs text-slate-500 mt-1">Years</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
+                            <div class="text-2xl font-bold text-purple-400">50+</div>
+                            <div class="text-xs text-slate-500 mt-1">Projects</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
+                            <div class="text-2xl font-bold text-emerald-400">100%</div>
+                            <div class="text-xs text-slate-500 mt-1">Self-Taught</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="max-w-2xl mx-auto">
-            <div class="glass-panel rounded-3xl p-8 md:p-12 border border-white/5">
-                <h2 class="text-3xl font-bold mb-2 text-center">Let's talk</h2>
-                <p class="text-slate-400 text-center mb-8">Have a project? I'll tell you honestly if I can help.</p>
+        <!-- PROJECT ESTIMATOR MODULE -->
+        <section id="quote" class="max-w-4xl mx-auto pt-12">
+            <div class="text-center mb-8 fade-in">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20 mb-6">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span>Free Quote in 24-48h</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Let's Build Something <span class="text-blue-400">Amazing</span></h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Tell me about your project. No technical knowledge required.</p>
+            </div>
 
-                <form onsubmit="handleSubmit(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" placeholder="Name" required
-                            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors">
-                        <input type="email" placeholder="Email" required
-                            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors">
+            <div class="glass-panel p-6 md:p-10 border border-white/5 rounded-2xl bg-slate-900/60 shadow-2xl">
+                <form id="quote-form-home" onsubmit="handleQuoteSubmit(event)">
+                    <div id="qstp-1" class="step-content">
+                        <h3 class="text-2xl font-bold mb-2">What do you need?</h3>
+                        <p class="text-slate-400 mb-6">Select what best describes your project</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all" onclick="selectQuoteOption(this, 'landing')">
+                                <i data-lucide="layout" class="w-8 h-8 text-blue-400 mb-3"></i>
+                                <h4 class="font-semibold">Landing Page</h4>
+                                <p class="text-sm text-slate-400 mt-1">Single page to showcase your product</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all" onclick="selectQuoteOption(this, 'website')">
+                                <i data-lucide="globe" class="w-8 h-8 text-purple-400 mb-3"></i>
+                                <h4 class="font-semibold">Business Website</h4>
+                                <p class="text-sm text-slate-400 mt-1">Multi-page site with CMS</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all" onclick="selectQuoteOption(this, 'webapp')">
+                                <i data-lucide="app-window" class="w-8 h-8 text-green-400 mb-3"></i>
+                                <h4 class="font-semibold">Web Application</h4>
+                                <p class="text-sm text-slate-400 mt-1">Custom functionality, dashboards</p>
+                            </div>
+                            <div class="quote-option-card bg-slate-950 border border-white/10 p-6 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all" onclick="selectQuoteOption(this, 'ecommerce')">
+                                <i data-lucide="shopping-cart" class="w-8 h-8 text-amber-400 mb-3"></i>
+                                <h4 class="font-semibold">Online Store</h4>
+                                <p class="text-sm text-slate-400 mt-1">Sell products with payments</p>
+                            </div>
+                        </div>
+                        <input type="hidden" name="project_type" id="quote-project-type" required>
                     </div>
-                    <select
-                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors text-slate-300">
-                        <option>WordPress Website</option>
-                        <option>Custom Feature</option>
-                        <option>Bug Fix</option>
-                        <option>Other</option>
-                    </select>
-                    <textarea rows="4" placeholder="Tell me about your project..." required
-                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors resize-none"></textarea>
 
-                    <button type="submit"
-                        class="w-full py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
-                        <span>Send Message</span>
-                        <i data-lucide="send" class="w-4 h-4"></i>
-                    </button>
+                    <div id="qstp-2" class="step-content hidden">
+                        <h3 class="text-2xl font-bold mb-2">Tell me about your project</h3>
+                        <p class="text-slate-400 mb-6">The more details, the better</p>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">What's the main goal?</label>
+                                <textarea name="project_goal" id="quote-goal"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors resize-none"
+                                    rows="3" required></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your email</label>
+                                <input type="email" name="email" id="quote-email"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-white/10 focus:border-blue-500 outline-none transition-colors"
+                                    required>
+                            </div>
+                            <div class="flex gap-4">
+                                <button type="button" onclick="showQuoteStep(1)"
+                                    class="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">Back</button>
+                                <button type="submit"
+                                    class="flex-1 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all">Send Request</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
-                <div id="success-msg"
-                    class="hidden mt-6 p-4 bg-green-500/10 text-green-400 rounded-xl text-center border border-green-500/20">
-                    Message sent! I'll get back to you within 24 hours.
-                </div>
-
-                <div class="mt-8 pt-8 border-t border-white/5 flex justify-center gap-6">
-                    <a href="#" class="p-3 rounded-full glass-card hover:bg-white/5 transition-colors">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="p-3 rounded-full glass-card hover:bg-white/5 transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="p-3 rounded-full glass-card hover:bg-white/5 transition-colors">
-                        <i data-lucide="twitter" class="w-5 h-5"></i>
-                    </a>
+                <div id="quote-success" class="hidden text-center py-12">
+                    <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="check" class="w-8 h-8 text-green-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Request sent!</h3>
+                    <p class="text-slate-400">I'll get back to you within 24-48 hours.</p>
                 </div>
             </div>
         </section>
@@ -896,6 +1000,56 @@ console.log = (...args) => {
     <footer class="border-t border-white/5 py-8 text-center text-slate-500 text-sm">
         <p>© 2024 Horacio Morales. Built with HTML, Tailwind, and caffeine.</p>
     </footer>
+    <script>
+        // Quote Form Functions
+        function selectQuoteOption(element, value) {
+            document.querySelectorAll('.quote-option-card').forEach(el => {
+                el.classList.remove('border-blue-500', 'bg-blue-500/10');
+            });
+            element.classList.add('border-blue-500', 'bg-blue-500/10');
+            document.getElementById('quote-project-type').value = value;
+            setTimeout(() => showQuoteStep(2), 300);
+        }
+
+        function showQuoteStep(step) {
+            document.getElementById('qstp-1').classList.add('hidden');
+            document.getElementById('qstp-2').classList.add('hidden');
+            document.getElementById('qstp-' + step).classList.remove('hidden');
+        }
+
+        async function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                project_type: document.getElementById('quote-project-type').value,
+                project_goal: document.getElementById('quote-goal').value,
+                email: document.getElementById('quote-email').value
+            };
+            
+            try {
+                const response = await fetch('/api/save-quote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    form.classList.add('hidden');
+                    document.getElementById('quote-success').classList.remove('hidden');
+                } else {
+                    alert('Error sending request. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error sending request. Please try again.');
+            }
+        }
+
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
     <script type="module" src="/src/main.js"></script>
 </body>
 
