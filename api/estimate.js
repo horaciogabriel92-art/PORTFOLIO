@@ -8,7 +8,7 @@ import {
   rateLimit 
 } from './_utils/security.js';
 import { Redis } from '@upstash/redis';
-import knowledgeBase from '../knowledge_base.json' assert { type: 'json' };
+import knowledgeBase from '../knowledge_base.json' with { type: 'json' };
 
 // Conectar a Redis para guardar historial
 const redis = new Redis({
