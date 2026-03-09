@@ -206,8 +206,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Project 0: Bordados Pando -->
-                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-amber-500/20 transition-all duration-300 cursor-pointer"
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-amber-500/20 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
                     style="transform-style: preserve-3d; perspective: 1000px;"
+                    data-tilt
                     onclick="window.location.href='proyecto-bordados-pando.html'">
                     <div class="tilt-glow absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
                         style="transform: translateZ(1px);"></div>
@@ -265,8 +266,9 @@
                 </div>
 
                 <!-- Project 1 -->
-                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer"
-                    style="transform-style: preserve-3d; perspective: 1000px;">
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                    style="transform-style: preserve-3d; perspective: 1000px;"
+                    data-tilt>
                     <div class="tilt-glow absolute inset-0 bg-gradient-to-tr from-blue-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
                         style="transform: translateZ(1px);"></div>
                     <div class="relative z-10 aspect-video bg-gradient-to-br from-blue-900/50 to-purple-900/50 relative overflow-hidden"
@@ -299,8 +301,9 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer hidden md:block"
-                    style="transform-style: preserve-3d; perspective: 1000px;">
+                <div class="tilt-card group relative bg-slate-900 rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 cursor-pointer hover:scale-[1.02] hidden md:block"
+                    style="transform-style: preserve-3d; perspective: 1000px;"
+                    data-tilt>
                     <div class="tilt-glow absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 mix-blend-overlay"
                         style="transform: translateZ(1px);"></div>
                     <div class="relative z-10 aspect-video bg-gradient-to-br from-emerald-900/50 to-teal-900/50 relative overflow-hidden"
@@ -983,9 +986,9 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Post 1: Cómo se me ocurrió el portfolio -->
-                <article class="glass-panel rounded-2xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all group cursor-pointer" onclick="window.location.href='#blog-post-portfolio'">
+            <div class="grid md:grid-cols-2 gap-6" id="blog-preview">
+                <!-- Post 1: Portfolio Building -->
+                <article class="glass-panel rounded-2xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all group cursor-pointer" onclick="showBlogPost('portfolio-post')">
                     <div class="aspect-video bg-gradient-to-br from-blue-900/40 to-slate-900 relative overflow-hidden">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="text-center p-6">
@@ -1001,24 +1004,24 @@
                             <span>5 min read</span>
                         </div>
                         <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
-                            How I Built My Portfolio: From WordPress to AI-Assisted Development
+                            Building This Portfolio: Why I Ditched Templates
                         </h3>
                         <p class="text-slate-400 text-sm mb-4">
-                            The story of why I ditched templates and built something that actually represents how I work. 
-                            Six years of learning, compressed into one interactive experience...
+                            After 20 years of building websites, I finally made something that represents how I actually work. 
+                            No WordPress themes, no page builders—just code...
                         </p>
                         <div class="flex items-center gap-2 text-blue-400 text-sm font-medium">
-                            Read more <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            Read post <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </div>
                     </div>
                 </article>
 
-                <!-- Post 2: Bordados Pando Case Study -->
-                <article class="glass-panel rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all group cursor-pointer" onclick="window.location.href='proyecto-bordados-pando.html'">
+                <!-- Post 2: Bordados Pando -->
+                <article class="glass-panel rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all group cursor-pointer" onclick="showBlogPost('bordados-post')">
                     <div class="aspect-video bg-gradient-to-br from-amber-900/40 to-slate-900 relative overflow-hidden">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="text-center p-6">
-                                <i data-lucide="cpu" class="w-12 h-12 text-amber-400 mx-auto mb-2 group-hover:scale-110 transition-transform"></i>
+                                <i data-lucide="factory" class="w-12 h-12 text-amber-400 mx-auto mb-2 group-hover:scale-110 transition-transform"></i>
                                 <p class="text-xs text-amber-300/70 uppercase tracking-widest">Case Study</p>
                             </div>
                         </div>
@@ -1030,57 +1033,188 @@
                             <span>8 min read</span>
                         </div>
                         <h3 class="text-xl font-bold mb-2 group-hover:text-amber-400 transition-colors">
-                            Building an AI-Powered ERP: The Bordados Pando Story
+                            Lessons from Building an Industrial ERP Solo
                         </h3>
                         <p class="text-slate-400 text-sm mb-4">
-                            How I reduced order management time by 40% using Next.js, Firebase, and Genkit AI. 
-                            A deep dive into building industrial software as a solo developer...
+                            Bordados Pando needed to process 200+ orders daily. Here's how I built a system 
+                            that reduced their management time by 40%...
                         </p>
                         <div class="flex items-center gap-2 text-amber-400 text-sm font-medium">
-                            Read case study <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            Read post <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </div>
                     </div>
                 </article>
             </div>
 
-            <!-- SEO-Optimized Blog Content (Hidden but indexed) -->
-            <div id="blog-post-portfolio" class="glass-panel rounded-2xl p-8 border border-white/5 hidden">
-                <article class="prose prose-invert max-w-none">
-                    <h1>How I Built My Portfolio: From WordPress to AI-Assisted Development</h1>
-                    <p class="text-slate-400">Published: March 8, 2025 | Reading time: 5 minutes</p>
+            <!-- Blog Post: Portfolio -->
+            <article id="portfolio-post" class="glass-panel rounded-2xl p-8 border border-white/5 hidden">
+                <button onclick="hideBlogPost()" class="mb-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to blog
+                </button>
+                <div class="max-w-3xl">
+                    <div class="flex items-center gap-3 text-sm text-slate-500 mb-4">
+                        <span>March 8, 2025</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                        <span>•</span>
+                        <span class="text-blue-400">Story</span>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-6">Building This Portfolio: Why I Ditched Templates</h1>
                     
-                    <p>In 2018, I bought my first hosting account for $5 and installed WordPress using Softaculous. It took me three days just to change the header color. That frustration sparked a journey that led to this portfolio you're viewing right now.</p>
+                    <div class="space-y-4 text-slate-300 leading-relaxed">
+                        <p>
+                            I've been building websites for 20 years. Started with table layouts and Flash, moved to WordPress in 2016, 
+                            and gradually evolved into modern web development. Through all that time, my portfolio was always a template—
+                            first a ThemeForest WordPress theme, then a Jekyll template, then a Next.js starter.
+                        </p>
+                        
+                        <p>
+                            They all looked professional. None of them represented what I actually do.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">The Problem</h2>
+                        <p>
+                            A template shows you can install and configure. It doesn't show you can <em>build</em>. And after two decades 
+                            of learning—from debugging IE6 compatibility to orchestrating AI agents—I wanted something that reflected 
+                            the depth of that experience.
+                        </p>
+                        
+                        <p>
+                            More importantly, I wanted to demonstrate something recruiters and clients keep asking about: 
+                            "How do you actually work with AI?"
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">The Approach</h2>
+                        <p>
+                            This portfolio is built entirely with vanilla JavaScript. No React, no Vue, no frameworks. Why? Because 
+                            I wanted to prove I understand the fundamentals—the DOM, event delegation, the Canvas API, CSS transforms—
+                            that power every abstraction layer above them.
+                        </p>
+                        
+                        <p>
+                            The <a href="#labs" class="text-blue-400 hover:underline">Interactive Labs</a> section contains eight modules 
+                            demonstrating specific technical competencies: algorithms (Fisher-Yates shuffle), browser APIs (Drag & Drop, Canvas), 
+                            and performance optimization (virtual scroll with 10,000 items). Each one is fully functional, not a screenshot.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">AI Integration</h2>
+                        <p>
+                            The <a href="#quote" class="text-blue-400 hover:underline">Project Estimator</a> uses Google's Gemini API to 
+                            generate pricing estimates based on project requirements. It's not a gimmick—it's a real tool I use to 
+                            streamline client onboarding. Building it required prompt engineering, API integration, and error handling 
+                            for production use.
+                        </p>
+                        
+                        <p>
+                            This is how I work: I architect the system, orchestrate AI agents for acceleration, and review every output. 
+                            The result is faster delivery without sacrificing code quality.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">The Result</h2>
+                        <p>
+                            A portfolio that loads in under a second, works without JavaScript frameworks, and demonstrates—rather than 
+                            claims—technical competency. For recruiters who only spend 30 seconds scanning: the Interactive Labs show 
+                            depth. For clients who want to understand my process: the estimator shows how I think about problems.
+                        </p>
+                        
+                        <p>
+                            After 20 years, this is finally a portfolio that feels like mine.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post: Bordados Pando -->
+            <article id="bordados-post" class="glass-panel rounded-2xl p-8 border border-white/5 hidden">
+                <button onclick="hideBlogPost()" class="mb-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to blog
+                </button>
+                <div class="max-w-3xl">
+                    <div class="flex items-center gap-3 text-sm text-slate-500 mb-4">
+                        <span>February 15, 2025</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                        <span>•</span>
+                        <span class="text-amber-400">Case Study</span>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-6">Lessons from Building an Industrial ERP Solo</h1>
                     
-                    <h2>The Problem with Templates</h2>
-                    <p>After six years of building websites for clients—restaurants, shops, professionals—I realized my own portfolio was just another WordPress template. It showed I could install themes, but not that I understood how things actually work under the hood.</p>
-                    
-                    <p>I wanted to build something that reflected my actual capabilities:</p>
-                    <ul>
-                        <li>Deep understanding of JavaScript fundamentals (not just frameworks)</li>
-                        <li>Ability to create complex interactive experiences</li>
-                        <li>Knowledge of algorithms and performance optimization</li>
-                        <li>Integration of modern AI tools into workflows</li>
-                    </ul>
-                    
-                    <h2>The Interactive Labs Concept</h2>
-                    <p>The centerpiece of this portfolio is the <strong>Interactive Labs</strong> section—eight complex modules built entirely with vanilla JavaScript, no libraries. Why vanilla? Because I wanted to prove I understand the fundamentals that power every React component, every Vue directive, every framework abstraction.</p>
-                    
-                    <p>From the <a href="#labs">Fisher-Yates shuffle algorithm</a> with 3D CSS transforms to the <a href="#labs">virtual scroll system</a> handling 10,000 items, each lab demonstrates a specific technical competency that recruiters actually look for.</p>
-                    
-                    <h2>AI as a Teammate, Not a Crutch</h2>
-                    <p>Yes, I use AI extensively—Claude, GPT-4, Gemini. But here's the key: I don't use AI to replace thinking. I use it to accelerate execution. I architect the system, define the logic, and orchestrate AI agents to handle repetitive coding tasks. Then I audit, refine, and optimize every output.</p>
-                    
-                    <p>This portfolio itself was built with AI assistance, but every interaction, every animation, every algorithm was curated by me. The <a href="#quote">Project Estimator</a> uses Google's Gemini API to generate pricing estimates—that's a real feature solving a real business problem.</p>
-                    
-                    <h2>No CS Degree, Just Results</h2>
-                    <p>I'm self-taught. No computer science degree, no bootcamp certificate. Just six years of shipping projects, debugging at 2 AM, and learning from a folder full of failed experiments.</p>
-                    
-                    <p>If you're a recruiter or potential client wondering whether autodidacts can deliver: this portfolio is my answer. Check out the <a href="#labs">Interactive Labs</a>, review the code on <a href="https://github.com/horaciogabriel92-art/PORTFOLIO">GitHub</a>, or <a href="#contact">start a project</a> and see the results firsthand.</p>
-                    
-                    <h3>Key Technologies Used</h3>
-                    <p>Vanilla JavaScript ES6+, Tailwind CSS, Vite, Canvas API, WebGL (Three.js for particles), Google Gemini API, Upstash Redis, Vercel Serverless Functions.</p>
-                </article>
-            </div>
+                    <div class="space-y-4 text-slate-300 leading-relaxed">
+                        <p>
+                            Bordados Pando is an industrial embroidery shop in Argentina. When they contacted me, they were processing 
+                            orders through WhatsApp and Excel. With 200+ orders daily, this was becoming unmanageable. They needed a 
+                            system that could handle order tracking, production queueing, and delivery management—in real time.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">The Challenge</h2>
+                        <p>
+                            Industrial embroidery has specific constraints: designs need approval, machines have limited capacity, 
+                            and deadlines are tight. The shop operates 24/7 with multiple shifts, so the system needed to work 
+                            flawlessly on mobile devices on the factory floor.
+                        </p>
+                        
+                        <p>
+                            The client had tried off-the-shelf ERP solutions, but they were either too expensive (enterprise pricing) 
+                            or too generic (couldn't handle embroidery-specific workflows). They needed something custom, but their 
+                            budget was limited.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">Technical Architecture</h2>
+                        <p>
+                            I chose <strong>Next.js 15</strong> for the frontend—App Router, Server Components, and streaming UI for 
+                            real-time updates. For the backend, <strong>Firebase</strong> provided real-time database capabilities, 
+                            authentication, and hosting without server maintenance overhead.
+                        </p>
+                        
+                        <p>
+                            The critical feature was the production queue. I implemented an intelligent routing system using 
+                            <strong>Firestore snapshots</strong> that automatically assigns orders to machines based on capacity, 
+                            design complexity, and deadline proximity. This alone reduced manual coordination time by 40%.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">AI Integration</h2>
+                        <p>
+                            The most innovative feature came from <strong>Google Genkit</strong>: AI-generated embroidery mockups. 
+                            Customers upload their logos, and the system generates realistic previews of how the final embroidery 
+                            will look on different garments. This reduced approval cycles from days to hours.
+                        </p>
+                        
+                        <p>
+                            Building this required understanding both AI prompt engineering and the technical constraints of 
+                            embroidery (stitch density, thread colors, fabric types). The model needed precise prompting to generate 
+                            useful previews rather than generic images.
+                        </p>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">Results</h2>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li><strong>40% reduction</strong> in order management time</li>
+                            <li><strong>200+ orders/day</strong> processed through the system</li>
+                            <li><strong>Real-time visibility</strong> for managers on production status</li>
+                            <li><strong>Zero downtime</strong> since deployment (4+ months)</li>
+                        </ul>
+                        
+                        <h2 class="text-xl font-bold text-white mt-8 mb-4">Key Lessons</h2>
+                        <p>
+                            <strong>1. Build for the environment:</strong> Factory floors have poor lighting and workers wear gloves. 
+                            The UI needed large buttons, high contrast, and touch-friendly targets.
+                        </p>
+                        
+                        <p>
+                            <strong>2. Offline matters:</strong> Internet connectivity isn't guaranteed in industrial zones. 
+                            Firebase's offline persistence ensures workers can continue operating even during outages.
+                        </p>
+                        
+                        <p>
+                            <strong>3. AI needs guardrails:</strong> The mockup feature is helpful, but we implemented clear 
+                            disclaimers that final results may vary. Managing user expectations is as important as the technology.
+                        </p>
+                        
+                        <p class="mt-8">
+                            <a href="proyecto-bordados-pando.html" class="text-amber-400 hover:underline">View full case study →</a>
+                        </p>
+                    </div>
+                </div>
+            </article>
         </section>
 
         <!-- CODE VAULT -->
@@ -1129,7 +1263,7 @@
             <div class="text-center max-w-3xl mx-auto mb-8">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
                 <p class="text-slate-400">
-                    The human behind the code. Self-taught, AI-augmented, and obsessed with building things that work.
+                    20 years of building for the web. From table layouts to AI-powered applications.
                 </p>
             </div>
 
@@ -1153,29 +1287,22 @@
                         </div>
                         
                         <div class="typing-line">
-                            <span class="text-green-400">$</span> cat skills.json
+                            <span class="text-green-400">$</span> cat experience.json
                         </div>
                         <div class="pl-4 text-slate-400">
 <pre>{
-  "frontend": ["React", "Next.js", "Tailwind", "Canvas API"],
-  "backend": ["Node.js", "PHP", "Firebase"],
-  "ai_tools": ["LLM Orchestration", "Prompt Engineering"],
-  "learning": "Always"
+  "web_design": "20 years",
+  "wordpress": "Since 2016",
+  "modern_stack": "React, Node, Firebase",
+  "current_focus": "AI-accelerated development"
 }</pre>
                         </div>
                         
                         <div class="typing-line">
-                            <span class="text-green-400">$</span> status --work
+                            <span class="text-green-400">$</span> status --availability
                         </div>
                         <div class="pl-4">
-                            <span class="text-green-400">🟢</span> Available for new projects
-                        </div>
-                        
-                        <div class="typing-line">
-                            <span class="text-green-400">$</span> experience --years
-                        </div>
-                        <div class="pl-4">
-                            6 years self-taught | 50+ projects shipped
+                            <span class="text-green-400">🟢</span> Open to new projects
                         </div>
                         
                         <div class="typing-line">
@@ -1188,49 +1315,49 @@
                 <div class="space-y-6">
                     <div class="glass-panel rounded-2xl p-6 border border-white/5">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
-                            <i data-lucide="book-open" class="w-5 h-5 text-blue-400"></i>
-                            The Origin Story
+                            <i data-lucide="history" class="w-5 h-5 text-blue-400"></i>
+                            The Journey
                         </h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            In 2018, I bought a $5 hosting account and installed WordPress. It took me three days 
-                            just to change the header color. That frustration became curiosity. I started selling 
-                            simple websites to local businesses—restaurants, shops, professionals.
+                            Started 20 years ago with table-based layouts and Flash animations. Built my first 
+                            WordPress site in 2016—it was ugly, but it worked. Since then, I've shipped solutions 
+                            for restaurants, shops, and industrial clients. No CS degree, just continuous learning.
                         </p>
                     </div>
 
                     <div class="glass-panel rounded-2xl p-6 border border-white/5">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
-                            <i data-lucide="cpu" class="w-5 h-5 text-purple-400"></i>
-                            The AI Shift
+                            <i data-lucide="bot" class="w-5 h-5 text-purple-400"></i>
+                            How I Work Now
                         </h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Now I build differently. I use AI as my development team—I architect, they execute, 
-                            I curate. This isn't vibe coding; it's orchestrated development. The result? 
-                            Products delivered in weeks, not months, without sacrificing quality.
+                            I architect systems and orchestrate AI agents to accelerate development. I review every 
+                            line of code, optimize performance, and ensure the final product meets professional standards. 
+                            Faster delivery, same quality.
                         </p>
                     </div>
 
                     <div class="glass-panel rounded-2xl p-6 border border-white/5">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
-                            <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
-                            Philosophy
+                            <i data-lucide="target" class="w-5 h-5 text-amber-400"></i>
+                            What I Do
                         </h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            No CS degree. Just Google, patience, and a folder full of failed experiments 
-                            that taught me what works. I build with purpose: clean code, fast loading times, 
-                            and interfaces that don't confuse users.
+                            Build complete web applications—from interface to deployment. Handle frontend, backend, 
+                            databases, and server configuration. Self-taught means I had to learn every layer, 
+                            which turns out to be useful.
                         </p>
                     </div>
 
                     <!-- Stats -->
                     <div class="grid grid-cols-3 gap-4">
                         <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
-                            <div class="text-2xl font-bold text-blue-400">50+</div>
-                            <div class="text-xs text-slate-500 mt-1">Projects</div>
+                            <div class="text-2xl font-bold text-blue-400">20+</div>
+                            <div class="text-xs text-slate-500 mt-1">Years</div>
                         </div>
                         <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
-                            <div class="text-2xl font-bold text-purple-400">6</div>
-                            <div class="text-xs text-slate-500 mt-1">Years</div>
+                            <div class="text-2xl font-bold text-purple-400">50+</div>
+                            <div class="text-xs text-slate-500 mt-1">Projects</div>
                         </div>
                         <div class="glass-panel rounded-xl p-4 text-center border border-white/5">
                             <div class="text-2xl font-bold text-emerald-400">100%</div>
@@ -1980,6 +2107,24 @@
                 }
                 lucide.createIcons();
             });
+
+            // ===== BLOG POSTS =====
+            function showBlogPost(postId) {
+                document.getElementById('blog-preview').classList.add('hidden');
+                document.getElementById(postId).classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('blog').offsetTop - 100, behavior: 'smooth' });
+                lucide.createIcons();
+            }
+
+            function hideBlogPost() {
+                document.querySelectorAll('[id$="-post"]').forEach(el => el.classList.add('hidden'));
+                document.getElementById('blog-preview').classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('blog').offsetTop - 100, behavior: 'smooth' });
+            }
+
+            // Attach to window for inline onclick handlers
+            window.showBlogPost = showBlogPost;
+            window.hideBlogPost = hideBlogPost;
         </script>
 </body>
 
