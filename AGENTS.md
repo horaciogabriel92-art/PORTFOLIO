@@ -132,9 +132,12 @@ The main feature of this portfolio is the **Interactive Labs** section containin
 
 ### Important Implementation Notes
 
-- All interactive functions are attached to `window` object (lines 220-236 in main.js) to work with inline HTML event handlers
+- **Título:** "Product Developer & AI Architect - Orchestrator" (NO usar "Ingeniero" ni "Fullstack")
+- **Theme Toggle:** Implementado en nav, guarda preferencia en localStorage
+- All interactive functions are attached to `window` object to work with inline HTML event handlers
 - Uses `lucide.createIcons()` from CDN to render SVG icons
 - Canvas-based particle background runs continuously
+- Blog section incluye 2 posts SEO-optimizados (ocultos inicialmente)
 
 ---
 
@@ -202,9 +205,10 @@ Generates optimized assets in `dist/`:
 
 ## Security Considerations
 
-- Contact form has **no backend integration** - currently shows success message only
-- No user authentication or session management
-- No sensitive data handling
+- Contact form uses **JWT authentication** para admin panel
+- **AES encryption** para datos de clientes en Redis
+- Rate limiting implementado en APIs
+- No sensitive data in client-side code
 - CDN resources loaded from unpkg.com and Google Fonts (HTTPS)
 
 ---
@@ -229,7 +233,24 @@ None - This is a static site with no runtime dependencies.
 ### External CDN Resources (loaded in index.html)
 
 - `lucide@latest` - Icon library
+- `devicon@latest` - Tech stack icons
 - Google Fonts (Inter, JetBrains Mono, Cinzel, Quicksand)
+
+---
+
+## 🎨 Secciones Principales
+
+| Sección | Descripción | ID |
+|---------|-------------|-----|
+| Hero | Título + Badges tech stack | #hero |
+| Work | Proyectos con métricas (Bordados Pando: -40% tiempo) | #work |
+| Process | 4 pasos del workflow (Discovery → Deploy) | #process |
+| Stack | Tech stack visual con iconos | #stack |
+| Labs | 8 Interactive Labs (vanilla JS) | #labs |
+| Blog | 2 posts SEO-optimizados | #blog |
+| Code Vault | Snippets reutilizables | #snippets |
+| About | Terminal JSON effect + Story | #about |
+| Contact | Formulario de cotización wizard | #quote |
 
 ---
 
