@@ -94,4 +94,8 @@ vercel --prod
 
 ---
 
-*No tengo un título de CS. Tengo 6 años de proyectos entregados, un folder lleno de experimentos fallidos que me enseñaron qué funciona, y la paciencia para debuggear a las 2 AM cuando un cliente necesita su launch.*
+**Cómo empecé:** En 2018 compré un hosting de $5, instalé WordPress con Softaculous, y pasé tres días tratando de cambiar el color del header. Esa frustración se convirtió en curiosidad.
+
+**Dónde estoy:** Algún proyecto salió mal. Otros se rompieron. Aprendí a debuggear a las 2 AM mientras un cliente esperaba su launch. Ahora construyo con propósito: código limpio, tiempos de carga rápidos, e interfaces que no confunden a los usuarios.
+
+No tengo un título de CS. Tengo Google, paciencia, y un folder de experimentos fallidos que me enseñaron qué funciona.
