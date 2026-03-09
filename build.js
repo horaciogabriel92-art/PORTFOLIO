@@ -1,66 +1,38 @@
-import { execSync } from 'child_process';
 import { cpSync, copyFileSync, existsSync, mkdirSync } from 'fs';
 
-console.log('Running Vite build...');
-try {
-  execSync('npx vite build', { stdio: 'inherit' });
-} catch (e) {
-  console.error('Vite build failed:', e.message);
-  process.exit(1);
-}
+// Static build - no processing, just copy files to dist
+console.log('Building static site...');
 
-console.log('Copying static files...');
 try {
-  // Ensure dist exists
+  // Create dist
   if (!existsSync('dist')) {
     mkdirSync('dist', { recursive: true });
   }
   
-  // Copy folders
-  if (existsSync('onboarding')) {
-    cpSync('onboarding', 'dist/onboarding', { recursive: true });
-    console.log('✓ onboarding/ copied');
-  }
-  if (existsSync('admin')) {
-    cpSync('admin', 'dist/admin', { recursive: true });
-    console.log('✓ admin/ copied');
-  }
-  if (existsSync('documentation')) {
-    cpSync('documentation', 'dist/documentation', { recursive: true });
-    console.log('✓ documentation/ copied');
-  }
-  if (existsSync('quote')) {
-    cpSync('quote', 'dist/quote', { recursive: true });
-    console.log('✓ quote/ copied');
-  }
+  // Copy main index.html
+  copyFileSync('index.html', 'dist/index.html');
+  console.log('✓ index.html');
   
-  // Copy project HTML files
-  if (existsSync('proyecto-bordados-pando.html')) {
-    copyFileSync('proyecto-bordados-pando.html', 'dist/proyecto-bordados-pando.html');
-    console.log('✓ proyecto-bordados-pando.html copied');
-  }
-  if (existsSync('proyecto-personal-shopper.html')) {
-    copyFileSync('proyecto-personal-shopper.html', 'dist/proyecto-personal-shopper.html');
-    console.log('✓ proyecto-personal-shopper.html copied');
-  }
-  if (existsSync('proyecto-arrancandonga.html')) {
-    copyFileSync('proyecto-arrancandonga.html', 'dist/proyecto-arrancandonga.html');
-    console.log('✓ proyecto-arrancandonga.html copied');
-  }
+  // Copy project files
+  copyFileSync('proyecto-personal-shopper.html', 'dist/proyecto-personal-shopper.html');
+  copyFileSync('proyecto-bordados-pando.html', 'dist/proyecto-bordados-pando.html');
+  copyFileSync('proyecto-arrancandonga.html', 'dist/proyecto-arrancandonga.html');
+  console.log('✓ project files');
   
   // Copy knowledge base
-  if (existsSync('knowledge_base.json')) {
-    copyFileSync('knowledge_base.json', 'dist/knowledge_base.json');
-    console.log('✓ knowledge_base.json copied');
-  }
+  copyFileSync('knowledge_base.json', 'dist/knowledge_base.json');
+  console.log('✓ knowledge_base.json');
   
-  // List dist contents
-  console.log('\nDist folder contents:');
-  const distFiles = await import('fs/promises').then(fs => fs.readdir('dist'));
-  distFiles.forEach(f => console.log(`  - ${f}`));
+  // Copy folders
+  cpSync('admin', 'dist/admin', { recursive: true });
+  cpSync('onboarding', 'dist/onboarding', { recursive: true });
+  cpSync('quote', 'dist/quote', { recursive: true });
+  cpSync('documentation', 'dist/documentation', { recursive: true });
+  cpSync('api', 'dist/api', { recursive: true });
+  console.log('✓ folders copied');
   
-  console.log('\n✓ Build completed successfully!');
+  console.log('\n✓ Build complete!');
 } catch (e) {
-  console.error('Error copying files:', e.message);
+  console.error('Error:', e.message);
   process.exit(1);
 }
