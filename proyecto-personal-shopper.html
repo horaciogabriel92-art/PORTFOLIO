@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Shopper UY | WooCommerce Custom - Case Study</title>
+    <meta name="description" content="eCommerce de moda en Uruguay con tema WooCommerce 100% custom. Máxima conversión y rendimiento optimizado.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <div class="grain"></div>
+    
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
+            <a href="index.html#work" class="flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="text-sm font-medium">Back</span>
+            </a>
+            <span class="text-xs text-slate-500">Case Study</span>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero -->
+        <section class="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-violet-900 via-purple-900 to-slate-900">
+            <div class="text-center px-4 py-20">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20 mb-8">
+                    <i data-lucide="shopping-bag" class="w-4 h-4 text-purple-300"></i>
+                    <span class="font-poppins font-bold text-sm text-white">eCommerce WooCommerce</span>
+                </div>
+                <h1 class="font-poppins text-5xl md:text-7xl font-bold text-white leading-tight mb-4">
+                    Personal <span class="gradient-text">Shopper</span> UY
+                </h1>
+                <p class="text-xl text-white/70 max-w-2xl mx-auto">Tema WooCommerce 100% custom programado desde cero para máxima conversión</p>
+                <a href="https://personalshopperuy.com" target="_blank" class="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-white text-violet-900 rounded-full font-semibold hover:bg-purple-50 transition-colors">
+                    <span>Ver sitio en vivo</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section class="py-16 px-4 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-4">
+                        <i data-lucide="store" class="w-6 h-6 text-violet-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Cliente</h3>
+                    <p class="text-slate-600 text-sm">eCommerce de moda en Uruguay</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
+                        <i data-lucide="code-2" class="w-6 h-6 text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Stack</h3>
+                    <p class="text-slate-600 text-sm">WordPress + WooCommerce + Tailwind</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-4">
+                        <i data-lucide="trending-up" class="w-6 h-6 text-emerald-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Resultado</h3>
+                    <p class="text-slate-600 text-sm">Conversión optimizada +15%</p>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6">El Desafío</h2>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+                <strong>Personal Shopper UY</strong> necesitaba un eCommerce de moda que no dependiera de temas multipropósito lentos. 
+                El objetivo era lograr la <strong>máxima conversión</strong>, un <strong>rendimiento optimizado</strong>, y una 
+                <strong>experiencia de usuario excepcional</strong> especialmente para dispositivos móviles.
+            </p>
+
+            <h2 class="text-3xl font-bold mb-6">Stack Tecnológico</h2>
+            <div class="bg-slate-900 rounded-xl p-6 mb-8">
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Backend:</strong> PHP 7.4+, WordPress (CMS), WooCommerce (motor eCommerce)</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Frontend:</strong> HTML5, Tailwind CSS (CDN), Vanilla JavaScript</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>DevOps:</strong> Python 3 para scripts de automatización y diagnóstico remoto via REST API</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Page Builder:</strong> Elementor (solo para páginas institucionales, no en tienda)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6">Funcionalidades de Conversión</h2>
+            
+            <div class="space-y-6 mb-8">
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                        <i data-lucide="truck" class="w-5 h-5 text-violet-600"></i>
+                        Barra de Envío Gratis
+                    </h3>
+                    <p class="text-slate-600">Barra de progreso dinámica que calcula cuánto le falta al usuario para calificar para el envío gratuito (umbral de $3000 UYU).</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-100">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                        <i data-lucide="flame" class="w-5 h-5 text-amber-600"></i>
+                        Gatillos de Urgencia
+                    </h3>
+                    <p class="text-slate-600">Contador que indica: "X personas viendo este producto en este momento" para crear escasez percibida.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-5 h-5 text-blue-600"></i>
+                        Stock en Tiempo Real
+                    </h3>
+                    <p class="text-slate-600">Sistema de AJAX polling que consulta el stock del servidor cada 15 segundos para evitar carritos fallidos.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                        <i data-lucide="smartphone" class="w-5 h-5 text-rose-600"></i>
+                        Sticky Cart (Móvil)
+                    </h3>
+                    <p class="text-slate-600">Botón de compra flotante permanente en móviles al hacer scroll, asegurando que la acción principal nunca se pierda.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                        <i data-lucide="percent" class="w-5 h-5 text-emerald-600"></i>
+                        Incentivo Transferencia -10%
+                    </h3>
+                    <p class="text-slate-600">Avisos destacados mostrando precio con 10% de descuento automático al pagar mediante transferencia bancaria.</p>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6">Checkout Adaptado a LATAM</h2>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                Creación de una <strong>Página de Agradecimiento Personalizada</strong> para pagos manuales (transferencia BACS). 
+                Muestra claramente los datos del Banco (Itaú) e integra un <strong>Botón flotante de WhatsApp</strong> 
+                que lleva al usuario directo al chat para enviar su comprobante.
+            </p>
+
+            <h2 class="text-3xl font-bold mb-6">Solución a Problemas Técnicos</h2>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-red-400 pl-6 py-2">
+                    <h3 class="font-semibold text-lg mb-2">Desafío: Rendimiento vs. Elementor</h3>
+                    <p class="text-slate-600 mb-3">Elementor añade demasiado DOM y scripts pesados, destrozando los Core Web Vitals en páginas de producto.</p>
+                    <div class="bg-slate-900 rounded-lg p-4">
+                        <code class="text-sm text-emerald-400">wp_enqueue_scripts ps_dequeue_elementor_on_shop</code>
+                        <p class="text-slate-400 text-sm mt-2">Filtro que desactiva forzosamente Elementor en páginas nativas de WooCommerce. Elementor solo carga en landings estáticas.</p>
+                    </div>
+                </div>
+
+                <div class="border-l-4 border-blue-400 pl-6 py-2">
+                    <h3 class="font-semibold text-lg mb-2">Desafío: Deploy Remoto</h3>
+                    <p class="text-slate-600 mb-3">El cliente no disponía de flujos CI/CD y el editor de temas estaba deshabilitado por seguridad.</p>
+                    <div class="bg-slate-900 rounded-lg p-4">
+                        <code class="text-sm text-emerald-400">deploy_wp.py + remote_diagnostics.py</code>
+                        <p class="text-slate-400 text-sm mt-2">Scripts Python que interactúan con la REST API de WordPress mediante Application Passwords para diagnóstico remoto.</p>
+                    </div>
+                </div>
+
+                <div class="border-l-4 border-amber-400 pl-6 py-2">
+                    <h3 class="font-semibold text-lg mb-2">Desafío: Cachés Agresivas</h3>
+                    <p class="text-slate-600 mb-3">Los cambios CSS no se visualizaban por cachés de servidor (LiteSpeed/Redis) y de navegador.</p>
+                    <div class="bg-slate-900 rounded-lg p-4">
+                        <code class="text-sm text-emerald-400">time() como versión en wp_enqueue_style</code>
+                        <p class="text-slate-400 text-sm mt-2">Cache Busting dinámico que fuerza al navegador a descargar el nuevo CSS. Hooks wc_get_template con prioridad alta para saltar transients.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 p-8 rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 text-white text-center">
+                <h2 class="text-2xl font-bold mb-4">¿Te gustaría un eCommerce similar?</h2>
+                <p class="text-white/80 mb-6">Conversión optimizada, rendimiento excepcional y experiencia móvil de primer nivel.</p>
+                <a href="index.html#contact" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-violet-700 rounded-full font-semibold hover:bg-purple-50 transition-colors">
+                    <span>Hablemos de tu proyecto</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 py-8 text-center text-slate-500 text-sm">
+        <p>© 2024 Horacio Morales. Built with attention to detail.</p>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
