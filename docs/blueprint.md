@@ -1,0 +1,22 @@
+# **App Name**: EmbroideryFlow
+
+## Core Features:
+
+- Cotizador Web Interactivo: Formulario multistep intuitivo que permite a los usuarios configurar su pedido de bordado, incluyendo carga de logo (con opciones de arrastrar y soltar), selección de productos (camiseta, gorra, bolso), elección de la posición del bordado, cantidad y color del producto, con logos de ejemplo interactivos.
+- Visualizador de Diseño (Mockup): Utilizando una herramienta de inteligencia artificial, se genera una previsualización fotorrealista del logo cargado o seleccionado. El AI analiza la complejidad y estilo del logo, el tipo de producto y la posición elegida, aplicando automáticamente ajustes de perspectiva, textura de bordado y efectos de iluminación para simular de forma realista el resultado final.
+- Calculadora de Precios Dinámica: Calcula el precio estimado del pedido en tiempo real, considerando el tipo de producto, la cantidad con descuentos por volumen aplicados automáticamente, y presentando un rango de inversión. Requiere la captura de datos de contacto del cliente antes de mostrar el precio final detallado.
+- Gestión Integral de Pedidos: Funcionalidades CRUD completas para gestionar pedidos con estados personalizables (Pendiente, En Proceso, Listo, Entregado) para un seguimiento total.
+- Asignación de Máquinas y Monitoreo: Interfaz para asignar pedidos a las máquinas industriales, con sugerencias automáticas de disponibilidad y una visualización clara mediante códigos de color por deadline.
+- Dashboard Operativo en Tiempo Real: Panel administrativo en tiempo real (vía WebSockets) para visualizar métricas de producción, estado de máquinas, progreso de pedidos y marcaje de completado por operarios con timestamp.
+- Automatización de Leads y Notificaciones: Integración con n8n para la captura de leads del cotizador y envío automático de notificaciones a vendedores por WhatsApp/email y recordatorios de deadlines.
+- Reportes y Analítica: Generación de reportes clave sobre pedidos por estado, máquina, operario; ingresos mensuales vs objetivos; tiempos de producción reales vs estimados; y top clientes y productos más vendidos para la toma de decisiones.
+
+## Style Guidelines:
+
+- Esquema de color principal: Predominan tonos oscuros para el fondo y elementos de tarjeta (--dark: #0a0a0f, --dark-card: #1a1a25), generando un ambiente moderno y enfocado. Los textos claros (--gray-100: #f1f5f9) aseguran legibilidad.
+- Colores de acento e interactividad: Se utilizan degradados vibrantes con un azul índigo (--primary: #6366f1), rosa (--secondary: #ec4899) y verde brillante (--accent: #10b981) para elementos interactivos, botones CTA, progreso y realzar títulos.
+- Efectos visuales: Implementación de 'glassmorphism' con fondos semitransparentes (--glass: rgba(255, 255, 255, 0.03)) y bordes (--glass-border: rgba(255, 255, 255, 0.08)) para añadir profundidad y modernidad a los componentes.
+- Fuentes Sans-serif: 'Inter' es la fuente principal para el cuerpo de texto y la mayoría de los elementos, elegida por su legibilidad y estética moderna. 'Space Grotesk' se usa para títulos destacados (hero, precio, etc.) y la marca del logo, aportando un toque distintivo y tecnológico.
+- Iconografía: Se emplean una combinación de emojis (👕, 🧢, 🎒, ☁️, 👤, ✉️, 📱, 🎉, 💬) y caracteres geométricos (◉, ◈, ▹, ◃, ▤) para representar productos, acciones e información, priorizando la claridad y el reconocimiento instantáneo. Para los logos de ejemplo, se utilizan SVGs con degradados.
+- Diseño responsivo y en cuadrícula: La interfaz utiliza un diseño principal de dos columnas para el cotizador (formulario y panel de previsualización) en escritorios, adaptándose a una disposición de una columna en dispositivos móviles. Se emplean cuadrículas para organizar selectores de opciones y ejemplos de logos, optimizando el uso del espacio.
+- Animaciones fluidas y decorativas: Se implementan animaciones de fondo (gridMove, float, pulse-glow) para un ambiente dinámico. Las transiciones de interfaz incluyen un slideUp al cargar secciones y successPop para feedback de acciones. Las interacciones con elementos como botones y tarjetas se enriquecen con transiciones de color y escala sutiles (transform, box-shadow) para una experiencia de usuario responsiva.

@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * BORDADOS PANDO - REGLAS DE PROTOTIPADO
+     * 
+     * Para la fase de desarrollo y prototipado, permitimos acceso público de lectura y escritura.
+     * Esto asegura que el tablero de pedidos y el taller funcionen inmediatamente para las pruebas
+     * sin requerir un flujo de autenticación complejo en esta etapa.
+     */
+
+    match /{document=**} {
+      allow read, write: if true;
+    }
+
+    // Estas reglas permiten que el cotizador y el panel de administración
+    // interactúen con la base de datos sin restricciones de UID.
+    
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    match /orders/{orderId} {
+      allow read, write: if true;
+      
+      match /status_history/{historyId} {
+        allow read, write: if true;
+      }
+      
+      match /payment_transactions/{transactionId} {
+        allow read, write: if true;
+      }
+    }
+
+    match /machines/{machineId} {
+      allow read, write: if true;
+    }
+
+    match /product_types/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /embroidery_positions/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /example_logos/{id} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

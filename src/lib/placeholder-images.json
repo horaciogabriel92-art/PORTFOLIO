@@ -1,0 +1,22 @@
+{
+  "placeholderImages": [
+    {
+      "id": "t-shirt-white",
+      "description": "Premium Cotton T-Shirt",
+      "imageUrl": "https://images.unsplash.com/photo-1603924217873-6bab89f381de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3aGl0ZSUyMHQtc2hpcnR8ZW58MHx8fHwxNzcyMTg2NjM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "white t-shirt"
+    },
+    {
+      "id": "cap-black",
+      "description": "Industrial Standard Cap",
+      "imageUrl": "https://images.unsplash.com/photo-1625753196225-a40c998c7aa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxibGFjayUyMGNhcHxlbnwwfHx8fDE3NzIyMDc2MzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black cap"
+    },
+    {
+      "id": "bag-tote",
+      "description": "Canvas Tote Bag",
+      "imageUrl": "https://images.unsplash.com/photo-1610282081854-9c311350beb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dG90ZSUyMGJhZ3xlbnwwfHx8fDE3NzIxNzgwMjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tote bag"
+    }
+  ]
+}
