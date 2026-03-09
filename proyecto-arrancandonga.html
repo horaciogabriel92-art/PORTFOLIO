@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrancandonga | Branding Studio - Case Study</title>
+    <meta name="description" content="From React CDN MVP to Astro SSG: Building a high-performance branding studio website with zero-compromise SEO.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-marquee { animation: marquee 20s linear infinite; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <div class="grain"></div>
+    
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
+            <a href="index.html#work" class="flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="text-sm font-medium">Back</span>
+            </a>
+            <span class="text-xs text-slate-500">Case Study</span>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Hero -->
+        <section class="min-h-[70vh] flex items-center justify-center" style="background-color: #F8F3E0;">
+            <div class="text-center px-4 py-20">
+                <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border-2 border-[#1a1a1a] mb-8 transform -rotate-2">
+                    <span>✨</span>
+                    <span class="font-poppins font-bold text-sm text-[#1a1a1a]">Branding Studio</span>
+                </div>
+                <h1 class="font-poppins text-5xl md:text-7xl font-bold text-[#1a1a1a] leading-tight mb-4">
+                    Arrancan<span class="text-[#FE5007]">donga</span>
+                </h1>
+                <p class="text-xl text-[#1a1a1a]/70">From React CDN MVP to Astro SSG</p>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section class="py-16 px-4 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="text-3xl mb-2">🎨</div>
+                    <h3 class="font-semibold mb-1">Client</h3>
+                    <p class="text-slate-600 text-sm">Branding & Design Studio</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="text-3xl mb-2">🚀</div>
+                    <h3 class="font-semibold mb-1">Stack</h3>
+                    <p class="text-slate-600 text-sm">Astro + Tailwind</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="text-3xl mb-2">⚡</div>
+                    <h3 class="font-semibold mb-1">Result</h3>
+                    <p class="text-slate-600 text-sm">100/100 Lighthouse</p>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6">The Challenge</h2>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+                The client needed a brand presence <strong>fast</strong>. Less than 24 hours from concept to deploy. 
+                The solution? A Single-File React App — everything in one HTML file, React via CDN, Babel compiling JSX in the browser.
+            </p>
+
+            <h2 class="text-3xl font-bold mb-6">Phase 1: The MVP Hack</h2>
+            <div class="bg-slate-900 rounded-xl p-6 mb-8 overflow-x-auto">
+                <pre class="text-sm text-slate-300"><code>&lt;script src="https://unpkg.com/react@18/umd/react.development.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/babel"&gt;
+  const Hero = () =&gt; (
+    &lt;section className="animate-marquee"&gt;
+      &lt;h1&gt;Branding con propósito&lt;/h1&gt;
+    &lt;/section&gt;
+  );
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6">Phase 2: Astro Migration</h2>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+                Post-pitch, we migrated to <strong>Astro</strong> for production. Zero JS by default, 
+                partial hydration with React islands where needed, and 100/100 Lighthouse scores.
+            </p>
+
+            <h2 class="text-3xl font-bold mb-6">Results</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-green-50 rounded-xl">
+                    <div class="text-3xl font-bold text-green-600">100</div>
+                    <div class="text-xs text-green-800">Lighthouse</div>
+                </div>
+                <div class="text-center p-4 bg-blue-50 rounded-xl">
+                    <div class="text-3xl font-bold text-blue-600">0KB</div>
+                    <div class="text-xs text-blue-800">JS Initial</div>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-xl">
+                    <div class="text-3xl font-bold text-purple-600">&lt;100ms</div>
+                    <div class="text-xs text-purple-800">TTFB</div>
+                </div>
+                <div class="text-center p-4 bg-orange-50 rounded-xl">
+                    <div class="text-3xl font-bold text-orange-600">#1</div>
+                    <div class="text-xs text-orange-800">SEO Ranking</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-16 px-4" style="background-color: #F8F3E0;">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="font-poppins text-3xl font-bold text-[#1a1a1a] mb-6">
+                    Ready for your own <span class="text-[#FE5007]">evolution</span>?
+                </h2>
+                <a href="index.html#contact" class="inline-flex items-center gap-2 bg-[#FE5007] text-white px-8 py-4 rounded-full font-bold">
+                    Start a Project
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

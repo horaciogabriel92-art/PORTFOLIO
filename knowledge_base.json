@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-03-09",
+  "currency": "USD",
+  "description": "Base de conocimiento para estimación de proyectos de desarrollo de software por Product Developer & AI Architect",
+
+  "pricing_tiers": {
+    "freelancer_me": {
+      "name": "Horacio Morales - Product Developer & AI Architect",
+      "type": "freelancer_con_ia",
+      "hourly_rates": {
+        "desarrollo": 25,
+        "diseno_ui_ux": 20,
+        "consultoria": 30,
+        "project_management": 20
+      },
+      "ia_efficiency_factor": 0.6,
+      "description": "Desarrollador solitario potenciado por agentes de IA. Factor 0.6 = 40% más rápido que desarrollo tradicional"
+    },
+    "software_factory_latam": {
+      "name": "Software Factory LATAM Promedio",
+      "type": "agency",
+      "hourly_rates": {
+        "junior": 30,
+        "mid": 50,
+        "senior": 80,
+        "tech_lead": 110,
+        "diseno": 45,
+        "project_management": 60,
+        "qa": 35
+      },
+      "markup_factor": 2.5,
+      "description": "Agencias de software en LATAM (Argentina, Uruguay, Chile). Markup 2.5x sobre costo interno"
+    }
+  },
+
+  "market_data_latam": {
+    "argentina": 45,
+    "uruguay": 55,
+    "brasil": 50,
+    "mexico": 55,
+    "chile": 65,
+    "colombia": 48,
+    "average": 53
+  },
+
+  "project_templates": {
+    "landing_page": { "base_hours": 24, "complexity": "baja" },
+    "corporate_website": { "base_hours": 70, "complexity": "media-baja" },
+    "ecommerce_simple": { "base_hours": 130, "complexity": "media" },
+    "ecommerce_custom": { "base_hours": 310, "complexity": "alta" },
+    "saas_mvp": { "base_hours": 190, "complexity": "media-alta" },
+    "saas_full": { "base_hours": 600, "complexity": "muy_alta" },
+    "mobile_app_simple": { "base_hours": 155, "complexity": "media" },
+    "mobile_app_complex": { "base_hours": 370, "complexity": "alta" },
+    "dashboard_analytics": { "base_hours": 190, "complexity": "media-alta" },
+    "marketplace": { "base_hours": 510, "complexity": "muy_alta" }
+  },
+
+  "complexity_multipliers": {
+    "baja": 1.0,
+    "media-baja": 1.2,
+    "media": 1.4,
+    "media-alta": 1.7,
+    "alta": 2.1,
+    "muy_alta": 2.8
+  },
+
+  "deadline_factors": {
+    "relaxed": { "factor": 1.0, "risk": "bajo" },
+    "normal": { "factor": 1.0, "risk": "medio" },
+    "tight": { "factor": 1.15, "risk": "alto" },
+    "urgent": { "factor": 1.35, "risk": "muy_alto" }
+  },
+
+  "feature_hours": {
+    "autenticacion_basica": 4,
+    "autenticacion_social": 8,
+    "roles_permisos": 16,
+    "dashboard_simple": 16,
+    "dashboard_avanzado": 40,
+    "reportes_pdf": 20,
+    "graficos_interactivos": 24,
+    "pagos_stripe": 16,
+    "pagos_mercadopago": 12,
+    "suscripciones": 24,
+    "carrito_compras": 20,
+    "chat_simple": 24,
+    "chat_realtime": 40,
+    "busqueda_avanzada": 24,
+    "busqueda_elastic": 40,
+    "notificaciones_push": 20,
+    "api_externa": 16,
+    "multilenguaje": 24,
+    "pwa": 40,
+    "cms_integrado": 40
+  },
+
+  "historical_projects": [
+    {
+      "id": "bordados-pando",
+      "type": "saas_mvp",
+      "real_hours": 160,
+      "technologies": ["Next.js", "Firebase", "Genkit AI"],
+      "note": "El módulo de IA tomó más tiempo del estimado por refinamiento de prompts"
+    },
+    {
+      "id": "personal-shopper",
+      "type": "ecommerce_custom",
+      "real_hours": 120,
+      "technologies": ["WordPress", "WooCommerce"],
+      "note": "Integración de medios de pago locales suma 20% más"
+    },
+    {
+      "id": "arrancandonga",
+      "type": "landing_page",
+      "real_hours": 40,
+      "technologies": ["Astro", "Tailwind"],
+      "note": "Animaciones CSS complejas requieren tiempo de pulido"
+    }
+  ],
+
+  "estimation_rules": [
+    "Siempre aplicar factor IA (0.6) solo al tiempo de desarrollo, NO al de diseño",
+    "Diseño UI/UX no se beneficia tanto de IA, mantener horas reales",
+    "Testing y QA se reducen 30% con IA (generación de tests)",
+    "Proyectos con deadline 'urgent' requieren +35% de costo por horas extras",
+    "Si el cliente pide tecnología legacy, aplicar factor 1.3",
+    "El precio mínimo por proyecto es $500 (fee base)",
+    "Comparativa con software factory: calcular diferencia porcentual para mostrar ahorro"
+  ]
+}
