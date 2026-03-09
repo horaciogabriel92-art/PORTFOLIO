@@ -2,10 +2,15 @@ import { execSync } from 'child_process';
 import { cpSync, copyFileSync, existsSync } from 'fs';
 
 console.log('Running Vite build...');
-execSync('vite build', { stdio: 'inherit' });
+execSync('npx vite build', { stdio: 'inherit' });
 
 console.log('Copying static files...');
 try {
+  // Ensure dist exists and copy index.html if Vite didn't generate it properly
+  if (existsSync('index.html')) {
+    copyFileSync('index.html', 'dist/index.html');
+    console.log('✓ index.html copied');
+  }
   // Copy folders
   cpSync('onboarding', 'dist/onboarding', { recursive: true });
   cpSync('admin', 'dist/admin', { recursive: true });
